@@ -1,0 +1,24 @@
+[package]
+name = "organized"
+version = "0.0.0"
+description = "The App to organize your daily doings"
+authors = ["Attila Menyhárt"]
+license = "MIT"
+repository = "https://github.com/MAttila42/Organized"
+edition = "2021"
+
+[lib]
+name = "tauri_app_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2.0.0-alpha", features = [] }
+
+[dependencies]
+tauri = { version = "2.0.0-alpha", features = [] }
+tauri-plugin-window = "2.0.0-alpha"
+tauri-plugin-shell = "2.0.0-alpha"
+serde_json = "1.0"
+
+[features]
+custom-protocol = ["tauri/custom-protocol"]

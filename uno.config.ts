@@ -1,5 +1,14 @@
-import { defineConfig, presetAttributify, presetUno } from "unocss";
+import { defineConfig, presetAttributify, presetIcons, presetUno, presetWebFonts } from 'unocss'
 
 export default defineConfig({
-	presets: [presetAttributify(), presetUno()],
-});
+  presets: [
+    presetUno(),
+    presetAttributify(),
+    presetIcons(),
+    presetWebFonts({
+      fonts: {
+        sans: 'Ubuntu',
+      },
+    }),
+  ],
+})

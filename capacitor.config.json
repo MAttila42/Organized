@@ -1,8 +1,0 @@
-{
-  "appId": "com.organized.app",
-  "appName": "Organized",
-  "webDir": "dist",
-  "server": {
-    "androidScheme": "https"
-  }
-}
