@@ -5,9 +5,11 @@ export default defineNuxtConfig({
     enabled: true,
   },
   ssr: false,
-  modules: [
-    '@unocss/nuxt',
-  ],
+  modules: ['@unocss/nuxt'],
+  devServer: {
+    host: '0.0.0.0',
+    port: 3000,
+  },
   vite: {
     clearScreen: false,
     server: {
@@ -15,7 +17,7 @@ export default defineNuxtConfig({
       hmr: {
         host: '0.0.0.0',
         protocol: 'ws',
-        port: 5173,
+        port: 3001,
       },
     },
   },

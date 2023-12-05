@@ -1,10 +1,10 @@
 [package]
-name = "organized"
+name = "tauri-app"
 version = "0.0.0"
-description = "The App to organize your daily doings"
-authors = ["Attila Menyhárt"]
+description = "This is an example Tauri app."
+authors = ["You"]
 license = "MIT"
-repository = "https://github.com/MAttila42/Organized"
+repository = ""
 edition = "2021"
 
 [lib]
