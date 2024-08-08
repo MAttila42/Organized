@@ -1,24 +1,25 @@
-import { defineNuxtConfig } from 'nuxt/config'
-
 export default defineNuxtConfig({
-  devtools: {
-    enabled: true,
+  devtools: { enabled: true },
+  modules: [
+    '@unocss/nuxt',
+    'shadcn-nuxt',
+    '@nuxt/eslint',
+    '@nuxtjs/color-mode',
+  ],
+  colorMode: {
+    preference: 'system',
+    classSuffix: '',
   },
-  ssr: false,
-  modules: ['@unocss/nuxt'],
-  devServer: {
-    host: '0.0.0.0',
-    port: 3000,
+  css: [
+    '@unocss/reset/tailwind.css',
+  ],
+  features: {
+    inlineStyles: false,
   },
-  vite: {
-    clearScreen: false,
-    server: {
-      strictPort: true,
-      hmr: {
-        host: '0.0.0.0',
-        protocol: 'ws',
-        port: 3001,
-      },
+  eslint: {
+    config: {
+      standalone: false,
     },
   },
+  compatibilityDate: '2024-08-08',
 })

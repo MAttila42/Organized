@@ -1,24 +1,23 @@
 [package]
-name = "tauri-app"
-version = "0.0.0"
-description = "This is an example Tauri app."
-authors = ["You"]
-license = "MIT"
+name = "app"
+version = "0.1.0"
+description = "A Tauri App"
+authors = ["you"]
+license = ""
 repository = ""
 edition = "2021"
+rust-version = "1.70"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [lib]
-name = "tauri_app_lib"
-crate-type = ["staticlib", "cdylib", "rlib"]
+name = "app_lib"
+crate-type = ["staticlib", "cdylib", "lib"]
 
 [build-dependencies]
-tauri-build = { version = "2.0.0-alpha", features = [] }
+tauri-build = { version = "2.0.0-rc.1", features = [] }
 
 [dependencies]
-tauri = { version = "2.0.0-alpha", features = [] }
-tauri-plugin-window = "2.0.0-alpha"
-tauri-plugin-shell = "2.0.0-alpha"
 serde_json = "1.0"
-
-[features]
-custom-protocol = ["tauri/custom-protocol"]
+serde = { version = "1.0", features = ["derive"] }
+tauri = { version = "2.0.0-rc.1", features = [] }
