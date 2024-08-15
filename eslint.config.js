@@ -8,7 +8,7 @@ export default withNuxt(antfu(
   },
   {
     rules: {
-      'style/max-statements-per-line': ['error', { max: 2 }],
+      'vue/no-multiple-template-root': 'off',
     },
   },
 ))
