@@ -19,6 +19,10 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Drizzle
+sqlite
+sqlite.db
+
 node_modules
 dist
 dist-ssr

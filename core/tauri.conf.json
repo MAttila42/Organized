@@ -1,12 +1,12 @@
 {
   "productName": "Organized",
   "version": "0.1.0",
-  "identifier": "com.tauri.dev",
+  "identifier": "com.organized.dev",
   "build": {
     "frontendDist": "../dist",
     "devUrl": "http://localhost:3000",
-    "beforeDevCommand": "bun run dev --host",
-    "beforeBuildCommand": "bun run build"
+    "beforeDevCommand": "bun x nuxt dev --host",
+    "beforeBuildCommand": "bun x nuxt generate"
   },
   "app": {
     "windows": [
