@@ -1,0 +1,24 @@
+name: Add [✴️ Todo]
+
+on:
+  issues:
+    types: [milestoned]
+
+jobs:
+  create-update-project:
+    name: Create/update project issue
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/add-to-project@v1.0.2 # This adds the issue to the project
+        with:
+          project-url: https://github.com/users/MAttila42/projects/2/
+          github-token: ${{ secrets.ACCESS_TOKEN }}
+        id: add-project
+      - uses: titoportas/update-project-fields@v0.1.0
+        with:
+          project-url: https://github.com/users/MAttila42/projects/2/
+          github-token: ${{ secrets.ACCESS_TOKEN }}
+          item-id: ${{ steps.add-project.outputs.itemId }} # Use the item-id output of the previous step
+          field-keys: Status
+          field-values: ✴️ Todo
