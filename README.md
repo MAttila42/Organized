@@ -19,8 +19,6 @@ Example commands use [@antfu/ni](https://github.com/antfu-collective/ni).
 
 ```bash
 nr desktop # Target: Windows, Linux, MacOS
-
-nr init # Only needed once for Android dev server
 nr android # Target: Android
 ```
 
