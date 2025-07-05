@@ -1,12 +1,13 @@
 {
-  "productName": "Organized",
+  "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
+  "productName": "organized",
   "version": "0.1.0",
-  "identifier": "com.organized.dev",
+  "identifier": "com.organized.app",
   "build": {
-    "frontendDist": "../dist",
-    "devUrl": "http://localhost:3000",
-    "beforeDevCommand": "bun x nuxt dev --host",
-    "beforeBuildCommand": "bun x nuxt generate"
+    "frontendDist": "../build",
+    "devUrl": "http://localhost:5173",
+    "beforeDevCommand": "vite dev --host",
+    "beforeBuildCommand": "vite build"
   },
   "app": {
     "windows": [
@@ -32,6 +33,5 @@
       "icons/icon.icns",
       "icons/icon.ico"
     ]
-  },
-  "$schema": "../node_modules/@tauri-apps/cli/schema.json"
+  }
 }

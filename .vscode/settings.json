@@ -2,7 +2,85 @@
   "prettier.enable": false,
   "editor.formatOnSave": false,
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit"
+    "source.fixAll.eslint": "explicit",
+    "source.organizeImports": "never"
   },
-  "typescript.tsdk": "node_modules/typescript/lib"
+  "eslint.rules.customizations": [
+    {
+      "rule": "style/*",
+      "severity": "warn",
+      "fixable": true
+    },
+    {
+      "rule": "format/*",
+      "severity": "warn",
+      "fixable": true
+    },
+    {
+      "rule": "*-indent",
+      "severity": "warn",
+      "fixable": true
+    },
+    {
+      "rule": "*-spacing",
+      "severity": "warn",
+      "fixable": true
+    },
+    {
+      "rule": "*-spaces",
+      "severity": "warn",
+      "fixable": true
+    },
+    {
+      "rule": "*-order",
+      "severity": "warn",
+      "fixable": true
+    },
+    {
+      "rule": "*-dangle",
+      "severity": "warn",
+      "fixable": true
+    },
+    {
+      "rule": "*-newline",
+      "severity": "warn",
+      "fixable": true
+    },
+    {
+      "rule": "*quotes",
+      "severity": "warn",
+      "fixable": true
+    },
+    {
+      "rule": "*semi",
+      "severity": "warn",
+      "fixable": true
+    }
+  ],
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "vue",
+    "html",
+    "markdown",
+    "json",
+    "jsonc",
+    "yaml",
+    "toml",
+    "xml",
+    "gql",
+    "graphql",
+    "astro",
+    "svelte",
+    "css",
+    "less",
+    "scss",
+    "pcss",
+    "postcss"
+  ],
+  "i18n-ally.localesPaths": [
+    "src/lib/locales"
+  ]
 }

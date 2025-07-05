@@ -1,56 +1,79 @@
 # Organized App
 
-Modular app for organizing your life.
+Your everyday companion app
 
 ## Contributing
 
-This app is made with [Nuxt](https://nuxt.com/), [shadcn](https://www.shadcn-vue.com/), [UnoCSS](https://unocss.dev/) and [Tauri](https://v2.tauri.app/). See documentation for each to get started.
+### Tech Stack
+
+This app is made with
+
+- [SvelteKit](https://svelte.dev/)
+- [Shadcn](https://shadcn-svelte.com/)
+- [UnoCSS](https://unocss.dev/)
+- [Tauri](https://tauri.app/)
+- [Bun](https://bun.sh/)
+- [Drizzle](https://orm.drizzle.team/)
+- [@yuo-app/lin](https://github.com/yuo-app/lin)
+
+See documentation for each to get started.
 
 ### Prerequisites
 
-- [Bun](https://bun.sh/)
-- [Tauri v2 prerequisites](https://v2.tauri.app/start/prerequisites/)
+- [Bun](https://bun.sh/docs/installation)
+- [Tauri](https://tauri.app/start/prerequisites/)
+- [VSCode](https://code.visualstudio.com/) (recommended)
+- You should also install all recommended VSCode extensions from the `.vscode/extensions.json` file.
 
-### Commands
+### Setup
 
 Example commands use [@antfu/ni](https://github.com/antfu-collective/ni).
 
+```sh
+ni # Install dependencies
+nr sync # Sync svelte types
+nr init # Initialize android target
+nr desktop # Start desktop dev build + creates database
+nlx eemoji init -c none # Initialize automatic commit emojis
+```
+
+If you wish to use the [lin](https://github.com/yuo-app/lin) tool, you need to set up the environment variables in the `.env` file. You can use the `.env.example` as a template.
+
+```sh
+
+### Commands
+
 #### Start development server
 
-```bash
+```sh
 nr desktop # Target: Windows, Linux, MacOS
 nr android # Target: Android
 ```
 
-#### Build ([Distribute](https://v2.tauri.app/distribute/))
+#### Build
 
-```bash
+```sh
 nr build:desktop
-nr build:android # Requires distribution setup
+nr build:android
 ```
+
+Android build requirees [distribution setup](https://v2.tauri.app/distribute/).
+
+#### Database
+
+```sh
+nr db:generate # Generate SQL migrations
+nr db:migrate # Apply migrations
+nr db:push # Push schema changes without SQL file generations
+nr db:studio # Start real time SQL explorer
+```
+
+For more information, check the [documentation](https://orm.drizzle.team/docs/kit-overview).
 
 #### Other
 
-Add shdcn component to the app:
-
-```bash
-nr add
-```
-
-Migrate database schema changes:
-
-```bash
-nr migrate
-```
-
-Live SQL explorer (works with desktop target):
-
-```bash
-nr studio
-```
-
-Regenerate Nuxt:
-
-```bash
-nr generate
+```sh
+nr add <component> # Add shadcn component
+nr lint # Eslint check and fix
+nr lin <command> [options] # Run lin commands
 ```
