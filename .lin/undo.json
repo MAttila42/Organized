@@ -1,4 +1,0 @@
-{
-  "src\\lib\\locales\\en-US.json": "{\n  \"insertButton\": \"Add record\",\n  \"purgeButton\": \"Purge\",\n  \"testKey2\": \"Test2\"\n}\n",
-  "src\\lib\\locales\\hu-HU.json": "{\n  \"insertButton\": \"Rekord hozzáadása\",\n  \"purgeButton\": \"Törlés\",\n  \"testKey2\": \"Teszt2\"\n}\n"
-}
