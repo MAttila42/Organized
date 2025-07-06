@@ -74,4 +74,5 @@ For more information, check the [documentation](https://orm.drizzle.team/docs/ki
 nr add <component> # Add shadcn component
 nr lint # Eslint check and fix
 nr lin <command> [options] # Run lin commands
+nr tauri <command> [options] # Run tauri commands
 ```
