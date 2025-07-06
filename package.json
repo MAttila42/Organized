@@ -44,7 +44,7 @@
     "@unocss/eslint-plugin": "^66.3.2",
     "@unocss/extractor-svelte": "^66.3.2",
     "@unocss/preset-wind3": "^66.3.2",
-    "@yuo-app/lin": "^2.0.4",
+    "@yuo-app/lin": "^2.1.0",
     "bits-ui": "^2.8.10",
     "drizzle-kit": "^0.31.4",
     "eslint": "^9.30.1",
