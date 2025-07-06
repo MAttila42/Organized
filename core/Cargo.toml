@@ -1,5 +1,5 @@
 [package]
-name = "app"
+name = "organized_app"
 version = "0.1.0"
 description = "Organized App"
 authors = [ "you" ]

@@ -5,7 +5,6 @@
   "private": true,
   "packageManager": "bun@1.2.5",
   "scripts": {
-    "init": "tauri android init",
     "desktop": "tauri dev",
     "android": "tauri android dev",
     "build:desktop": "tauri build",
@@ -18,7 +17,8 @@
     "lint": "eslint --fix .",
     "sync": "svelte-kit sync",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
+    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+    "init": "tauri android init"
   },
   "dependencies": {
     "@fontsource/ubuntu": "^5.2.6",
@@ -44,7 +44,7 @@
     "@unocss/eslint-plugin": "^66.3.2",
     "@unocss/extractor-svelte": "^66.3.2",
     "@unocss/preset-wind3": "^66.3.2",
-    "@yuo-app/lin": "^2.0.2",
+    "@yuo-app/lin": "^2.0.4",
     "bits-ui": "^2.8.10",
     "drizzle-kit": "^0.31.4",
     "eslint": "^9.30.1",

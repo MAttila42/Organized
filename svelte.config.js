@@ -8,7 +8,7 @@ const config = {
     adapter: adapter(),
   },
   i18n: {
-    locales: ['en-US', 'hu-HU'],
+    locales: ['en-US', 'hu-HU', 'de-DE', 'fr-FR', 'es-ES'],
     defaultLocale: 'en-US',
     directory: 'src/lib/locales',
   },

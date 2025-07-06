@@ -1,41 +1,80 @@
 import i18next from 'i18next'
-import enUS from './locales/en-US.json'
-import huHU from './locales/hu-HU.json'
 
-const i18n = $state({
-  locale: i18next.language,
-  locales: i18next.languages,
-  setLocale: (locale: string) => {
-    i18next.changeLanguage(locale)
-    i18n.locale = locale
-    localStorage.setItem('locale', locale)
-  },
-  t: (key: string, defaultValue?: string, options?: Record<string, any>) => {
-    return i18next.t(key, {
-      ...options,
-      defaultValue,
-      lng: i18n.locale,
-    })
-  },
+const state = $state({
+  locale: 'en-US',
+  locales: [] as string[],
 })
 
-export function useI18n() {
-  i18next.init({
-    lng: 'en-US',
-    debug: true,
-    resources: {
-      'en-US': { translation: enUS },
-      'hu-HU': { translation: huHU },
-    },
+/**
+ * Simple wrapper around i18next for Svelte.
+ */
+const i18n = {
+  /**
+   * The current locale.
+   */
+  get locale() {
+    return state.locale
+  },
+
+  /**
+   * Sets the locale and updates i18next and localStorage.
+   * @param locale The locale to set.
+   */
+  set locale(locale: string) {
+    state.locale = locale
+    localStorage.setItem('locale', locale)
+  },
+
+  /**
+   * The available locales.
+   */
+  get locales() {
+    return state.locales
+  },
+}
+
+/**
+ * Translates a key using i18next.
+ *
+ * @param key The translation key to look up.
+ * @param fallback An optional fallback string to return if the key is not found. (Organized convention: use the default locale's translation as fallback and use lin for translations)
+ * @returns The translated string for the given key in the selected locale, or the fallback if the key is not found.
+ */
+export function t(key: string, fallback?: string) {
+  return i18next.t(key, {
+    defaultValue: fallback,
+    lng: state.locale,
   })
+}
+
+/**
+ * Initializes i18next with the available locales and sets the initial locale.
+ *
+ * The avaliable locales are loaded from JSON files in the `./locales/` directory.
+ *
+ * The initial locale is set to the value stored in localStorage, or defaults to 'en-US'.
+ */
+export function initI18n() {
+  const resources: Record<string, any> = {}
+  const localeModules = import.meta.glob('./locales/*.json', { eager: true })
+  for (const path in localeModules) {
+    const localeKey = path.match(/([\w-]+)\.json$/)?.[1]
+    if (localeKey) {
+      const module = localeModules[path]
+      resources[localeKey] = { translation: (module as any).default }
+      state.locales.push(localeKey)
+    }
+  }
 
   const storedLocale = localStorage.getItem('locale')
-  if (storedLocale)
-    i18n.setLocale(storedLocale)
-  else
-    localStorage.setItem('locale', i18next.language)
+  if (storedLocale && state.locales.includes(storedLocale))
+    state.locale = storedLocale
 
-  i18n.locale = i18next.language
+  i18next.init({
+    lng: state.locale,
+    debug: false,
+    resources,
+  })
 }
 
 export default i18n

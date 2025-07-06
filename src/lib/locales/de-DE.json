@@ -1,0 +1,10 @@
+{
+  "ui": {
+    "insert": "Datensatz hinzufügen",
+    "purge": "Löschen",
+    "toggleLang": "Sprache umschalten"
+  },
+  "home": {
+    "oneliner": "Ihre tägliche Begleit-App"
+  }
+}

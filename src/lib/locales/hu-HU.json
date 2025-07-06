@@ -1,7 +1,10 @@
 {
-  "insertButton": "Rekord hozzáadása",
-  "purgeButton": "Törlés",
-  "testKey2": "Teszt2",
-  "toggleLang": "Nyelv váltása",
-  "testKey": "Teszt"
+  "ui": {
+    "insert": "Rekord hozzáadása",
+    "purge": "Törlés",
+    "toggleLang": "Nyelv váltása"
+  },
+  "home": {
+    "oneliner": "A mindennapi társad alkalmazás"
+  }
 }

@@ -1,0 +1,10 @@
+{
+  "ui": {
+    "insert": "Agregar registro",
+    "purge": "Purgar",
+    "toggleLang": "Alternar idioma"
+  },
+  "home": {
+    "oneliner": "Tu aplicación compañera diaria"
+  }
+}

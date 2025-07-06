@@ -1,8 +1,9 @@
 <script lang='ts'>
   import type { PageProps } from './$types'
+  import image from '$lib/assets/logo-512.png'
   import { Button } from '$lib/components/ui/button'
   import { test } from '$lib/database/schema'
-  import i18n from '$lib/i18n.svelte'
+  import i18n, { t } from '$lib/i18n.svelte'
 
   const { data }: PageProps = $props()
   const database = data.database
@@ -20,25 +21,34 @@
     records.length = 0
   }
 
-  function toggleLocale() {
-    i18n.setLocale(i18n.locale === 'en-US' ? 'hu-HU' : 'en-US')
+  function nextLocale() {
+    const currentIndex = i18n.locales.indexOf(i18n.locale)
+    i18n.locale = i18n.locales[(currentIndex + 1) % i18n.locales.length]
   }
 </script>
 
-<h1 class='pb-2 pt-6 text-center text-4xl font-bold'>Organized</h1>
-<div class='m-5 flex flex-col gap-5'>
+<div class='flex flex-col gap-5 p-5'>
+  <div class='flex flex-row items-center gap-3'>
+    <img src={image} alt='Organized Logo' class='size-16 bg-inherit p-1' />
+    <div>
+      <h1 class='text-3xl font-bold'>Organized</h1>
+      <p class='text-sm text-muted-foreground'>
+        {t('home.oneliner', 'Your everyday companion app')}
+      </p>
+    </div>
+  </div>
   <div class='flex flex-col gap-2'>
     <Button class='w-full' onclick={testInsert}>
       <div class='i-fluent:add-square-16-filled size-4'></div>
-      {i18n.t('insertButton', 'Add record')}
+      {t('ui.insert', 'Add record')}
     </Button>
     <Button class='w-full' onclick={purge}>
       <div class='i-fluent:delete-16-filled size-4'></div>
-      {i18n.t('purgeButton', 'Purge')}
+      {t('ui.purge', 'Purge')}
     </Button>
-    <Button class='w-full' onclick={toggleLocale}>
+    <Button class='w-full' onclick={nextLocale}>
       <div class='i-fluent:globe-28-filled size-4'></div>
-      {i18n.t('toggleLang', 'Toggle language')}
+      {t('ui.toggleLang', 'Toggle language')}
     </Button>
   </div>
 

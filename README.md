@@ -57,7 +57,7 @@ nr build:desktop
 nr build:android
 ```
 
-Android build requirees [distribution setup](https://v2.tauri.app/distribute/).
+Android build requirees [distribution setup](https://tauri.app/distribute/).
 
 #### Database
 

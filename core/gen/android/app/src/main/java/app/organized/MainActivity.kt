@@ -1,3 +1,3 @@
-package com.organized.app
+package app.organized
 
 class MainActivity : TauriActivity()

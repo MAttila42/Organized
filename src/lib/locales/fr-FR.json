@@ -1,0 +1,10 @@
+{
+  "ui": {
+    "insert": "Ajouter un enregistrement",
+    "purge": "Vider",
+    "toggleLang": "Basculer la langue"
+  },
+  "home": {
+    "oneliner": "Votre application compagnon quotidienne"
+  }
+}

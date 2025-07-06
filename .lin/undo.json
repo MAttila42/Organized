@@ -1,4 +1,7 @@
 {
-  "src\\lib\\locales\\en-US.json": "{\n  \"insertButton\": \"Add record\",\n  \"purgeButton\": \"Purge\",\n  \"testKey2\": \"Test2\"\n}\n",
-  "src\\lib\\locales\\hu-HU.json": "{\n  \"insertButton\": \"Rekord hozzáadása\",\n  \"purgeButton\": \"Törlés\",\n  \"testKey2\": \"Teszt2\"\n}\n"
+  "src\\lib\\locales\\en-US.json": "{\n  \"ui\": {\n    \"insert\": \"Add record\",\n    \"purge\": \"Purge\",\n    \"toggleLang\": \"Toggle language\"\n  },\n  \"home\": {\n    \"oneliner\": \"Your everyday companion app\"\n  },\n  \"test\": \"test\"\n}\n",
+  "src\\lib\\locales\\hu-HU.json": "{\n  \"ui\": {\n    \"insert\": \"Rekord hozzáadása\",\n    \"purge\": \"Törlés\",\n    \"toggleLang\": \"Nyelv váltása\"\n  },\n  \"home\": {\n    \"oneliner\": \"A mindennapi társad alkalmazás\"\n  },\n  \"test\": \"teszt\"\n}\n",
+  "src\\lib\\locales\\de-DE.json": "{\n  \"ui\": {\n    \"insert\": \"Datensatz hinzufügen\",\n    \"purge\": \"Löschen\",\n    \"toggleLang\": \"Sprache umschalten\"\n  },\n  \"home\": {\n    \"oneliner\": \"Ihre tägliche Begleit-App\"\n  },\n  \"test\": \"Test\"\n}\n",
+  "src\\lib\\locales\\fr-FR.json": "{\n  \"ui\": {\n    \"insert\": \"Ajouter un enregistrement\",\n    \"purge\": \"Vider\",\n    \"toggleLang\": \"Basculer la langue\"\n  },\n  \"home\": {\n    \"oneliner\": \"Votre application compagnon quotidienne\"\n  },\n  \"test\": \"test\"\n}\n",
+  "src\\lib\\locales\\es-ES.json": "{\n  \"ui\": {\n    \"insert\": \"Agregar registro\",\n    \"purge\": \"Purgar\",\n    \"toggleLang\": \"Alternar idioma\"\n  },\n  \"home\": {\n    \"oneliner\": \"Tu aplicación compañera diaria\"\n  },\n  \"test\": \"prueba\"\n}\n"
 }
