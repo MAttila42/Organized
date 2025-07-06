@@ -39,8 +39,6 @@ nlx eemoji init -c none # Initialize automatic commit emojis
 
 If you wish to use the [lin](https://github.com/yuo-app/lin) tool, you need to set up the environment variables in the `.env` file. You can use the `.env.example` as a template.
 
-```sh
-
 ### Commands
 
 #### Start development server
