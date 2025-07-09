@@ -17,8 +17,7 @@
     "lint": "eslint --fix .",
     "sync": "svelte-kit sync",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-    "init": "tauri android init"
+    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
   },
   "dependencies": {
     "@fontsource/ubuntu": "^5.2.6",

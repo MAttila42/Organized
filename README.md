@@ -32,7 +32,6 @@ Example commands use [@antfu/ni](https://github.com/antfu-collective/ni).
 ```sh
 ni # Install dependencies
 nr sync # Sync svelte types
-nr init # Initialize android target
 nr desktop # Start desktop dev build + creates database
 nlx eemoji init -c none # Initialize automatic commit emojis
 ```
