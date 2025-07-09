@@ -5,6 +5,7 @@
     "svelte.svelte-vscode",
     "antfu.unocss",
     "selemondev.vscode-shadcn-svelte",
-    "vitest.explorer"
+    "vitest.explorer",
+    "tauri-apps.tauri-vscode"
   ]
 }

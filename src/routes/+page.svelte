@@ -1,13 +1,12 @@
 <script lang='ts'>
-  import type { PageProps } from './$types'
+  import { page } from '$app/state'
   import image from '$lib/assets/logo-512.png'
   import { Button } from '$lib/components/ui/button'
   import { test } from '$lib/database/schema'
   import i18n, { t } from '$lib/i18n.svelte'
 
-  const { data }: PageProps = $props()
-  const database = data.database
-  let records = $state(data.records || [])
+  const database = page.data.database
+  let records = $state(page.data.records || [])
 
   async function testInsert() {
     await database.insert(test).values({

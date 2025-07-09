@@ -3,6 +3,11 @@ import process from 'node:process'
 import { defineConfig } from '@yuo-app/lin'
 
 export default defineConfig({
+  i18n: {
+    locales: ['en-US', 'hu-HU', 'de-DE', 'fr-FR', 'es-ES'],
+    defaultLocale: 'en-US',
+    directory: 'src/lib/locales',
+  },
   options: {
     provider: (process.env.LLM_PROVIDER as Provider) || 'openai',
     model: process.env.LLM_MODEL || 'gpt-4.1-nano',
