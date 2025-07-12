@@ -50,9 +50,9 @@ export function t(key: string, fallback?: string) {
 /**
  * Initializes i18next with the available locales and sets the initial locale.
  *
- * The avaliable locales are loaded from JSON files in the `./locales/` directory.
+ * The avaliable locales are loaded from JSON files in the `$lib/locales` directory.
  *
- * The initial locale is set to the value stored in localStorage, or defaults to 'en-US'.
+ * The initial locale is set to the value stored in localStorage, or defaults to `en-US`.
  */
 export function initI18n() {
   const resources: Record<string, any> = {}
