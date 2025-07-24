@@ -1,5 +1,5 @@
 import { useDatabase } from '$lib/database'
-import { userModules } from '$lib/database/schema/home'
+import { userLinks, userModules } from '$lib/database/schema/home'
 import { eq, gte, sql } from 'drizzle-orm'
 
 export interface Module {
@@ -35,6 +35,29 @@ export const moduleStore = $state({
       module.links.push(link)
     else
       throw new Error(`Module with id ${moduleId} not found`)
+  },
+
+  async getAllEnabled() {
+    const { database } = await useDatabase()
+    const enabledModules = await database.select()
+      .from(userModules)
+      .orderBy(userModules.displayOrder)
+    const enabledLabels = await database.select()
+      .from(userLinks)
+      .where(eq(userLinks.type, 'label'))
+      .orderBy(userLinks.displayOrder)
+
+    return enabledModules.map(m => ({
+      moduleId: m.moduleId,
+      color: m.color,
+      labels: enabledLabels.filter(l => l.moduleId === m.id)
+        .map(l => ({
+          linkId: l.linkId,
+          icon: l.icon,
+          color: l.color,
+          parameters: l.parameters,
+        })),
+    }))
   },
 
   async enableModule(moduleId: string, color: string, position: number) {
