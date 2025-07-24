@@ -12,5 +12,6 @@ CREATE TABLE `user_links` (
 CREATE TABLE `user_modules` (
 	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
 	`module_id` text NOT NULL,
+	`color` text NOT NULL,
 	`display_order` integer DEFAULT 0 NOT NULL
 );

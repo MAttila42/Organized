@@ -1,7 +1,7 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "c687ee20-894b-4fe3-8cc1-386e377e1f6d",
+  "id": "2184c0bf-f4f7-4d31-829c-ad952893de3e",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "user_links": {
@@ -83,6 +83,13 @@
         },
         "module_id": {
           "name": "module_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "color": {
+          "name": "color",
           "type": "text",
           "primaryKey": false,
           "notNull": true,

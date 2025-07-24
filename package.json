@@ -10,6 +10,7 @@
     "build:desktop": "tauri build",
     "build:android": "tauri android build",
     "db:generate": "drizzle-kit generate",
+    "db:drop": "drizzle-kit drop",
     "db:migrate": "drizzle-kit migrate",
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio",

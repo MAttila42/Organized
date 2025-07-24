@@ -4,6 +4,7 @@ import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core'
 export const userModules = sqliteTable('user_modules', {
   id: integer().primaryKey({ autoIncrement: true }),
   moduleId: text().notNull(),
+  color: text().notNull(),
   displayOrder: integer().notNull().default(0),
 })
 
