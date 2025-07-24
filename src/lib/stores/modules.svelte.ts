@@ -24,6 +24,7 @@ export interface LinkParameter {
 
 export const moduleStore = $state({
   modules: [] as Module[],
+  enabledModules: [] as string[],
 
   addLink(moduleId: string, link: Link) {
     const module = this.modules.find(m => m.id === moduleId)
@@ -31,5 +32,9 @@ export const moduleStore = $state({
       module.links.push(link)
     else
       throw new Error(`Module with id ${moduleId} not found`)
+  },
+
+  disableModule(moduleId: string) {
+    this.enabledModules = this.enabledModules.filter(id => id !== moduleId)
   },
 })
