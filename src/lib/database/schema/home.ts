@@ -16,7 +16,7 @@ export const userLinks = sqliteTable('user_links', {
   icon: text().notNull(),
   color: text().notNull(),
   parameters: text({ mode: 'json' }).$type<Record<string, any>>(),
-  moduleId: integer().notNull(),
+  moduleId: text().notNull(),
 })
 
 export const userModulesRelations = relations(userModules, ({ many }) => ({

@@ -6,7 +6,7 @@ CREATE TABLE `user_links` (
 	`icon` text NOT NULL,
 	`color` text NOT NULL,
 	`parameters` text,
-	`module_id` integer NOT NULL
+	`module_id` text NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE `user_modules` (

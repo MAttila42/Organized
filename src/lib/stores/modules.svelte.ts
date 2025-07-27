@@ -1,6 +1,6 @@
 import { useDatabase } from '$lib/database'
 import { userLinks, userModules } from '$lib/database/schema/home'
-import { eq, gte, sql } from 'drizzle-orm'
+import { and, eq, gte, sql } from 'drizzle-orm'
 
 export interface Module {
   id: string
@@ -83,5 +83,23 @@ export const moduleStore = $state({
     const { database } = await useDatabase()
     database.delete(userModules)
       .where(eq(userModules.moduleId, moduleId))
+  },
+
+  async getLabels(moduleId: string) {
+    return this.modules
+      .find(m => m.id === moduleId)
+      ?.links
+      .filter(l => l.type === 'label') || []
+  },
+
+  async getEnabledLabels(moduleId: string) {
+    const { database } = await useDatabase()
+    return database.select()
+      .from(userLinks)
+      .where(and(
+        eq(userLinks.moduleId, moduleId),
+        eq(userLinks.type, 'label'),
+      ))
+      .orderBy(userLinks.displayOrder)
   },
 })
