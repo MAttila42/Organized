@@ -95,13 +95,19 @@ export const moduleStore = $state({
 
   async getEnabledLabels(moduleId: string) {
     const { database } = await useDatabase()
-    return database.select()
+    const result = await database.select()
       .from(userLinks)
       .where(and(
         eq(userLinks.moduleId, moduleId),
         eq(userLinks.type, 'label'),
       ))
       .orderBy(userLinks.displayOrder)
+
+    return result.map(l => ({
+      id: l.id,
+      linkId: l.linkId,
+      parameters: l.parameters,
+    }))
   },
 
   async addLabel(
@@ -134,5 +140,14 @@ export const moduleStore = $state({
       parameters,
       moduleId,
     })
+  },
+
+  async removeLabel(moduleId: string, id: number) {
+    const { database } = await useDatabase()
+    database.delete(userLinks)
+      .where(and(
+        eq(userLinks.moduleId, moduleId),
+        eq(userLinks.id, id),
+      ))
   },
 })
