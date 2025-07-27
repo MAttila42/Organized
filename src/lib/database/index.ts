@@ -1,12 +1,11 @@
 import Database from '@tauri-apps/plugin-sql'
 import { drizzle } from 'drizzle-orm/sqlite-proxy'
-import * as schema from './schema'
 
 export interface SelectQueryResult {
   [key: string]: any
 }
 
-let database: ReturnType<typeof drizzle<typeof schema>>
+let database: ReturnType<typeof drizzle>
 let sqlite: Database
 
 export async function useDatabase() {
@@ -15,7 +14,7 @@ export async function useDatabase() {
 
   sqlite = await Database.load('sqlite:sqlite.db')
 
-  database = drizzle<typeof schema>(
+  database = drizzle(
     async (sql, params, method) => {
       let rows: any = []
       let results = []
@@ -42,7 +41,7 @@ export async function useDatabase() {
 
       return { rows: results }
     },
-    { schema, logger: false },
+    { logger: false, casing: 'snake_case' },
   )
 
   return { database, sqlite }
