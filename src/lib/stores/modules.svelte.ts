@@ -50,7 +50,7 @@ export const moduleStore = $state({
     return enabledModules.map(m => ({
       moduleId: m.moduleId,
       color: m.color,
-      labels: enabledLabels.filter(l => l.moduleId === m.id)
+      labels: enabledLabels.filter(l => l.moduleId === m.moduleId)
         .map(l => ({
           linkId: l.linkId,
           icon: l.icon,
