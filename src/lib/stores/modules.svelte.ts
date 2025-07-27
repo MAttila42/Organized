@@ -29,7 +29,15 @@ export interface LinkParameter {
 export const moduleStore = $state({
   modules: [] as Module[],
 
-  addLink(moduleId: string, link: Link) {
+  /**
+   * Registers a new link.
+   *
+   * Use only in module initialization.
+   *
+   * @param moduleId The module identifier this link is for.
+   * @param link The link to register.
+   */
+  registerLink(moduleId: string, link: Link) {
     const module = this.modules.find(m => m.id === moduleId)
     if (module)
       module.links.push(link)
@@ -37,6 +45,11 @@ export const moduleStore = $state({
       throw new Error(`Module with id ${moduleId} not found`)
   },
 
+  /**
+   * Retrieves all enabled modules with their labels.
+   *
+   * @returns All enabled modules with their labels.
+   */
   async getAllEnabled() {
     const { database } = await useDatabase()
     const enabledModules = await database.select()
@@ -60,6 +73,15 @@ export const moduleStore = $state({
     }))
   },
 
+  /**
+   * Enables a module.
+   *
+   * This will insert the module into the database and adjust the display order of existing modules.
+   *
+   * @param moduleId The module identifier to enable.
+   * @param color The color to assign to the module.
+   * @param position The display order position for the module.
+   */
   async enableModule(moduleId: string, color: string, position: number) {
     const { database } = await useDatabase()
     const result = await database.select()
@@ -79,12 +101,23 @@ export const moduleStore = $state({
     })
   },
 
+  /**
+   * Disables a module.
+   *
+   * @param moduleId The module identifier to disable.
+   */
   async disableModule(moduleId: string) {
     const { database } = await useDatabase()
     database.delete(userModules)
       .where(eq(userModules.moduleId, moduleId))
   },
 
+  /**
+   * Retrieves all labels for a module.
+   *
+   * @param moduleId The module identifier to get labels for.
+   * @returns An array of labels for the specified module.
+   */
   async getLabels(moduleId: string) {
     return this.modules
       .find(m => m.id === moduleId)
@@ -93,6 +126,12 @@ export const moduleStore = $state({
       .sort((a, b) => a.name.localeCompare(b.name)) || []
   },
 
+  /**
+   * Retrieves all enabled labels for a module.
+   *
+   * @param moduleId The module identifier to get enabled labels for.
+   * @returns An array of enabled labels for the specified module.
+   */
   async getEnabledLabels(moduleId: string) {
     const { database } = await useDatabase()
     const result = await database.select()
@@ -110,6 +149,16 @@ export const moduleStore = $state({
     }))
   },
 
+  /**
+   * Adds a new label to a module.
+   *
+   * This will insert the label into the database and adjust the display order of existing labels.
+   *
+   * @param moduleId The module identifier to add the label to.
+   * @param linkId The link identifier for the label.
+   * @param parameters The parameters for the label.
+   * @param position The position in the module's label list for the label.
+   */
   async addLabel(
     moduleId: string,
     linkId: string,
@@ -142,6 +191,12 @@ export const moduleStore = $state({
     })
   },
 
+  /**
+   * Removes a label from a module.
+   *
+   * @param moduleId The module identifier to remove the label from.
+   * @param id The label identifier to remove.
+   */
   async removeLabel(moduleId: string, id: number) {
     const { database } = await useDatabase()
     database.delete(userLinks)
