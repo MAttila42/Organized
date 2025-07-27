@@ -13,8 +13,8 @@ export const userLinks = sqliteTable('user_links', {
   linkId: text().notNull(),
   type: text({ enum: ['shortcut', 'label'] }).notNull(),
   displayOrder: integer().notNull().default(0),
-  icon: text().notNull(),
-  color: text().notNull(),
+  icon: text(),
+  color: text(),
   parameters: text({ mode: 'json' }).$type<Record<string, any>>(),
   moduleId: text().notNull(),
 })

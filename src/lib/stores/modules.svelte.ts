@@ -89,7 +89,8 @@ export const moduleStore = $state({
     return this.modules
       .find(m => m.id === moduleId)
       ?.links
-      .filter(l => l.type === 'label') || []
+      .filter(l => l.type === 'label')
+      .sort((a, b) => a.name.localeCompare(b.name)) || []
   },
 
   async getEnabledLabels(moduleId: string) {
@@ -101,5 +102,37 @@ export const moduleStore = $state({
         eq(userLinks.type, 'label'),
       ))
       .orderBy(userLinks.displayOrder)
+  },
+
+  async addLabel(
+    moduleId: string,
+    linkId: string,
+    parameters: Record<string, any>,
+    position: number,
+  ) {
+    const { database } = await useDatabase()
+    const result = await database.select()
+      .from(userLinks)
+      .where(and(
+        eq(userLinks.moduleId, moduleId),
+        eq(userLinks.displayOrder, position),
+      ))
+
+    if (result.length > 0) {
+      database.update(userLinks)
+        .set({ displayOrder: sql`${userLinks.displayOrder} + 1` })
+        .where(and(
+          eq(userLinks.moduleId, moduleId),
+          gte(userLinks.displayOrder, position),
+        ))
+    }
+
+    database.insert(userLinks).values({
+      linkId,
+      type: 'label',
+      displayOrder: position,
+      parameters,
+      moduleId,
+    })
   },
 })

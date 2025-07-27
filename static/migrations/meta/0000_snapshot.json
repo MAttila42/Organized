@@ -1,7 +1,7 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "6e0730f6-c2a8-4b58-b121-d993a2788d66",
+  "id": "5b9627bf-1ca3-4541-a924-49c3fb9af015",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "user_links": {
@@ -40,14 +40,14 @@
           "name": "icon",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "autoincrement": false
         },
         "color": {
           "name": "color",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "autoincrement": false
         },
         "parameters": {
