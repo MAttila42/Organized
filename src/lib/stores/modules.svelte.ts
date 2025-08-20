@@ -219,4 +219,50 @@ export const moduleStore = $state({
         eq(userLinks.id, id),
       ))
   },
+
+  /**
+   * Adds a new shortcut to quick actions.
+   *
+   * @param moduleId The module identifier the shortcut is for.
+   * @param linkId The link identifier the shortcut invokes.
+   * @param parameters The parameters for the shortcut call.
+   * @param position The position in the shortcut list.
+   * @param icon The icon for the shortcut.
+   * @param color The color for the shortcut.
+   */
+  async addShortcut(
+    moduleId: string,
+    linkId: string,
+    parameters: Record<string, any>,
+    position: number,
+    icon: string,
+    color: string,
+  ) {
+    const { database } = await useDatabase()
+    const result = await database.select()
+      .from(userLinks)
+      .where(and(
+        eq(userLinks.moduleId, moduleId),
+        eq(userLinks.displayOrder, position),
+      ))
+
+    if (result.length > 0) {
+      database.update(userLinks)
+        .set({ displayOrder: sql`${userLinks.displayOrder} + 1` })
+        .where(and(
+          eq(userLinks.moduleId, moduleId),
+          gte(userLinks.displayOrder, position),
+        ))
+    }
+
+    database.insert(userLinks).values({
+      linkId,
+      type: 'shortcut',
+      displayOrder: position,
+      icon,
+      color,
+      parameters,
+      moduleId,
+    })
+  },
 })
