@@ -126,6 +126,12 @@ export const moduleStore = $state({
       .sort((a, b) => a.name.localeCompare(b.name)) || []
   },
 
+  /**
+   * Retrieves all possible actions for a module.
+   *
+   * @param moduleId The module identifier to get action for.
+   * @returns An array of actions for the specified module.
+   */
   async getActions(moduleId: string) {
     return this.modules
       .find(m => m.id === moduleId)
