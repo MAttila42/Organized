@@ -7,7 +7,7 @@
 
 <button
   aria-label='Shortcut'
-  class={`shortcut size-15 rounded-xl p-4 ${className}`}
+  class={`shortcut size-15 rounded-2xl p-4 ${className}`}
 >
   <div class={`icon size-full ${icon}`}></div>
 </button>

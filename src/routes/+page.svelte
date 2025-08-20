@@ -1,4 +1,5 @@
 <script lang='ts'>
+  import ModuleCard from '$lib/components/ModuleCard.svelte'
   import Shortcut from '$lib/components/Shortcut.svelte'
   import { Separator } from '$lib/components/ui/separator'
 
@@ -12,7 +13,7 @@
 </script>
 
 <div class='flex flex-col gap-0'>
-  <div class='my-3 mx-5 flex flex-row items-center justify-between'>
+  <div class='mx-5 my-3 flex flex-row items-center justify-between'>
     <h1 class='text-2xl font-bold'>Organized</h1>
     <a href='/settings' aria-label='Settings'>
       <div class='i-fluent:settings-16-filled size-7'></div>
@@ -26,7 +27,7 @@
   </div>
   <p>Text</p> -->
   <Separator />
-  <div class='my-4 mx-2 flex justify-center'>
+  <div class='mx-2 my-4 flex justify-center'>
     <div class='grid grid-cols-[repeat(auto-fill,5rem)] w-full justify-center justify-items-center gap-row-5'>
       <Shortcut icon='i-fluent:document-16-filled' --color='#1166dd' />
       <Shortcut icon='i-fluent:people-16-filled' --color='#dd6611' />
@@ -39,4 +40,7 @@
     </div>
   </div>
   <Separator />
+  <div class='mx-2 mt-4 flex flex-col gap-2'>
+    <ModuleCard />
+  </div>
 </div>

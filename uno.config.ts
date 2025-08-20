@@ -22,6 +22,11 @@ export default defineConfig({
       },
     }),
   ],
+  theme: {
+    colors: {
+      muted: '#6d6f70ff',
+    },
+  },
   transformers: [
     transformerAttributifyJsx(),
     transformerVariantGroup(),
