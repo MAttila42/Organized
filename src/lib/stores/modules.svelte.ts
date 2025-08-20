@@ -126,6 +126,14 @@ export const moduleStore = $state({
       .sort((a, b) => a.name.localeCompare(b.name)) || []
   },
 
+  async getActions(moduleId: string) {
+    return this.modules
+      .find(m => m.id === moduleId)
+      ?.links
+      .filter(l => l.type === 'shortcut')
+      .sort((a, b) => a.name.localeCompare(b.name)) || []
+  },
+
   /**
    * Retrieves all enabled labels for a module.
    *
