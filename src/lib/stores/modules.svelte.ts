@@ -206,21 +206,6 @@ export const moduleStore = $state({
   },
 
   /**
-   * Removes a label from a module.
-   *
-   * @param moduleId The module identifier to remove the label from.
-   * @param id The label identifier to remove.
-   */
-  async removeLabel(moduleId: string, id: number) {
-    const { database } = await useDatabase()
-    database.delete(userLinks)
-      .where(and(
-        eq(userLinks.moduleId, moduleId),
-        eq(userLinks.id, id),
-      ))
-  },
-
-  /**
    * Adds a new shortcut to quick actions.
    *
    * @param moduleId The module identifier the shortcut is for.
@@ -264,5 +249,16 @@ export const moduleStore = $state({
       parameters,
       moduleId,
     })
+  },
+
+  /**
+   * Removes a link (shortcut or label) from the home screen.
+   *
+   * @param id The identifier of the link to remove.
+   */
+  async removeLink(id: number) {
+    const { database } = await useDatabase()
+    database.delete(userLinks)
+      .where(eq(userLinks.id, id))
   },
 })
