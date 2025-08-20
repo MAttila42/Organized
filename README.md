@@ -59,10 +59,13 @@ Android build requirees [distribution setup](https://tauri.app/distribute/).
 #### Database
 
 ```sh
-nr db:generate # Generate SQL migrations
-nr db:migrate # Apply migrations
-nr db:push # Push schema changes without SQL file generations
-nr db:studio # Start real time SQL explorer
+nr db # drizzle-kit alias, use any subcommands available
+
+# Examples
+nr db generate # Generate SQL migrations
+nr db migrate # Apply migrations
+nr db push # Push schema changes without SQL file generations
+nr db studio # Start real time SQL explorer
 ```
 
 For more information, check the [documentation](https://orm.drizzle.team/docs/kit-overview).
