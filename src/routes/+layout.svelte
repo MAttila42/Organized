@@ -6,6 +6,4 @@
   const { children } = $props()
 </script>
 
-<div class='pt-[env(safe-area-inset-top)]'>
-  {@render children()}
-</div>
+{@render children()}
