@@ -28,5 +28,7 @@ log = "0.4"
 tauri = { version = "2.6.2", features = [] }
 tauri-plugin-log = "2"
 tauri-plugin-sql = { version = "2", features = ["sqlite"] }
-tauri-plugin-fs = "2"
-tauri-plugin-http = "2"
+tauri-plugin-os = "2"
+tauri-plugin-haptics = "2.0.0"
+# [target.'cfg(any(target_os = "android", target_os = "ios"))'.dependencies]
+

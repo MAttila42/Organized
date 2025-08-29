@@ -24,6 +24,7 @@ export default defineConfig({
   ],
   theme: {
     colors: {
+      destructive: '#d30000',
       muted: '#6d6f70ff',
     },
   },

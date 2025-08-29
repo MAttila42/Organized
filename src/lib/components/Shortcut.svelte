@@ -15,10 +15,10 @@
 <style>
   .shortcut {
     box-shadow:
-      inset 0 0 0.1em hsl(var(--background)),
       inset 0 0 2em hsl(var(--secondary)),
       inset 0 0 4em hsl(var(--secondary)),
       inset 0 0 6em hsl(var(--secondary));
+    outline: 1px solid hsl(var(--background));
     background-color: var(--color);
   }
 
