@@ -1,6 +1,7 @@
 <script lang='ts'>
   import ModuleCard from '$lib/components/ModuleCard.svelte'
   import Shortcut from '$lib/components/Shortcut.svelte'
+  import { moduleStore } from '$lib/stores/modules.svelte'
 </script>
 
 <div class='flex flex-col gap-0'>
@@ -26,10 +27,13 @@
     </div>
   </div>
   <div class='mx-4 mt-4 flex flex-col gap-4'>
-    <ModuleCard />
+    {#each await moduleStore.moduleCards as module}
+      <ModuleCard {module} />
+    {/each}
 
     <button
       class='flex flex-row items-center gap-3 b-3 rounded-md b-dashed p-3 text-muted'
+      onclick={() => moduleStore.enableModule('grocery', '#ffffff', 1)}
     >
       <div class='i-fluent:add-12-filled size-6'></div>
       <div>Add Module</div>

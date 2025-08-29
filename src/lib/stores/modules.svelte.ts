@@ -26,8 +26,19 @@ export interface LinkParameter {
   defaultValue?: string | number | boolean
 }
 
+export interface ModuleCard {
+  name: string
+  moduleId: string
+  color: string
+  labels: {
+    linkId: string
+    parameters: Record<string, any>
+  }[]
+}
+
 export const moduleStore = $state({
   modules: [] as Module[],
+  moduleCards: [] as ModuleCard[],
 
   /**
    * Registers a new link.
@@ -50,7 +61,7 @@ export const moduleStore = $state({
    *
    * @returns All enabled modules with their labels.
    */
-  async getAllEnabled() {
+  async loadAllEnabled() {
     const { database } = await useDatabase()
     const enabledModules = await database.select()
       .from(userModules)
@@ -60,17 +71,16 @@ export const moduleStore = $state({
       .where(eq(userLinks.type, 'label'))
       .orderBy(userLinks.displayOrder)
 
-    return enabledModules.map(m => ({
+    this.moduleCards = enabledModules.map(m => ({
+      name: this.modules.filter(mod => mod.id === m.moduleId)[0]!.name,
       moduleId: m.moduleId,
       color: m.color,
       labels: enabledLabels.filter(l => l.moduleId === m.moduleId)
         .map(l => ({
           linkId: l.linkId,
-          icon: l.icon,
-          color: l.color,
           parameters: l.parameters,
         })),
-    }))
+    } as ModuleCard))
   },
 
   /**
@@ -94,11 +104,13 @@ export const moduleStore = $state({
         .where(gte(userModules.displayOrder, position))
     }
 
-    database.insert(userModules).values({
+    await database.insert(userModules).values({
       moduleId,
       color,
       displayOrder: position,
     })
+
+    await this.loadAllEnabled()
   },
 
   /**
@@ -108,8 +120,10 @@ export const moduleStore = $state({
    */
   async disableModule(moduleId: string) {
     const { database } = await useDatabase()
-    database.delete(userModules)
+    await database.delete(userModules)
       .where(eq(userModules.moduleId, moduleId))
+
+    await this.loadAllEnabled()
   },
 
   /**
