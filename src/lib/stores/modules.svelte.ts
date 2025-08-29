@@ -30,6 +30,7 @@ export interface ModuleCard {
   name: string
   moduleId: string
   color: string
+  displayOrder: number
   labels: {
     linkId: string
     parameters: Record<string, any>
@@ -61,7 +62,7 @@ export const moduleStore = $state({
    *
    * @returns All enabled modules with their labels.
    */
-  async loadAllEnabled() {
+  async loadModuleCards() {
     const { database } = await useDatabase()
     const enabledModules = await database.select()
       .from(userModules)
@@ -75,6 +76,7 @@ export const moduleStore = $state({
       name: this.modules.filter(mod => mod.id === m.moduleId)[0]!.name,
       moduleId: m.moduleId,
       color: m.color,
+      displayOrder: m.displayOrder,
       labels: enabledLabels.filter(l => l.moduleId === m.moduleId)
         .map(l => ({
           linkId: l.linkId,
@@ -92,8 +94,12 @@ export const moduleStore = $state({
    * @param color The color to assign to the module.
    * @param position The display order position for the module.
    */
-  async enableModule(moduleId: string, color: string, position: number) {
+  async addModuleCard(moduleId: string, color?: string, position?: number) {
     const { database } = await useDatabase()
+
+    if (!position)
+      position = this.moduleCards[this.moduleCards.length - 1]?.displayOrder + 1 || 0
+
     const result = await database.select()
       .from(userModules)
       .where(eq(userModules.displayOrder, position))
@@ -104,13 +110,16 @@ export const moduleStore = $state({
         .where(gte(userModules.displayOrder, position))
     }
 
+    if (!color)
+      color = '#FFFFFF'
+
     await database.insert(userModules).values({
       moduleId,
       color,
       displayOrder: position,
     })
 
-    await this.loadAllEnabled()
+    await this.loadModuleCards()
   },
 
   /**
@@ -118,12 +127,12 @@ export const moduleStore = $state({
    *
    * @param moduleId The module identifier to disable.
    */
-  async disableModule(moduleId: string) {
+  async removeModuleCard(moduleId: string) {
     const { database } = await useDatabase()
     await database.delete(userModules)
       .where(eq(userModules.moduleId, moduleId))
 
-    await this.loadAllEnabled()
+    await this.loadModuleCards()
   },
 
   /**

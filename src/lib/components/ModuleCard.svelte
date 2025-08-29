@@ -98,7 +98,7 @@
       <ContextMenuItem>
         Edit
       </ContextMenuItem>
-      <ContextMenuItem variant='destructive' onclick={() => moduleStore.disableModule(module.moduleId)}>
+      <ContextMenuItem variant='destructive' onclick={() => moduleStore.removeModuleCard(module.moduleId)}>
         Remove
       </ContextMenuItem>
     </ContextMenuContent>

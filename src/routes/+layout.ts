@@ -10,5 +10,5 @@ export async function load({ fetch }) {
   await migrate(fetch)
   initI18n()
   await loadAllModules()
-  await moduleStore.loadAllEnabled()
+  await moduleStore.loadModuleCards()
 }

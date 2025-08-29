@@ -33,7 +33,7 @@
 
     <button
       class='flex flex-row items-center gap-3 b-3 rounded-md b-dashed p-3 text-muted'
-      onclick={() => moduleStore.enableModule('grocery', '#ffffff', 1)}
+      onclick={() => moduleStore.addModuleCard('grocery')}
     >
       <div class='i-fluent:add-12-filled size-6'></div>
       <div>Add Module</div>
