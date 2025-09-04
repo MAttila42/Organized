@@ -1,6 +1,7 @@
+import type { IconifyJSON } from '@iconify/types'
+import presetIcons from '@unocss/preset-icons'
 import {
   defineConfig,
-  presetIcons,
   presetWind3,
   transformerAttributifyJsx,
   transformerVariantGroup,
@@ -16,6 +17,9 @@ export default defineConfig({
       color: 'neutral',
     }),
     presetIcons({
+      collections: {
+        fluent: () => import('@iconify-json/fluent/icons.json').then(i => i.default as IconifyJSON),
+      },
       extraProperties: {
         'display': 'inline-block',
         'vertical-align': 'middle',

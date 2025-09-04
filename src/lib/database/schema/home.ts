@@ -14,7 +14,7 @@ export const userLinks = sqliteTable('user_links', {
   type: text({ enum: ['shortcut', 'label'] }).notNull(),
   displayOrder: integer('display_order').notNull().default(0),
   icon: text(),
-  color: text(),
+  color: text().notNull().default('#FFFFFF'),
   parameters: text({ mode: 'json' }).$type<Record<string, any>>(),
   moduleId: text('module_id').notNull(),
 })

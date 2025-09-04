@@ -2,6 +2,7 @@
   import '@unocss/reset/tailwind.css'
   import 'virtual:uno.css'
   import '@fontsource/ubuntu'
+  import '@unocss/runtime'
 
   const { children } = $props()
 </script>

@@ -4,11 +4,12 @@ import { loadAllModules } from '$lib/modules/registry'
 import { moduleStore } from '$lib/stores/modules.svelte'
 
 export const ssr = false
-export const prerender = true
+export const prerender = false
 
 export async function load({ fetch }) {
   await migrate(fetch)
   initI18n()
   await loadAllModules()
   await moduleStore.loadModuleCards()
+  await moduleStore.loadShortcuts()
 }
