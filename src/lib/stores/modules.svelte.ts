@@ -43,22 +43,6 @@ export const moduleStore = $state({
   moduleCards: [] as ModuleCard[],
 
   /**
-   * Registers a new link.
-   *
-   * Use only in module initialization.
-   *
-   * @param moduleId The module identifier this link is for.
-   * @param link The link to register.
-   */
-  registerLink(moduleId: string, link: Link) {
-    const module = this.modules.find(m => m.id === moduleId)
-    if (module)
-      module.links.push(link)
-    else
-      throw new Error(`Module with id ${moduleId} not found`)
-  },
-
-  /**
    * Retrieves all enabled modules with their labels.
    *
    * @returns All enabled modules with their labels.
