@@ -7,6 +7,7 @@ export interface Module {
   name: string
   description: string
   links: Link[]
+  component: () => Promise<any>
 }
 
 export interface Link {

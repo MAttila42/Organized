@@ -22,6 +22,9 @@ export default defineConfig({
       },
     }),
   ],
+  shortcuts: {
+    'pt-safe': 'pt-[max(env(safe-area-inset-top),0.75rem)]',
+  },
   theme: {
     colors: {
       destructive: '#d30000',
