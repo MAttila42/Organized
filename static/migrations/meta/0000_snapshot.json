@@ -1,7 +1,7 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "c687ee20-894b-4fe3-8cc1-386e377e1f6d",
+  "id": "5b9627bf-1ca3-4541-a924-49c3fb9af015",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "user_links": {
@@ -40,14 +40,14 @@
           "name": "icon",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "autoincrement": false
         },
         "color": {
           "name": "color",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "autoincrement": false
         },
         "parameters": {
@@ -59,7 +59,7 @@
         },
         "module_id": {
           "name": "module_id",
-          "type": "integer",
+          "type": "text",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
@@ -83,6 +83,13 @@
         },
         "module_id": {
           "name": "module_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "color": {
+          "name": "color",
           "type": "text",
           "primaryKey": false,
           "notNull": true,

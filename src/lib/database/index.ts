@@ -1,18 +1,20 @@
-import Database from '@tauri-apps/plugin-sql'
+import SQL from '@tauri-apps/plugin-sql'
 import { drizzle } from 'drizzle-orm/sqlite-proxy'
 
 export interface SelectQueryResult {
   [key: string]: any
 }
 
-let database: ReturnType<typeof drizzle>
-let sqlite: Database
+export type Database = ReturnType<typeof drizzle>
+
+let database: Database
+let sqlite: SQL
 
 export async function useDatabase() {
   if (database)
     return { database, sqlite }
 
-  sqlite = await Database.load('sqlite:sqlite.db')
+  sqlite = await SQL.load('sqlite:sqlite.db')
 
   database = drizzle(
     async (sql, params, method) => {

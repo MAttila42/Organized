@@ -4,6 +4,7 @@ import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core'
 export const userModules = sqliteTable('user_modules', {
   id: integer().primaryKey({ autoIncrement: true }),
   moduleId: text().notNull(),
+  color: text().notNull(),
   displayOrder: integer().notNull().default(0),
 })
 
@@ -12,10 +13,10 @@ export const userLinks = sqliteTable('user_links', {
   linkId: text().notNull(),
   type: text({ enum: ['shortcut', 'label'] }).notNull(),
   displayOrder: integer().notNull().default(0),
-  icon: text().notNull(),
-  color: text().notNull(),
+  icon: text(),
+  color: text(),
   parameters: text({ mode: 'json' }).$type<Record<string, any>>(),
-  moduleId: integer().notNull(),
+  moduleId: text().notNull(),
 })
 
 export const userModulesRelations = relations(userModules, ({ many }) => ({
