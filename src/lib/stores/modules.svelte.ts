@@ -259,9 +259,9 @@ export const moduleStore = $state({
    * @param moduleId The module identifier the shortcut is for.
    * @param linkId The link identifier the shortcut invokes.
    * @param parameters The parameters for the shortcut call.
-   * @param position The position in the shortcut list.
    * @param icon The icon for the shortcut.
    * @param color The color for the shortcut.
+   * @param position The position in the shortcut list.
    */
   async addShortcut(
     moduleId: string,

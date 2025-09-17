@@ -1,15 +1,8 @@
-// Modules registry
-// Discovers each ./<module>/index.ts and collects its exported load() function
-// Usage:
-//   import { modules, moduleLoads, loadAllModules } from '$lib/modules/registry'
-//   await loadAllModules()
-
 interface ModuleEntry {
   name: string
   load?: () => void | Promise<void>
 }
 
-// Eagerly import every module index
 const moduleFiles = import.meta.glob('./*/index.ts', { eager: true })
 
 const modules: ModuleEntry[] = Object.entries(moduleFiles).map(([path, mod]) => {
@@ -19,7 +12,6 @@ const modules: ModuleEntry[] = Object.entries(moduleFiles).map(([path, mod]) => 
   return { name, load: loadFn }
 })
 
-// Array of just the load functions (filtering out undefined)
 const moduleLoads = modules
   .map(m => m.load)
   .filter((fn): fn is NonNullable<ModuleEntry['load']> => Boolean(fn))

@@ -1,4 +1,3 @@
-import type { IconifyJSON } from '@iconify/types'
 import presetIcons from '@unocss/preset-icons'
 import {
   defineConfig,
@@ -18,7 +17,7 @@ export default defineConfig({
     }),
     presetIcons({
       collections: {
-        fluent: () => import('@iconify-json/fluent/icons.json').then(i => i.default as IconifyJSON),
+        fluent: () => import('@iconify-json/fluent/icons.json').then(i => i.default as any),
       },
       extraProperties: {
         'display': 'inline-block',
