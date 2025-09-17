@@ -6,7 +6,6 @@ export const userModules = sqliteTable('user_modules', {
   color: text().notNull().default('#FFFFFF'),
   displayOrder: integer('display_order').notNull().default(0),
 })
-export type UserModule = typeof userModules.$inferSelect
 
 export const userLinks = sqliteTable('user_links', {
   id: integer().primaryKey({ autoIncrement: true }),
@@ -18,4 +17,3 @@ export const userLinks = sqliteTable('user_links', {
   parameters: text({ mode: 'json' }).$type<Record<string, any>>(),
   moduleId: text('module_id').notNull(),
 })
-export type UserLink = typeof userLinks.$inferSelect
