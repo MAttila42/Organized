@@ -17,4 +17,9 @@ export const shopping = $state({
     await database.delete(shoppingList).where(eq(shoppingList.id, id))
     this.items = this.items.filter(item => item.id !== id)
   },
+
+  async loadItems() {
+    const { database } = await useDatabase()
+    this.items = await database.select().from(shoppingList).all()
+  },
 })

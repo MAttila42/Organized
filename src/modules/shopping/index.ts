@@ -1,4 +1,5 @@
 import { moduleStore } from '$lib/stores/modules.svelte'
+import { shopping } from './store.svelte'
 
 export function load() {
   moduleStore.modules.push({
@@ -18,4 +19,6 @@ export function load() {
     ],
     component: () => import('./page.svelte'),
   })
+
+  shopping.loadItems()
 }
