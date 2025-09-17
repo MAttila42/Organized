@@ -1,28 +1,217 @@
 <script lang='ts'>
-  import image from '$lib/assets/logo-512.png'
+  import ModuleCard from '$lib/components/ModuleCard.svelte'
+  import Shortcut from '$lib/components/Shortcut.svelte'
   import { Button } from '$lib/components/ui/button'
-  import i18n, { t } from '$lib/i18n.svelte'
+  import * as Dialog from '$lib/components/ui/dialog'
+  import { Input } from '$lib/components/ui/input'
+  import { Label } from '$lib/components/ui/label'
+  import * as Select from '$lib/components/ui/select'
+  import { moduleStore } from '$lib/stores/modules.svelte'
 
-  function nextLocale() {
-    const currentIndex = i18n.locales.indexOf(i18n.locale)
-    i18n.locale = i18n.locales[(currentIndex + 1) % i18n.locales.length]
+  let addModuleValue = $state('')
+  let addModuleColor = $state('')
+
+  const addModuleValueTrigger = $derived(
+    moduleStore.modules.find(m => m.id === addModuleValue)?.name ?? 'Select a module',
+  )
+
+  function addModule() {
+    if (!addModuleValue)
+      return
+
+    moduleStore.addModuleCard(
+      addModuleValue,
+      addModuleColor,
+    )
+
+    addModuleValue = ''
+    addModuleColor = ''
+  }
+
+  let addShortcutModule = $state('')
+  let addShortcutLink = $state('')
+  let addShortcutIcon = $state('')
+  let addShortcutColor = $state('')
+
+  const addShortcutModuleTrigger = $derived(
+    moduleStore.modules.find(m => m.id === addShortcutModule)?.name ?? 'Select a module',
+  )
+  const addShortcutLinkTrigger = $derived(
+    moduleStore.modules
+      .find(m => m.id === addShortcutModule)
+      ?.links
+      .find(l => l.id === addShortcutLink)
+      ?.name ?? 'Select a shortcut',
+  )
+
+  const isAddShortcutReady = $derived(
+    addShortcutModule && addShortcutLink && addShortcutIcon,
+  )
+
+  function addShortcut() {
+    if (!isAddShortcutReady)
+      return
+
+    moduleStore.addShortcut(
+      addShortcutModule,
+      addShortcutLink,
+      {},
+      addShortcutIcon,
+      addShortcutColor,
+      moduleStore.shortcuts.length,
+    )
+
+    addShortcutModule = ''
+    addShortcutLink = ''
+    addShortcutIcon = ''
+    addShortcutColor = ''
   }
 </script>
 
-<div class='flex flex-col gap-5 p-5'>
-  <div class='flex flex-row items-center gap-3'>
-    <img src={image} alt='Organized Logo' class='size-16 bg-inherit p-1' />
-    <div>
-      <h1 class='text-3xl font-bold'>Organized</h1>
-      <p class='text-sm text-muted-foreground'>
-        {t('home.oneliner', 'Your everyday companion app')}
-      </p>
+<div class='flex flex-col gap-0'>
+  <div class='flex flex-row items-center justify-between px-5 pb-3 pt-safe'>
+    <h1 class='text-2xl font-bold'>Organized</h1>
+    <a href='/settings' aria-label='Settings' draggable='false'>
+      <div class='i-fluent:settings-16-filled size-7'></div>
+    </a>
+  </div>
+  <div class='mx-2 my-2 flex justify-center'>
+    <div class='grid grid-cols-[repeat(auto-fill,5rem)] w-full justify-center justify-items-center gap-row-5'>
+      {#each moduleStore.shortcuts as shortcut (shortcut.id)}
+        <Shortcut
+          {shortcut}
+          onclick={() => shortcut.call(shortcut.parameters)}
+        />
+      {/each}
+
+      <Dialog.Root>
+        <Dialog.Trigger>
+          <button class='size-15 b-3 rounded-2xl b-dashed p-3' aria-label='Add new shortcut'>
+            <div class='i-fluent:add-12-filled size-6 color-muted'></div>
+          </button>
+        </Dialog.Trigger>
+        <Dialog.Content>
+          <Dialog.Header>
+            <Dialog.Title>Add Shortcut</Dialog.Title>
+          </Dialog.Header>
+
+          <div class='w-full flex flex-col gap-4'>
+            <Select.Root type='single' bind:value={addShortcutModule}>
+              <Select.Trigger class='w-full'>
+                {addShortcutModuleTrigger}
+              </Select.Trigger>
+              <Select.Content>
+                {#each moduleStore.moduleCards as module (module.moduleId)}
+                  <Select.Item value={module.moduleId}>{module.name}</Select.Item>
+                {/each}
+              </Select.Content>
+            </Select.Root>
+
+            {#if addShortcutModule}
+              <Select.Root type='single' bind:value={addShortcutLink}>
+                <Select.Trigger class='w-full'>
+                  {addShortcutLinkTrigger}
+                </Select.Trigger>
+                <Select.Content>
+                  {#each moduleStore.getActions(addShortcutModule) as link (link.id)}
+                    <Select.Item value={link.id}>{link.name}</Select.Item>
+                  {/each}
+                </Select.Content>
+              </Select.Root>
+
+              {#if addShortcutLink}
+                <Dialog.Description class='text-muted'>
+                  {moduleStore.modules.find(m => m.id === addShortcutLink)
+                    ?.description}
+                </Dialog.Description>
+
+                <Label for='icon'>Icon</Label>
+                <Input
+                  bind:value={addShortcutIcon}
+                  type='text'
+                  id='icon'
+                  placeholder='i-fluent:document-16-filled'
+                />
+                <Label for='color'>Color</Label>
+                <Input
+                  bind:value={addShortcutColor}
+                  type='text'
+                  id='color'
+                  placeholder='#FFFFFF'
+                />
+              {/if}
+            {/if}
+
+            <Dialog.Close disabled={!isAddShortcutReady}>
+              <Button
+                onclick={addShortcut}
+                class='w-full'
+                disabled={!isAddShortcutReady}
+              >
+                Add Shortcut
+              </Button>
+            </Dialog.Close>
+          </div>
+        </Dialog.Content>
+      </Dialog.Root>
     </div>
   </div>
-  <div class='flex flex-col gap-2'>
-    <Button class='w-full' onclick={nextLocale}>
-      <div class='i-fluent:globe-28-filled size-4'></div>
-      {t('ui.toggleLang', 'Toggle language')}
-    </Button>
+  <div class='mx-4 mt-4 flex flex-col gap-4'>
+    {#each await moduleStore.moduleCards as module}
+      <ModuleCard {module} />
+    {/each}
+
+    <Dialog.Root>
+      <Dialog.Trigger>
+        <div
+          class='flex flex-row items-center gap-3 b-3 rounded-md b-dashed p-3 text-muted'
+        >
+          <div class='i-fluent:add-12-filled size-6'></div>
+          <div>Add Module</div>
+        </div>
+      </Dialog.Trigger>
+      <Dialog.Content>
+        <Dialog.Header>
+          <Dialog.Title>Add Module</Dialog.Title>
+        </Dialog.Header>
+
+        <div class='w-full flex flex-col gap-4'>
+          <Select.Root type='single' bind:value={addModuleValue}>
+            <Select.Trigger class='w-full'>
+              {addModuleValueTrigger}
+            </Select.Trigger>
+            <Select.Content>
+              {#each moduleStore.modules.filter(m => !moduleStore.moduleCards.find(mc => mc.moduleId === m.id)) as module (module.id)}
+                <Select.Item value={module.id}>{module.name}</Select.Item>
+              {/each}
+            </Select.Content>
+          </Select.Root>
+
+          {#if addModuleValue}
+            <Dialog.Description class='text-muted'>
+              {moduleStore.modules.find(m => m.id === addModuleValue)
+                ?.description}
+            </Dialog.Description>
+            <Label for='color'>Color</Label>
+            <Input
+              bind:value={addModuleColor}
+              type='text'
+              id='color'
+              placeholder='#FFFFFF'
+            />
+          {/if}
+
+          <Dialog.Close disabled={!addModuleValue}>
+            <Button
+              onclick={addModule}
+              class='w-full'
+              disabled={!addModuleValue}
+            >
+              Add Module
+            </Button>
+          </Dialog.Close>
+        </div>
+      </Dialog.Content>
+    </Dialog.Root>
   </div>
 </div>

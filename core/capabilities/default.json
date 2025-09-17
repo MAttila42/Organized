@@ -14,20 +14,7 @@
     "core:resources:default",
     "core:menu:default",
     "sql:default",
-    "fs:default",
-    {
-      "identifier": "http:default",
-      "allow": [
-        {
-          "url": "*"
-        }
-      ]
-    },
-    {
-      "identifier": "fs:allow-exists",
-      "allow": [{ "path": "*" }]
-    },
-    "fs:allow-read-text-file",
-    "sql:allow-execute"
+    "sql:allow-execute",
+    "os:default"
   ]
 }

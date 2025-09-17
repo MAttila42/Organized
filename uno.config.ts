@@ -1,6 +1,6 @@
+import presetIcons from '@unocss/preset-icons'
 import {
   defineConfig,
-  presetIcons,
   presetWind3,
   transformerAttributifyJsx,
   transformerVariantGroup,
@@ -16,12 +16,24 @@ export default defineConfig({
       color: 'neutral',
     }),
     presetIcons({
+      collections: {
+        fluent: () => import('@iconify-json/fluent/icons.json').then(i => i.default as any),
+      },
       extraProperties: {
         'display': 'inline-block',
         'vertical-align': 'middle',
       },
     }),
   ],
+  shortcuts: {
+    'pt-safe': 'pt-[max(env(safe-area-inset-top),0.75rem)]',
+  },
+  theme: {
+    colors: {
+      destructive: '#d30000',
+      muted: '#6d6f70ff',
+    },
+  },
   transformers: [
     transformerAttributifyJsx(),
     transformerVariantGroup(),

@@ -7,6 +7,7 @@ export interface Module {
   name: string
   description: string
   links: Link[]
+  component: () => Promise<any>
 }
 
 export interface Link {
@@ -26,31 +27,39 @@ export interface LinkParameter {
   defaultValue?: string | number | boolean
 }
 
+export interface ModuleCard {
+  name: string
+  moduleId: string
+  color: string
+  displayOrder: number
+  labels: {
+    linkId: string
+    parameters: Record<string, any>
+  }[]
+}
+
+export interface Shortcut {
+  id: number
+  moduleId: string
+  linkId: string
+  icon: string
+  color: string
+  displayOrder: number
+  call: (params: Record<string, any>) => void
+  parameters: Record<string, any>
+}
+
 export const moduleStore = $state({
   modules: [] as Module[],
-
-  /**
-   * Registers a new link.
-   *
-   * Use only in module initialization.
-   *
-   * @param moduleId The module identifier this link is for.
-   * @param link The link to register.
-   */
-  registerLink(moduleId: string, link: Link) {
-    const module = this.modules.find(m => m.id === moduleId)
-    if (module)
-      module.links.push(link)
-    else
-      throw new Error(`Module with id ${moduleId} not found`)
-  },
+  moduleCards: [] as ModuleCard[],
+  shortcuts: [] as Shortcut[],
 
   /**
    * Retrieves all enabled modules with their labels.
    *
    * @returns All enabled modules with their labels.
    */
-  async getAllEnabled() {
+  async loadModuleCards() {
     const { database } = await useDatabase()
     const enabledModules = await database.select()
       .from(userModules)
@@ -60,16 +69,38 @@ export const moduleStore = $state({
       .where(eq(userLinks.type, 'label'))
       .orderBy(userLinks.displayOrder)
 
-    return enabledModules.map(m => ({
+    this.moduleCards = enabledModules.map(m => ({
+      name: this.modules.filter(mod => mod.id === m.moduleId)[0]!.name,
       moduleId: m.moduleId,
       color: m.color,
+      displayOrder: m.displayOrder,
       labels: enabledLabels.filter(l => l.moduleId === m.moduleId)
         .map(l => ({
           linkId: l.linkId,
-          icon: l.icon,
-          color: l.color,
           parameters: l.parameters,
         })),
+    } as ModuleCard))
+  },
+
+  async loadShortcuts() {
+    const { database } = await useDatabase()
+    const enabledShortcuts = await database.select()
+      .from(userLinks)
+      .where(eq(userLinks.type, 'shortcut'))
+      .orderBy(userLinks.displayOrder)
+
+    this.shortcuts = enabledShortcuts.map(s => ({
+      id: s.id,
+      moduleId: s.moduleId,
+      linkId: s.linkId,
+      icon: s.icon!,
+      color: s.color,
+      displayOrder: s.displayOrder,
+      call: this.modules
+        .find(m => m.id === s.moduleId)!
+        .links
+        .find(link => link.id === s.linkId)!.call,
+      parameters: s.parameters ?? {},
     }))
   },
 
@@ -82,7 +113,16 @@ export const moduleStore = $state({
    * @param color The color to assign to the module.
    * @param position The display order position for the module.
    */
-  async enableModule(moduleId: string, color: string, position: number) {
+  async addModuleCard(
+    moduleId: string,
+    color?: string,
+    position?: number,
+  ) {
+    if (!position)
+      position = this.moduleCards[this.moduleCards.length - 1]?.displayOrder + 1 || 0
+    if (!color)
+      color = '#FFFFFF'
+
     const { database } = await useDatabase()
     const result = await database.select()
       .from(userModules)
@@ -94,11 +134,13 @@ export const moduleStore = $state({
         .where(gte(userModules.displayOrder, position))
     }
 
-    database.insert(userModules).values({
+    await database.insert(userModules).values({
       moduleId,
       color,
       displayOrder: position,
     })
+
+    await this.loadModuleCards()
   },
 
   /**
@@ -106,10 +148,16 @@ export const moduleStore = $state({
    *
    * @param moduleId The module identifier to disable.
    */
-  async disableModule(moduleId: string) {
+  async removeModuleCard(moduleId: string) {
     const { database } = await useDatabase()
-    database.delete(userModules)
+    await database.delete(userModules)
       .where(eq(userModules.moduleId, moduleId))
+
+    await database.delete(userLinks)
+      .where(eq(userLinks.moduleId, moduleId))
+
+    await this.loadModuleCards()
+    await this.loadShortcuts()
   },
 
   /**
@@ -118,7 +166,7 @@ export const moduleStore = $state({
    * @param moduleId The module identifier to get labels for.
    * @returns An array of labels for the specified module.
    */
-  async getLabels(moduleId: string) {
+  getLabels(moduleId: string) {
     return this.modules
       .find(m => m.id === moduleId)
       ?.links
@@ -132,7 +180,7 @@ export const moduleStore = $state({
    * @param moduleId The module identifier to get action for.
    * @returns An array of actions for the specified module.
    */
-  async getActions(moduleId: string) {
+  getActions(moduleId: string) {
     return this.modules
       .find(m => m.id === moduleId)
       ?.links
@@ -211,18 +259,23 @@ export const moduleStore = $state({
    * @param moduleId The module identifier the shortcut is for.
    * @param linkId The link identifier the shortcut invokes.
    * @param parameters The parameters for the shortcut call.
-   * @param position The position in the shortcut list.
    * @param icon The icon for the shortcut.
    * @param color The color for the shortcut.
+   * @param position The position in the shortcut list.
    */
   async addShortcut(
     moduleId: string,
     linkId: string,
     parameters: Record<string, any>,
-    position: number,
     icon: string,
-    color: string,
+    color?: string,
+    position?: number,
   ) {
+    if (!position)
+      position = this.shortcuts[this.shortcuts.length - 1]?.displayOrder + 1 || 0
+    if (!color)
+      color = '#FFFFFF'
+
     const { database } = await useDatabase()
     const result = await database.select()
       .from(userLinks)
@@ -240,7 +293,7 @@ export const moduleStore = $state({
         ))
     }
 
-    database.insert(userLinks).values({
+    await database.insert(userLinks).values({
       linkId,
       type: 'shortcut',
       displayOrder: position,
@@ -249,6 +302,8 @@ export const moduleStore = $state({
       parameters,
       moduleId,
     })
+
+    await this.loadShortcuts()
   },
 
   /**
@@ -258,7 +313,8 @@ export const moduleStore = $state({
    */
   async removeLink(id: number) {
     const { database } = await useDatabase()
-    database.delete(userLinks)
+    await database.delete(userLinks)
       .where(eq(userLinks.id, id))
+    await this.loadShortcuts()
   },
 })
