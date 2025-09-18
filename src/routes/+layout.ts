@@ -7,8 +7,8 @@ export const ssr = false
 export const prerender = false
 
 export async function load({ fetch }) {
-  await migrate(fetch)
   initI18n()
+  await migrate(fetch)
   await loadAllModules()
   await moduleStore.loadModuleCards()
   await moduleStore.loadShortcuts()
