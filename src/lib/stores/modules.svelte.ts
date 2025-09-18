@@ -17,7 +17,7 @@ export interface Link {
   moduleId: string
   description: string
   parameters: LinkParameter[]
-  call: (params: Record<string, any>) => void
+  call: (params?: Record<string, any>) => Promise<any> | any
 }
 
 export interface LinkParameter {
@@ -33,7 +33,7 @@ export interface ModuleCard {
   color: string
   displayOrder: number
   labels: {
-    linkId: string
+    component: any
     parameters: Record<string, any>
   }[]
 }
@@ -69,17 +69,26 @@ export const moduleStore = $state({
       .where(eq(userLinks.type, 'label'))
       .orderBy(userLinks.displayOrder)
 
-    this.moduleCards = enabledModules.map(m => ({
-      name: this.modules.filter(mod => mod.id === m.moduleId)[0]!.name,
-      moduleId: m.moduleId,
-      color: m.color,
-      displayOrder: m.displayOrder,
-      labels: enabledLabels.filter(l => l.moduleId === m.moduleId)
-        .map(l => ({
-          linkId: l.linkId,
-          parameters: l.parameters,
-        })),
-    } as ModuleCard))
+    this.moduleCards = await Promise.all(enabledModules.map(async (m) => {
+      const moduleDef = this.modules.find(mod => mod.id === m.moduleId)!
+      const labelsForModule = enabledLabels.filter(l => l.moduleId === m.moduleId)
+      const resolved = await Promise.all(labelsForModule.map(async (l) => {
+        const link = moduleDef.links.find(link => link.id === l.linkId)!
+        const mod = await link.call()
+        return {
+          component: mod?.default,
+          parameters: l.parameters ?? {},
+        }
+      }))
+
+      return {
+        name: moduleDef.name,
+        moduleId: m.moduleId,
+        color: m.color,
+        displayOrder: m.displayOrder,
+        labels: resolved,
+      } as ModuleCard
+    }))
   },
 
   async loadShortcuts() {

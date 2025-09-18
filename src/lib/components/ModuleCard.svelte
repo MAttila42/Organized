@@ -31,23 +31,13 @@
           </Card.Title>
         </Card.Header>
         <Card.Content class='px-0'>
-          <!-- <div class='flex flex-col gap-2 rounded-lg bg-background p-2'>
-          <div class='flex items-center justify-between'>
-            <span class='font-medium'>Item 1</span>
-            <span class='text-sm text-muted'>2 pcs</span>
+          <div class='pointer-events-none'>
+            {#each module.labels as label (label)}
+              {#if label.component}
+                <label.component {...(label.parameters ?? {})} />
+              {/if}
+            {/each}
           </div>
-          <div class='flex items-center justify-between'>
-            <span class='font-medium'>Item 2</span>
-            <span class='text-sm text-muted'>1 pcs</span>
-          </div>
-          <div class='flex items-center justify-between'>
-            <span class='font-medium'>Item 3</span>
-            <span class='text-sm text-muted'>5 pcs</span>
-          </div>
-        </div> -->
-          <!-- {#each module.labels as label}
-          {@render label()}
-        {/each} -->
         </Card.Content>
       </Card.Root>
     </div>

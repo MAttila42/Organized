@@ -8,3 +8,4 @@ export const shoppingList = sqliteTable('shopping_list', {
   description: text('description'),
 })
 export type SelectShoppingList = typeof shoppingList.$inferSelect
+export type InsertShoppingList = typeof shoppingList.$inferInsert

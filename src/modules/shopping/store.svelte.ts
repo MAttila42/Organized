@@ -1,4 +1,4 @@
-import type { SelectShoppingList } from '$lib/database/schema/shopping'
+import type { InsertShoppingList, SelectShoppingList } from '$lib/database/schema/shopping'
 import { useDatabase } from '$lib/database'
 import { shoppingList } from '$lib/database/schema/shopping'
 import { eq } from 'drizzle-orm'
@@ -6,10 +6,12 @@ import { eq } from 'drizzle-orm'
 export const shopping = $state({
   items: [] as (SelectShoppingList)[],
 
-  async addItem(item: Omit<SelectShoppingList, 'id'>) {
+  async addItem(item: InsertShoppingList) {
     const { database } = await useDatabase()
-    const [result] = await database.insert(shoppingList).values(item).returning()
-    this.items.push(result)
+    await database
+      .insert(shoppingList)
+      .values(item)
+    await this.loadItems()
   },
 
   async removeItem(id: number) {
