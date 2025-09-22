@@ -4,6 +4,7 @@
   import * as Dialog from '$lib/components/ui/dialog'
   import { Input } from '$lib/components/ui/input'
   import { Label } from '$lib/components/ui/label'
+  import * as Select from '$lib/components/ui/select'
   import Container from './components/Container.svelte'
   import List from './components/List.svelte'
   import { study } from './store.svelte'
@@ -108,6 +109,8 @@
   const prevDay = $derived(study.neighborDays.prev)
   const currentDay = $derived(study.neighborDays.current)
   const nextDay = $derived(study.neighborDays.next)
+  const dayTrigger = $derived(weekDays[Number(dayStr)] ?? 'Day')
+  const editDayTrigger = $derived(editDayStr === '' ? 'No day' : weekDays[Number(editDayStr)])
 </script>
 
 <div class='mx-4 flex flex-col gap-4'>
@@ -179,11 +182,16 @@
             </div>
             <div class='flex flex-col gap-2'>
               <Label for='day'>Day</Label>
-              <select id='day' bind:value={dayStr} class='rounded-md bg-background px-2 py-1 text-sm'>
-                {#each weekDays as d, i}
-                  <option value={i}>{d}</option>
-                {/each}
-              </select>
+              <Select.Root type='single' bind:value={dayStr}>
+                <Select.Trigger id='day' class='w-full'>
+                  {dayTrigger}
+                </Select.Trigger>
+                <Select.Content>
+                  {#each weekDays as d, i}
+                    <Select.Item value={String(i)}>{d}</Select.Item>
+                  {/each}
+                </Select.Content>
+              </Select.Root>
             </div>
           </div>
           <div class='flex flex-col gap-2'>
@@ -228,11 +236,16 @@
             </div>
             <div class='flex flex-col gap-2'>
               <Label for='eday'>Day</Label>
-              <select id='eday' bind:value={editDayStr} class='rounded-md bg-background px-2 py-1 text-sm'>
-                {#each weekDays as d, i}
-                  <option value={i}>{d}</option>
-                {/each}
-              </select>
+              <Select.Root type='single' bind:value={editDayStr}>
+                <Select.Trigger id='eday' class='w-full'>
+                  {editDayTrigger}
+                </Select.Trigger>
+                <Select.Content>
+                  {#each weekDays as d, i}
+                    <Select.Item value={String(i)}>{d}</Select.Item>
+                  {/each}
+                </Select.Content>
+              </Select.Root>
             </div>
           </div>
           <div class='flex flex-col gap-2'>

@@ -9,7 +9,7 @@
   import { moduleStore } from '$lib/stores/modules.svelte'
 
   let addModuleValue = $state('')
-  let addModuleColor = $state('')
+  let addModuleColor = $state('#FFFFFF')
 
   const addModuleValueTrigger = $derived(
     moduleStore.modules.find(m => m.id === addModuleValue)?.name ?? 'Select a module',
@@ -25,13 +25,13 @@
     )
 
     addModuleValue = ''
-    addModuleColor = ''
+    addModuleColor = '#FFFFFF'
   }
 
   let addShortcutModule = $state('')
   let addShortcutLink = $state('')
   let addShortcutIcon = $state('')
-  let addShortcutColor = $state('')
+  let addShortcutColor = $state('#FFFFFF')
 
   const addShortcutModuleTrigger = $derived(
     moduleStore.modules.find(m => m.id === addShortcutModule)?.name ?? 'Select a module',
@@ -64,7 +64,7 @@
     addShortcutModule = ''
     addShortcutLink = ''
     addShortcutIcon = ''
-    addShortcutColor = ''
+    addShortcutColor = '#FFFFFF'
   }
 </script>
 
@@ -135,9 +135,8 @@
                 <Label for='color'>Color</Label>
                 <Input
                   bind:value={addShortcutColor}
-                  type='text'
+                  type='color'
                   id='color'
-                  placeholder='#FFFFFF'
                 />
               {/if}
             {/if}
@@ -195,9 +194,8 @@
             <Label for='color'>Color</Label>
             <Input
               bind:value={addModuleColor}
-              type='text'
+              type='color'
               id='color'
-              placeholder='#FFFFFF'
             />
           {/if}
 

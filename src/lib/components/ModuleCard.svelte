@@ -139,7 +139,7 @@
             <div class='flex flex-col gap-4'>
               <div class='flex flex-col gap-2'>
                 <Label for='color-mobile'>Color</Label>
-                <Input id='color-mobile' bind:value={editColor} />
+                <Input id='color-mobile' type='color' bind:value={editColor} />
               </div>
               <div class='flex flex-col gap-2'>
                 <div class='text-sm font-medium'>Labels</div>
@@ -207,7 +207,7 @@
       <div class='flex flex-col gap-4'>
         <div class='flex flex-col gap-2'>
           <Label for='color-desktop'>Color</Label>
-          <Input id='color-desktop' bind:value={editColor} />
+          <Input id='color-desktop' type='color' bind:value={editColor} />
         </div>
         <div class='flex flex-col gap-2'>
           <div class='text-sm font-medium'>Labels</div>

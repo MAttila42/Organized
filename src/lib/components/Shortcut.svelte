@@ -74,7 +74,7 @@
             <Label for='icon'>Icon</Label>
             <Input id='icon' bind:value={editIcon} />
             <Label for='color'>Color</Label>
-            <Input id='color' bind:value={editColor} />
+            <Input id='color' type='color' bind:value={editColor} />
             <div class='mt-2 flex gap-2'>
               <Button variant='outline' onclick={cancelEdit}>Cancel</Button>
               <Button onclick={save}>Save</Button>
@@ -109,7 +109,7 @@
         <Label for='icon-desktop'>Icon</Label>
         <Input id='icon-desktop' bind:value={editIcon} />
         <Label for='color-desktop'>Color</Label>
-        <Input id='color-desktop' bind:value={editColor} />
+        <Input id='color-desktop' type='color' bind:value={editColor} />
         <div class='mt-2 flex gap-2'>
           <Button variant='outline' onclick={cancelEdit}>Cancel</Button>
           <Button onclick={save}>Save</Button>
