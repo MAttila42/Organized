@@ -20,7 +20,6 @@
   type ButtonVariant = 'outline' | 'destructive'
   let isEditing = $state(false)
   let editColor = $state(module.color)
-  // Label management state (enabled labels with user link id + base link id)
   interface EnabledLabel {
     userLinkId: number
     linkId: string
@@ -30,9 +29,6 @@
   let isLabelsLoading = $state(false)
   let addLabelSelection = $state('')
 
-  // All labels are available (duplicates allowed). IMPORTANT: pass the expression directly to $derived
-  // NOT a zero-arg arrow. Using an arrow previously made availableLabels a function; length === 0
-  // so UI always thought there were no labels.
   const availableLabels = $derived(moduleStore.getLabels(module.moduleId))
 
   async function loadLabels() {
@@ -66,19 +62,19 @@
     if (!addLabelSelection)
       return
     const current = addLabelSelection
-    // Clear early to avoid re-entrancy if loadLabels triggers reactive flush
     addLabelSelection = ''
-    // Fire and forget (errors could be surfaced with a toast in future)
     addLabelToCard(current)
   })
 
   async function save() {
     await moduleStore.editModuleCard(module.moduleId, { color: editColor })
-    isEditing = false
+    if (!isMobile)
+      isEditing = false
   }
 
   function cancelEdit() {
-    isEditing = false
+    if (!isMobile)
+      isEditing = false
     editColor = module.color
   }
 
@@ -91,6 +87,13 @@
     { name: 'Edit', variant: 'outline', action: enterEdit },
     { name: 'Remove', variant: 'destructive', action: () => moduleStore.removeModuleCard(module.moduleId) },
   ]
+
+  $effect(() => {
+    if (isMobile) {
+      loadLabels()
+      isEditing = true
+    }
+  })
 </script>
 
 {#snippet card()}
@@ -128,57 +131,52 @@
           <div class='px-2'>
             {@render card()}
           </div>
-          <Drawer.Close class='flex flex-col gap-2'>
-            {#each actions as { name, variant, action }}
-              <Button {variant} onclick={action}>
-                {name}
-              </Button>
-            {/each}
-          </Drawer.Close>
-          {#if isEditing}
-            <div class='flex flex-col gap-4'>
-              <div class='flex flex-col gap-2'>
-                <Label for='color-mobile'>Color</Label>
-                <Input id='color-mobile' type='color' bind:value={editColor} />
-              </div>
-              <div class='flex flex-col gap-2'>
-                <div class='text-sm font-medium'>Labels</div>
-                {#if isLabelsLoading}
-                  <div class='text-xs text-muted'>Loading labels...</div>
-                {:else}
-                  <div class='flex flex-col gap-2'>
-                    {#if enabledLabels.length === 0}
-                      <div class='text-xs text-muted'>No labels added yet.</div>
-                    {/if}
-                    {#each enabledLabels as l (l.userLinkId)}
-                      <div class='flex items-center justify-between b b-border rounded-md px-2 py-1 text-sm'>
-                        <span>{l.name}</span>
-                        <Button aria-label='Remove label' variant='outline' class='size-7 p-0' onclick={() => removeLabel(l.userLinkId)}>
-                          <div class='i-fluent:delete-16-regular size-4'></div>
-                        </Button>
-                      </div>
-                    {/each}
-                    <Select.Root type='single' bind:value={addLabelSelection}>
-                      <Select.Trigger class='w-full'>{addLabelSelection ? 'Add another label...' : 'Add label...'}</Select.Trigger>
-                      <Select.Content>
-                        {#if availableLabels.length === 0}
-                          <Select.Item value='' disabled>No labels available</Select.Item>
-                        {:else}
-                          {#each availableLabels as opt (opt.id)}
-                            <Select.Item value={opt.id}>{opt.name}</Select.Item>
-                          {/each}
-                        {/if}
-                      </Select.Content>
-                    </Select.Root>
-                  </div>
-                {/if}
-              </div>
-              <div class='mt-2 flex gap-2'>
-                <Button variant='outline' onclick={cancelEdit}>Cancel</Button>
-                <Button onclick={save}>Save</Button>
-              </div>
+          <div class='flex flex-col gap-4'>
+            <div class='flex flex-col gap-2'>
+              <Label for='color-mobile'>Color</Label>
+              <Input id='color-mobile' type='color' bind:value={editColor} />
             </div>
-          {/if}
+            <div class='flex flex-col gap-2'>
+              <div class='text-sm font-medium'>Labels</div>
+              {#if isLabelsLoading}
+                <div class='text-xs text-muted'>Loading labels...</div>
+              {:else}
+                <div class='flex flex-col gap-2'>
+                  {#if enabledLabels.length === 0}
+                    <div class='text-xs text-muted'>No labels added yet.</div>
+                  {/if}
+                  {#each enabledLabels as l (l.userLinkId)}
+                    <div class='flex items-center justify-between b b-border rounded-md px-2 py-1 text-sm'>
+                      <span>{l.name}</span>
+                      <Button aria-label='Remove label' variant='outline' class='size-7 p-0' onclick={() => removeLabel(l.userLinkId)}>
+                        <div class='i-fluent:delete-16-regular size-4'></div>
+                      </Button>
+                    </div>
+                  {/each}
+                  <Select.Root type='single' bind:value={addLabelSelection}>
+                    <Select.Trigger class='w-full'>{addLabelSelection ? 'Add another label...' : 'Add label...'}</Select.Trigger>
+                    <Select.Content>
+                      {#if availableLabels.length === 0}
+                        <Select.Item value='' disabled>No labels available</Select.Item>
+                      {:else}
+                        {#each availableLabels as opt (opt.id)}
+                          <Select.Item value={opt.id}>{opt.name}</Select.Item>
+                        {/each}
+                      {/if}
+                    </Select.Content>
+                  </Select.Root>
+                </div>
+              {/if}
+            </div>
+            <div class='mt-2 flex flex-col gap-2'>
+              <Drawer.Close class='w-full'>
+                <Button class='w-full' onclick={save}>Save</Button>
+              </Drawer.Close>
+              <Drawer.Close class='w-full'>
+                <Button variant='destructive' class='w-full' onclick={() => moduleStore.removeModuleCard(module.moduleId)}>Remove</Button>
+              </Drawer.Close>
+            </div>
+          </div>
         </div>
       </Drawer.Footer>
     </Drawer.Content>
