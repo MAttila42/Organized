@@ -1,11 +1,11 @@
 <script lang='ts'>
   import type { InsertClasses } from '$lib/database/schema/study'
+  import SectionContainer from '$lib/components/SectionContainer.svelte'
   import { Button } from '$lib/components/ui/button'
   import * as Dialog from '$lib/components/ui/dialog'
   import { Input } from '$lib/components/ui/input'
   import { Label } from '$lib/components/ui/label'
   import * as Select from '$lib/components/ui/select'
-  import Container from './components/Container.svelte'
   import List from './components/List.svelte'
   import { study } from './store.svelte'
 
@@ -114,7 +114,7 @@
 </script>
 
 <div class='mx-4 flex flex-col gap-4'>
-  <Container
+  <SectionContainer
     title='Classes'
     description='Manage your class schedule.'
     class='flex flex-col gap-3'
@@ -261,5 +261,5 @@
         </div>
       </Dialog.Content>
     </Dialog.Root>
-  </Container>
+  </SectionContainer>
 </div>

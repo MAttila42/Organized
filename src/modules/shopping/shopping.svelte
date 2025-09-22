@@ -1,10 +1,10 @@
 <script lang='ts'>
   import type { InsertShoppingList } from '$lib/database/schema/shopping'
+  import SectionContainer from '$lib/components/SectionContainer.svelte'
   import { Button } from '$lib/components/ui/button'
   import * as Dialog from '$lib/components/ui/dialog'
   import { Input } from '$lib/components/ui/input'
   import { Label } from '$lib/components/ui/label'
-  import Container from './components/Container.svelte'
   import List from './components/List.svelte'
   import { shopping } from './store.svelte'
 
@@ -37,7 +37,7 @@
 </script>
 
 <div class='mx-4 flex flex-col gap-4'>
-  <Container
+  <SectionContainer
     title='Shopping List'
     description='Keep track of items to buy.'
     class='flex flex-col gap-3'
@@ -93,5 +93,5 @@
         </div>
       </Dialog.Content>
     </Dialog.Root>
-  </Container>
+  </SectionContainer>
 </div>
