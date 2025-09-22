@@ -5,6 +5,35 @@ import { eq } from 'drizzle-orm'
 
 export const study = $state({
   items: [] as (SelectClasses)[],
+  // Day selection state
+  selectedDay: (() => {
+    // JS getDay(): 0=Sunday ... 6=Saturday. Convert to 0=Monday ... 6=Sunday used in schema.
+    const d = new Date().getDay()
+    return d === 0 ? 6 : d - 1
+  })(),
+
+  setDay(day: number) {
+    this.selectedDay = day
+  },
+  nextDay() {
+    this.selectedDay = (this.selectedDay + 1) % 7
+  },
+  prevDay() {
+    this.selectedDay = (this.selectedDay + 6) % 7
+  },
+  get neighborDays(): { prev: number, current: number, next: number } {
+    return {
+      prev: (this.selectedDay + 6) % 7,
+      current: this.selectedDay,
+      next: (this.selectedDay + 1) % 7,
+    }
+  },
+
+  get filteredItems(): SelectClasses[] {
+    return this.items
+      .filter(i => i.day == null || i.day === this.selectedDay)
+      .sort((a, b) => (a.schedule ?? 0) - (b.schedule ?? 0))
+  },
 
   async addItem(item: InsertClasses) {
     const { database } = await useDatabase()

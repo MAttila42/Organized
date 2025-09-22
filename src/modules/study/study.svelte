@@ -1,1 +1,148 @@
-wip study module
+<script lang='ts'>
+  import type { InsertClasses } from '$lib/database/schema/study'
+  import { Button } from '$lib/components/ui/button'
+  import * as Dialog from '$lib/components/ui/dialog'
+  import { Input } from '$lib/components/ui/input'
+  import { Label } from '$lib/components/ui/label'
+  import Container from './components/Container.svelte'
+  import List from './components/List.svelte'
+  import { study } from './store.svelte'
+
+  const weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+
+  let subject = $state('')
+  let shortName = $state('')
+  let teacher = $state('')
+  let location = $state('')
+  let color = $state('#ffffff')
+  let dayStr = $state(String(study.selectedDay))
+  let scheduleStr = $state('')
+
+  const isAddReady = $derived(!!subject.trim())
+
+  function resetForm() {
+    subject = ''
+    shortName = ''
+    teacher = ''
+    location = ''
+    color = '#ffffff'
+    dayStr = String(study.selectedDay)
+    scheduleStr = ''
+  }
+
+  async function addClass() {
+    if (!isAddReady)
+      return
+    const scheduleNum = scheduleStr ? Number(scheduleStr) - 1 : null
+
+    const payload: InsertClasses = {
+      subject: subject.trim(),
+      shortName: shortName.trim() || null,
+      teacher: teacher.trim() || null,
+      location: location.trim() || null,
+      color: color.trim() || '#FFFFFF',
+      day: dayStr === '' ? null : Number(dayStr),
+      schedule: scheduleNum != null && Number.isFinite(scheduleNum) ? scheduleNum : null,
+    }
+    await study.addItem(payload)
+    resetForm()
+  }
+
+  function changeDay(d: number) {
+    study.setDay(d)
+    dayStr = String(d)
+  }
+
+  const prevDay = $derived(study.neighborDays.prev)
+  const currentDay = $derived(study.neighborDays.current)
+  const nextDay = $derived(study.neighborDays.next)
+</script>
+
+<div class='mx-4 flex flex-col gap-4'>
+  <Container
+    title='Classes'
+    description='Navigate by day using the center-highlighted selector.'
+    class='flex flex-col gap-3'
+  >
+    <div class='flex flex-row items-center justify-center gap-4'>
+      <button
+        class='b-1 rounded-md bg-background px-3 py-1 text-sm text-muted hover:b-primary'
+        onclick={() => changeDay(prevDay)}
+      >{weekDays[prevDay]}</button>
+      <button
+        class='b-2 rounded-md bg-primary px-3 py-1 text-sm text-primary-foreground'
+        onclick={() => changeDay(currentDay)}
+        aria-current='true'
+      >{weekDays[currentDay]}</button>
+      <button
+        class='b-1 rounded-md bg-background px-3 py-1 text-sm text-muted hover:b-primary'
+        onclick={() => changeDay(nextDay)}
+      >{weekDays[nextDay]}</button>
+    </div>
+
+    {#if study.filteredItems.length === 0}
+      <div class='mt-1 flex flex-row items-center gap-3 b-3 rounded-md b-dashed p-3 text-muted'>
+        <div class='i-fluent:book-open-16-filled size-5'></div>
+        <div>No classes for this day. Add one.</div>
+      </div>
+    {:else}
+      <List items={study.filteredItems} variant='default' />
+    {/if}
+
+    <Dialog.Root>
+      <Dialog.Trigger class='w-full'>
+        <div class='flex flex-row items-center justify-center gap-1 b-3 rounded-md b-dashed p-2 text-muted'>
+          <div class='i-fluent:add-12-filled size-5'></div>
+          <div>Add Class</div>
+        </div>
+      </Dialog.Trigger>
+      <Dialog.Content>
+        <Dialog.Header>
+          <Dialog.Title>Add Class</Dialog.Title>
+        </Dialog.Header>
+
+        <div class='w-full flex flex-col gap-4'>
+          <div class='flex flex-col gap-2'>
+            <Label for='subject'>Subject</Label>
+            <Input id='subject' type='text' bind:value={subject} placeholder='Mathematics' />
+          </div>
+          <div class='grid grid-cols-2 gap-3'>
+            <div class='flex flex-col gap-2'>
+              <Label for='short'>Short</Label>
+              <Input id='short' type='text' bind:value={shortName} placeholder='Math' />
+            </div>
+            <div class='flex flex-col gap-2'>
+              <Label for='teacher'>Teacher</Label>
+              <Input id='teacher' type='text' bind:value={teacher} placeholder='Mr. Smith' />
+            </div>
+          </div>
+          <div class='grid grid-cols-3 gap-3'>
+            <div class='flex flex-col gap-2'>
+              <Label for='location'>Location</Label>
+              <Input id='location' type='text' bind:value={location} placeholder='Room 101' />
+            </div>
+            <div class='flex flex-col gap-2'>
+              <Label for='color'>Color</Label>
+              <Input id='color' type='color' bind:value={color} />
+            </div>
+            <div class='flex flex-col gap-2'>
+              <Label for='day'>Day</Label>
+              <select id='day' bind:value={dayStr} class='rounded-md bg-background px-2 py-1 text-sm'>
+                {#each weekDays as d, i}
+                  <option value={i}>{d}</option>
+                {/each}
+              </select>
+            </div>
+          </div>
+          <div class='flex flex-col gap-2'>
+            <Label for='schedule'>Period (1..)</Label>
+            <Input id='schedule' type='number' bind:value={scheduleStr} placeholder='1' />
+          </div>
+          <Dialog.Close disabled={!isAddReady} class='w-full'>
+            <Button class='w-full' disabled={!isAddReady} onclick={addClass}>Add</Button>
+          </Dialog.Close>
+        </div>
+      </Dialog.Content>
+    </Dialog.Root>
+  </Container>
+</div>
