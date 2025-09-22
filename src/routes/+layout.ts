@@ -4,7 +4,7 @@ import { moduleStore } from '$lib/stores/modules.svelte'
 import { loadAllModules } from '../modules/registry'
 
 export const ssr = false
-export const prerender = false
+export const prerender = true
 
 export async function load({ fetch }) {
   initI18n()
