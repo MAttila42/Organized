@@ -5,7 +5,10 @@
   import { Button } from './ui/button'
   import * as Card from './ui/card'
   import * as ContextMenu from './ui/context-menu'
+  import * as Dialog from './ui/dialog'
   import * as Drawer from './ui/drawer'
+  import { Input } from './ui/input'
+  import { Label } from './ui/label'
 
   const {
     module,
@@ -14,8 +17,21 @@
   } = $props()
 
   type ButtonVariant = 'outline' | 'destructive'
+  let isEditing = $state(false)
+  let editColor = $state(module.color)
+
+  async function save() {
+    await moduleStore.editModuleCard(module.moduleId, { color: editColor })
+    isEditing = false
+  }
+
+  function cancelEdit() {
+    isEditing = false
+    editColor = module.color
+  }
+
   const actions: { name: string, variant: ButtonVariant, action: () => void }[] = [
-    { name: 'Edit', variant: 'outline', action: () => {} },
+    { name: 'Edit', variant: 'outline', action: () => { isEditing = true } },
     { name: 'Remove', variant: 'destructive', action: () => moduleStore.removeModuleCard(module.moduleId) },
   ]
 </script>
@@ -62,6 +78,16 @@
               </Button>
             {/each}
           </Drawer.Close>
+          {#if isEditing}
+            <div class='flex flex-col gap-2'>
+              <Label for='color-mobile'>Color</Label>
+              <Input id='color-mobile' bind:value={editColor} />
+              <div class='mt-2 flex gap-2'>
+                <Button variant='outline' onclick={cancelEdit}>Cancel</Button>
+                <Button onclick={save}>Save</Button>
+              </div>
+            </div>
+          {/if}
         </div>
       </Drawer.Footer>
     </Drawer.Content>
@@ -79,4 +105,22 @@
       {/each}
     </ContextMenu.Content>
   </ContextMenu.Root>
+{/if}
+
+{#if !isMobile && isEditing}
+  <Dialog.Root open>
+    <Dialog.Content>
+      <Dialog.Header>
+        <Dialog.Title>Edit Module Card</Dialog.Title>
+      </Dialog.Header>
+      <div class='flex flex-col gap-2'>
+        <Label for='color-desktop'>Color</Label>
+        <Input id='color-desktop' bind:value={editColor} />
+        <div class='mt-2 flex gap-2'>
+          <Button variant='outline' onclick={cancelEdit}>Cancel</Button>
+          <Button onclick={save}>Save</Button>
+        </div>
+      </div>
+    </Dialog.Content>
+  </Dialog.Root>
 {/if}
