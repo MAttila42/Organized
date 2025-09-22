@@ -42,6 +42,12 @@
     { name: 'Edit', variant: 'outline', action: () => { isEditing = true } },
     { name: 'Remove', variant: 'destructive', action: () => moduleStore.removeLink(shortcut.id) },
   ]
+
+  // Keep mobile behavior consistent with ModuleCard: always open in edit mode inside drawer
+  $effect(() => {
+    if (isMobile)
+      isEditing = true
+  })
 </script>
 
 {#snippet sc()}
@@ -62,25 +68,26 @@
     </Drawer.Trigger>
     <Drawer.Content>
       <Drawer.Footer>
-        <Drawer.Close class='flex flex-col gap-2'>
-          {#each actions as { name, variant, action }}
-            <Button {variant} onclick={action}>
-              {name}
-            </Button>
-          {/each}
-        </Drawer.Close>
-        {#if isEditing}
-          <div class='mt-4 flex flex-col gap-2'>
-            <Label for='icon'>Icon</Label>
-            <Input id='icon' bind:value={editIcon} />
-            <Label for='color'>Color</Label>
-            <Input id='color' type='color' bind:value={editColor} />
-            <div class='mt-2 flex gap-2'>
-              <Button variant='outline' onclick={cancelEdit}>Cancel</Button>
-              <Button onclick={save}>Save</Button>
+        <div class='w-full flex flex-col gap-6'>
+          <div class='flex flex-col gap-4'>
+            <div class='flex flex-col gap-2'>
+              <Label for='icon-mobile'>Icon</Label>
+              <Input id='icon-mobile' bind:value={editIcon} />
+            </div>
+            <div class='flex flex-col gap-2'>
+              <Label for='color-mobile'>Color</Label>
+              <Input id='color-mobile' type='color' bind:value={editColor} />
+            </div>
+            <div class='mt-2 flex flex-col gap-2'>
+              <Drawer.Close class='w-full'>
+                <Button class='w-full' onclick={save}>Save</Button>
+              </Drawer.Close>
+              <Drawer.Close class='w-full'>
+                <Button variant='destructive' class='w-full' onclick={() => moduleStore.removeLink(shortcut.id)}>Remove</Button>
+              </Drawer.Close>
             </div>
           </div>
-        {/if}
+        </div>
       </Drawer.Footer>
     </Drawer.Content>
   </Drawer.Root>
