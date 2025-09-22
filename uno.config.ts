@@ -16,9 +16,7 @@ export default defineConfig({
       color: 'neutral',
     }),
     presetIcons({
-      collections: {
-        fluent: () => import('@iconify-json/fluent/icons.json').then(i => i.default as any),
-      },
+      cdn: 'https://esm.sh/',
       extraProperties: {
         'display': 'inline-block',
         'vertical-align': 'middle',

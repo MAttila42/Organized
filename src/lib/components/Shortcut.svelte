@@ -43,7 +43,6 @@
     { name: 'Remove', variant: 'destructive', action: () => moduleStore.removeLink(shortcut.id) },
   ]
 
-  // Keep mobile behavior consistent with ModuleCard: always open in edit mode inside drawer
   $effect(() => {
     if (isMobile)
       isEditing = true
@@ -53,7 +52,7 @@
 {#snippet sc()}
   <button
     aria-label='Shortcut'
-    class={`shortcut size-15 rounded-2xl p-4 ${className}`}
+    class={`shortcut border border-accent size-15 rounded-2xl p-4 ${className}`}
     style={`--color: ${shortcut.color}`}
     {...restProps}
   >
@@ -128,10 +127,11 @@
 
 <style>
   .shortcut {
+    --bg: #282828;
     box-shadow:
-      inset 0 0 2em hsl(var(--secondary)),
-      inset 0 0 4em hsl(var(--secondary)),
-      inset 0 0 6em hsl(var(--secondary));
+      inset 0 0 2em var(--bg),
+      inset 0 0 4em var(--bg),
+      inset 0 0 6em var(--bg);
     outline: 1px solid hsl(var(--background));
     background-color: var(--color);
   }
