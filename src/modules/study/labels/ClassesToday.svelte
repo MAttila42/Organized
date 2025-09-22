@@ -2,9 +2,6 @@
   import List from '../components/List.svelte'
   import { study } from '../store.svelte'
 
-  // Ensure items loaded (idempotent)
-  study.loadItems()
-
   function getTodayIndex() {
     const d = new Date().getDay()
     return d === 0 ? 6 : d - 1
