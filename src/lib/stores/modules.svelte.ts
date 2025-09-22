@@ -245,7 +245,7 @@ export const moduleStore = $state({
       ))
 
     if (result.length > 0) {
-      database.update(userLinks)
+      await database.update(userLinks)
         .set({ displayOrder: sql`${userLinks.displayOrder} + 1` })
         .where(and(
           eq(userLinks.moduleId, moduleId),
@@ -253,13 +253,15 @@ export const moduleStore = $state({
         ))
     }
 
-    database.insert(userLinks).values({
+    await database.insert(userLinks).values({
       linkId,
       type: 'label',
       displayOrder: position,
       parameters,
       moduleId,
     })
+    // Keep module cards in sync when labels mutate
+    await this.loadModuleCards()
   },
 
   /**
