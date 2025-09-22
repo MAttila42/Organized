@@ -69,7 +69,7 @@
 </script>
 
 <div class='flex flex-col gap-0'>
-  <div class='flex flex-row items-center justify-between px-5 pb-3 pt-safe'>
+  <div class='flex flex-row items-center justify-between px-5 pb-3'>
     <h1 class='text-2xl font-bold'>Organized</h1>
     <a href='/settings' aria-label='Settings' draggable='false'>
       <div class='i-fluent:settings-16-filled size-7'></div>

@@ -12,10 +12,12 @@
   const { children } = $props()
 </script>
 
-<svelte:boundary>
-  {@render children()}
+<div class='pt-safe'>
+  <svelte:boundary>
+    {@render children()}
 
-  {#snippet pending()}
-    <p>Loading...</p>
-  {/snippet}
-</svelte:boundary>
+    {#snippet pending()}
+      <p>Loading...</p>
+    {/snippet}
+  </svelte:boundary>
+</div>
