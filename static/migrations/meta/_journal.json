@@ -15,6 +15,13 @@
       "when": 1758141152305,
       "tag": "0001_zippy_wolfpack",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1758578273049,
+      "tag": "0002_acoustic_amphibian",
+      "breakpoints": true
     }
   ]
 }

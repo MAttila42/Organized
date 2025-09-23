@@ -6,6 +6,13 @@ const config = {
   preprocess: vitePreprocess(),
   kit: {
     adapter: adapter(),
+    prerender: {
+      entries: [
+        '*',
+        '/module/shopping',
+        '/module/study',
+      ],
+    },
   },
   compilerOptions: {
     experimental: {

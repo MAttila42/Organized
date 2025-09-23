@@ -245,7 +245,7 @@ export const moduleStore = $state({
       ))
 
     if (result.length > 0) {
-      database.update(userLinks)
+      await database.update(userLinks)
         .set({ displayOrder: sql`${userLinks.displayOrder} + 1` })
         .where(and(
           eq(userLinks.moduleId, moduleId),
@@ -253,13 +253,15 @@ export const moduleStore = $state({
         ))
     }
 
-    database.insert(userLinks).values({
+    await database.insert(userLinks).values({
       linkId,
       type: 'label',
       displayOrder: position,
       parameters,
       moduleId,
     })
+    // Keep module cards in sync when labels mutate
+    await this.loadModuleCards()
   },
 
   /**
@@ -323,6 +325,58 @@ export const moduleStore = $state({
   async removeLink(id: number) {
     const { database } = await useDatabase()
     await database.delete(userLinks)
+      .where(eq(userLinks.id, id))
+    await this.loadShortcuts()
+  },
+
+  /**
+   * Updates a module card's editable fields.
+   *
+   * @param moduleId The module identifier whose card is being edited.
+   * @param data Partial editable properties (color, displayOrder)
+   * @param data.color New color value
+   * @param data.displayOrder New display order
+   */
+  async editModuleCard(moduleId: string, data: { color?: string, displayOrder?: number }) {
+    const { database } = await useDatabase()
+    const updates: any = {}
+    if (data.color !== undefined)
+      updates.color = data.color
+    if (data.displayOrder !== undefined)
+      updates.displayOrder = data.displayOrder
+    if (Object.keys(updates).length === 0)
+      return
+    await database.update(userModules)
+      .set(updates)
+      .where(eq(userModules.moduleId, moduleId))
+    await this.loadModuleCards()
+  },
+
+  /**
+   * Updates a shortcut's editable fields.
+   *
+   * @param id The userLinks row id for the shortcut (same as Shortcut.id)
+   * @param data Partial editable properties (icon, color, displayOrder, parameters)
+   * @param data.icon New icon class
+   * @param data.color New color value
+   * @param data.displayOrder New display order
+   * @param data.parameters Updated parameters payload
+   */
+  async editShortcut(id: number, data: { icon?: string, color?: string, displayOrder?: number, parameters?: Record<string, any> }) {
+    const { database } = await useDatabase()
+    const updates: any = {}
+    if (data.icon !== undefined)
+      updates.icon = data.icon
+    if (data.color !== undefined)
+      updates.color = data.color
+    if (data.displayOrder !== undefined)
+      updates.displayOrder = data.displayOrder
+    if (data.parameters !== undefined)
+      updates.parameters = data.parameters
+    if (Object.keys(updates).length === 0)
+      return
+    await database.update(userLinks)
+      .set(updates)
       .where(eq(userLinks.id, id))
     await this.loadShortcuts()
   },

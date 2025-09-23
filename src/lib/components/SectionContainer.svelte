@@ -20,9 +20,11 @@
     <Card.Title class='w-max rounded-lg bg-background px-3 py-2'>
       {title}
     </Card.Title>
-    <Card.Description class='px-1 text-muted'>
-      {description}
-    </Card.Description>
+    {#if description}
+      <Card.Description class='px-1 text-muted'>
+        {description}
+      </Card.Description>
+    {/if}
   </Card.Header>
 
   <Card.Content class={`px-0 ${className}`}>
