@@ -16,6 +16,15 @@ export function load() {
         call: () => import('./labels/ClassesToday.svelte'),
         parameters: [],
       },
+      {
+        id: 'due-assignments',
+        name: 'Due assignments',
+        description: 'Incomplete assignments sorted by due date.',
+        moduleId: 'study',
+        type: 'label',
+        call: () => import('./labels/DueAssignments.svelte'),
+        parameters: [],
+      },
     ],
     component: () => import('./study.svelte'),
   })

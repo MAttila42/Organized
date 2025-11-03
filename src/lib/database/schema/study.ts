@@ -12,3 +12,14 @@ export const classes = sqliteTable('classes', {
 })
 export type SelectClasses = typeof classes.$inferSelect
 export type InsertClasses = typeof classes.$inferInsert
+
+export const assignments = sqliteTable('assignments', {
+  id: integer().primaryKey({ autoIncrement: true }),
+  title: text('title').notNull(),
+  subject: text('subject'),
+  dueDate: text('due_date'),
+  description: text('description'),
+  completed: integer('completed').notNull().default(0),
+})
+export type SelectAssignments = typeof assignments.$inferSelect
+export type InsertAssignments = typeof assignments.$inferInsert
