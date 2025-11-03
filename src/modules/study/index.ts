@@ -25,6 +25,15 @@ export function load() {
         call: () => import('./labels/DueAssignments.svelte'),
         parameters: [],
       },
+      {
+        id: 'upcoming-exams',
+        name: 'Upcoming exams',
+        description: 'Exams scheduled in the next week.',
+        moduleId: 'study',
+        type: 'label',
+        call: () => import('./labels/UpcomingExams.svelte'),
+        parameters: [],
+      },
     ],
     component: () => import('./study.svelte'),
   })

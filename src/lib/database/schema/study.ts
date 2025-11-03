@@ -23,3 +23,13 @@ export const assignments = sqliteTable('assignments', {
 })
 export type SelectAssignments = typeof assignments.$inferSelect
 export type InsertAssignments = typeof assignments.$inferInsert
+
+export const exams = sqliteTable('exams', {
+  id: integer().primaryKey({ autoIncrement: true }),
+  title: text('title').notNull(),
+  subject: text('subject'),
+  date: text('date').notNull(),
+  description: text('description'),
+})
+export type SelectExams = typeof exams.$inferSelect
+export type InsertExams = typeof exams.$inferInsert
