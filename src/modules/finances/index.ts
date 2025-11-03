@@ -6,7 +6,17 @@ export function load() {
     id: 'finances',
     name: 'Finances',
     description: 'Track wallets, balances, and transactions.',
-    links: [],
+    links: [
+      {
+        id: 'wallet-balances',
+        name: 'Wallet balances',
+        description: 'Snapshot of each wallet with its current balance.',
+        moduleId: 'finances',
+        type: 'label',
+        call: () => import('./labels/WalletBalances.svelte'),
+        parameters: [],
+      },
+    ],
     component: () => import('./finances.svelte'),
   })
 
