@@ -1,11 +1,19 @@
-import type { InsertAssignments, InsertClasses, SelectAssignments, SelectClasses } from '$lib/database/schema/study'
+import type {
+  InsertAssignments,
+  InsertClasses,
+  InsertExams,
+  SelectAssignments,
+  SelectClasses,
+  SelectExams,
+} from '$lib/database/schema/study'
 import { useDatabase } from '$lib/database'
-import { assignments, classes } from '$lib/database/schema/study'
+import { assignments, classes, exams } from '$lib/database/schema/study'
 import { eq } from 'drizzle-orm'
 
 export const study = $state({
   items: [] as (SelectClasses)[],
   assignments: [] as SelectAssignments[],
+  exams: [] as SelectExams[],
   // Day selection state
   selectedDay: (() => {
     // JS getDay(): 0=Sunday ... 6=Saturday. Convert to 0=Monday ... 6=Sunday used in schema.
@@ -55,7 +63,7 @@ export const study = $state({
   },
 
   async loadItems() {
-    await Promise.all([this.loadClasses(), this.loadAssignments()])
+    await Promise.all([this.loadClasses(), this.loadAssignments(), this.loadExams()])
   },
 
   async loadClasses() {
@@ -66,6 +74,11 @@ export const study = $state({
   async loadAssignments() {
     const { database } = await useDatabase()
     this.assignments = await database.select().from(assignments).all()
+  },
+
+  async loadExams() {
+    const { database } = await useDatabase()
+    this.exams = await database.select().from(exams).all()
   },
 
   async addAssignment(item: InsertAssignments) {
@@ -88,5 +101,23 @@ export const study = $state({
 
   async setAssignmentCompletion(id: number, completed: boolean) {
     await this.updateAssignment(id, { completed: completed ? 1 : 0 })
+  },
+
+  async addExam(item: InsertExams) {
+    const { database } = await useDatabase()
+    await database.insert(exams).values(item)
+    await this.loadExams()
+  },
+
+  async updateExam(id: number, item: Partial<InsertExams>) {
+    const { database } = await useDatabase()
+    await database.update(exams).set(item).where(eq(exams.id, id))
+    await this.loadExams()
+  },
+
+  async removeExam(id: number) {
+    const { database } = await useDatabase()
+    await database.delete(exams).where(eq(exams.id, id))
+    this.exams = this.exams.filter(exam => exam.id !== id)
   },
 })
