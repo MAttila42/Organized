@@ -1,10 +1,11 @@
-import type { InsertClasses, SelectClasses } from '$lib/database/schema/study'
+import type { InsertAssignments, InsertClasses, SelectAssignments, SelectClasses } from '$lib/database/schema/study'
 import { useDatabase } from '$lib/database'
-import { classes } from '$lib/database/schema/study'
+import { assignments, classes } from '$lib/database/schema/study'
 import { eq } from 'drizzle-orm'
 
 export const study = $state({
   items: [] as (SelectClasses)[],
+  assignments: [] as SelectAssignments[],
   // Day selection state
   selectedDay: (() => {
     // JS getDay(): 0=Sunday ... 6=Saturday. Convert to 0=Monday ... 6=Sunday used in schema.
@@ -54,7 +55,38 @@ export const study = $state({
   },
 
   async loadItems() {
+    await Promise.all([this.loadClasses(), this.loadAssignments()])
+  },
+
+  async loadClasses() {
     const { database } = await useDatabase()
     this.items = await database.select().from(classes).all()
+  },
+
+  async loadAssignments() {
+    const { database } = await useDatabase()
+    this.assignments = await database.select().from(assignments).all()
+  },
+
+  async addAssignment(item: InsertAssignments) {
+    const { database } = await useDatabase()
+    await database.insert(assignments).values(item)
+    await this.loadAssignments()
+  },
+
+  async updateAssignment(id: number, item: Partial<InsertAssignments>) {
+    const { database } = await useDatabase()
+    await database.update(assignments).set(item).where(eq(assignments.id, id))
+    await this.loadAssignments()
+  },
+
+  async removeAssignment(id: number) {
+    const { database } = await useDatabase()
+    await database.delete(assignments).where(eq(assignments.id, id))
+    this.assignments = this.assignments.filter(assignment => assignment.id !== id)
+  },
+
+  async setAssignmentCompletion(id: number, completed: boolean) {
+    await this.updateAssignment(id, { completed: completed ? 1 : 0 })
   },
 })
