@@ -1,4 +1,5 @@
 <script lang='ts'>
+  import { t } from '$lib/i18n.svelte'
   import { onMount } from 'svelte'
   import ExamsList from '../components/ExamsList.svelte'
   import { study } from '../store.svelte'
@@ -41,7 +42,7 @@
 {#if upcomingExams.length === 0}
   <div class='flex flex-row items-center gap-2 text-sm text-muted'>
     <div class='i-fluent:calendar-ltr-16-filled size-4'></div>
-    <div>No exams scheduled this week.</div>
+    <div>{t('study.labels.upcomingExams.empty', 'No exams scheduled this week.')}</div>
   </div>
 {:else}
   <ExamsList items={upcomingExams} variant='compact' />

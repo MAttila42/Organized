@@ -1,10 +1,295 @@
 {
-  "ui": {
-    "insert": "Ajouter un enregistrement",
-    "purge": "Vider",
-    "toggleLang": "Basculer la langue"
+  "color": "Couleur",
+  "labels": "Étiquettes",
+  "labelsLoading": "Chargement des étiquettes...",
+  "noLabelsAdded": "Aucune étiquette ajoutée pour le moment.",
+  "noLabels": "Aucune étiquette disponible",
+  "save": "Enregistrer",
+  "remove": "Supprimer",
+  "module": {
+    "edit": "Éditer la carte de module",
+    "labels": {
+      "remove": {
+        "aria": "Supprimer l'étiquette"
+      },
+      "addAnother": "Ajouter une autre étiquette...",
+      "add": "Ajouter une étiquette..."
+    }
+  },
+  "cancel": "Annuler",
+  "-": "",
+  "icon": "Icône",
+  "shortcut": {
+    "edit": "Modifier le raccourci",
+    "card": {
+      "aria": "Raccourci"
+    }
+  },
+  "finances": {
+    "wallet": {
+      "overview": {
+        "title": "Aperçu",
+        "description": "Sélectionnez un portefeuille pour voir ses transactions et son solde."
+      },
+      "pick": "Choisissez un portefeuille pour commencer à suivre les transactions.",
+      "dialog": {
+        "title": "Enregistrer une transaction",
+        "description": "Les montants positifs ajoutent au solde, les négatifs soustraient.",
+        "income": "Revenu",
+        "expense": "Dépense",
+        "amount": "Montant",
+        "date": "Date",
+        "note": "Remarques",
+        "save": "Enregistrer la transaction",
+        "notePlaceholder": "Description facultative"
+      },
+      "currentBalance": "Solde actuel",
+      "addTransaction": "Ajouter une transaction",
+      "income": "Revenu",
+      "expense": "Dépense",
+      "transactions": {
+        "title": "Transactions",
+        "description": "Les plus récentes en premier.",
+        "noTransactions": "Aucune transaction enregistrée pour le moment.",
+        "delete": "Supprimer la transaction",
+        "noDate": "Pas de date"
+      },
+      "labels": {
+        "balances": {
+          "empty": "Aucun portefeuille suivi pour le moment."
+        }
+      },
+      "selector": {
+        "title": "Portefeuilles",
+        "description": "Créez des portefeuilles pour séparer les budgets et les économies.",
+        "empty": "Aucun portefeuille pour le moment. Ajoutez votre premier portefeuille pour commencer.",
+        "transactionSingular": "transaction",
+        "transactionPlural": "transactions",
+        "edit": {
+          "aria": "Modifier les détails du portefeuille",
+          "title": "Modifier le portefeuille",
+          "nameLabel": "Nom",
+          "delete": "Supprimer le portefeuille"
+        },
+        "addTrigger": "Ajouter un portefeuille",
+        "create": {
+          "title": "Nouveau portefeuille",
+          "description": "Définissez un nom, une couleur et une description facultative.",
+          "nameLabel": "Nom",
+          "namePlaceholder": "Dépenses quotidiennes",
+          "descriptionPlaceholder": "Notes courtes",
+          "cta": "Créer un portefeuille"
+        }
+      }
+    }
   },
   "home": {
-    "oneliner": "Votre application compagnon quotidienne"
-  }
+    "selectModule": "Sélectionner un module",
+    "selectShortcut": "Sélectionner un raccourci",
+    "heading": "Organized",
+    "settings": {
+      "aria": "Paramètres"
+    },
+    "shortcuts": {
+      "add": {
+        "aria": "Ajouter un nouveau raccourci",
+        "title": "Ajouter un raccourci",
+        "iconLabel": "Icône",
+        "colorLabel": "Couleur",
+        "cta": "Ajouter un raccourci"
+      }
+    },
+    "modules": {
+      "add": {
+        "trigger": "Ajouter un module",
+        "title": "Ajouter un module",
+        "cta": "Ajouter un module"
+      }
+    }
+  },
+  "loading": "Chargement...",
+  "settings": {
+    "language": {
+      "selectPrompt": "Sélectionner la langue",
+      "title": "Langue",
+      "description": "Choisissez la langue utilisée par Organisé dans l'application.",
+      "note": "Les modifications s'appliquent immédiatement et persistent entre les sessions."
+    },
+    "header": {
+      "title": "Paramètres"
+    }
+  },
+  "back": "Retour",
+  "edit": "Modifier",
+  "modules": {
+    "study": {
+      "name": "Étude",
+      "description": "Module d'étude de base.",
+      "links": {
+        "classesToday": {
+          "name": "Cours aujourd'hui",
+          "description": "Liste des cours d'aujourd'hui."
+        },
+        "dueAssignments": {
+          "name": "Devoirs à rendre",
+          "description": "Devoirs incomplets triés par date d'échéance."
+        },
+        "upcomingExams": {
+          "name": "Examens à venir",
+          "description": "Examens prévus dans la semaine prochaine."
+        }
+      }
+    },
+    "shopping": {
+      "name": "Achats",
+      "description": "Module d'achats de base.",
+      "links": {
+        "list": {
+          "name": "Liste d'achats",
+          "description": "Liste d'articles à acheter."
+        }
+      }
+    },
+    "finances": {
+      "name": "Finances",
+      "description": "Suivez les portefeuilles, les soldes et les transactions.",
+      "links": {
+        "walletBalances": {
+          "name": "Soldes des portefeuilles",
+          "description": "Instantané de chaque portefeuille avec son solde actuel."
+        }
+      }
+    }
+  },
+  "shopping": {
+    "title": "Liste d'achats",
+    "description": "Gardez une trace des articles à acheter.",
+    "empty": "Votre liste est vide. Ajoutez votre premier article.",
+    "add": {
+      "trigger": "Ajouter un article",
+      "title": "Ajouter un article",
+      "nameLabel": "Nom",
+      "namePlaceholder": "Lait",
+      "quantityLabel": "Quantité",
+      "quantityPlaceholder": "2",
+      "unitLabel": "Unité",
+      "unitPlaceholder": "pcs, l, kg",
+      "descriptionPlaceholder": "Marque ou notes (facultatif)"
+    }
+  },
+  "description": "Description",
+  "add": "Ajouter",
+  "study": {
+    "labels": {
+      "upcomingExams": {
+        "empty": "Aucun examen prévu cette semaine."
+      },
+      "dueAssignments": {
+        "empty": "Aucun devoir à rendre."
+      },
+      "classesToday": {
+        "empty": "Aucun cours aujourd'hui."
+      }
+    },
+    "exams": {
+      "title": "Examens",
+      "description": "Gardez une trace des examens à venir.",
+      "empty": "Aucun examen pour le moment. Ajoutez-en un.",
+      "add": {
+        "trigger": "Ajouter un examen",
+        "title": "Ajouter un examen",
+        "titleLabel": "Titre",
+        "titlePlaceholder": "Interrogation 1",
+        "subjectLabel": "Matière",
+        "subjectPlaceholder": "Physique",
+        "descriptionLabel": "Notes",
+        "descriptionPlaceholder": "Sujets, salle, tout ce qui est important"
+      },
+      "edit": {
+        "title": "Modifier l'examen",
+        "titleLabel": "Titre",
+        "subjectLabel": "Matière",
+        "descriptionLabel": "Notes"
+      }
+    },
+    "classes": {
+      "form": {
+        "dayPlaceholder": "Jour",
+        "noDay": "Aucun jour"
+      },
+      "title": "Cours",
+      "description": "Gérez votre emploi du temps.",
+      "empty": "Aucun cours pour ce jour. Ajoutez-en un.",
+      "add": {
+        "trigger": "Ajouter un cours",
+        "title": "Ajouter un cours",
+        "subjectLabel": "Matière",
+        "subjectPlaceholder": "Mathématiques",
+        "shortLabel": "Court",
+        "shortPlaceholder": "Maths",
+        "teacherLabel": "Enseignant",
+        "teacherPlaceholder": "M. Smith",
+        "locationLabel": "Lieu",
+        "locationPlaceholder": "Salle 101",
+        "dayLabel": "Jour",
+        "periodLabel": "Période (1..)",
+        "periodPlaceholder": "1"
+      },
+      "edit": {
+        "title": "Modifier le cours",
+        "subjectLabel": "Matière",
+        "shortLabel": "Court",
+        "teacherLabel": "Enseignant",
+        "locationLabel": "Lieu",
+        "dayLabel": "Jour",
+        "periodLabel": "Période (1..)"
+      }
+    },
+    "assignments": {
+      "title": "Devoirs",
+      "description": "Suivez les tâches et les échéances à venir.",
+      "empty": "Aucun devoir pour le moment. Ajoutez-en un.",
+      "add": {
+        "trigger": "Ajouter un devoir",
+        "title": "Ajouter un devoir",
+        "titleLabel": "Titre",
+        "titlePlaceholder": "Lire le chapitre 5",
+        "subjectLabel": "Matière",
+        "subjectPlaceholder": "Histoire",
+        "dueDateLabel": "Date d'échéance",
+        "descriptionLabel": "Notes",
+        "descriptionPlaceholder": "Tout ce qui est important à retenir"
+      },
+      "edit": {
+        "title": "Modifier le devoir",
+        "titleLabel": "Titre",
+        "subjectLabel": "Matière",
+        "dueDateLabel": "Date d'échéance",
+        "descriptionLabel": "Notes",
+        "completedLabel": "Terminé",
+        "completedHint": "Cochez lorsque le devoir est terminé.",
+        "completedAria": "État d'achèvement du devoir"
+      },
+      "item": {
+        "markIncomplete": "Marquer le devoir comme non terminé",
+        "markComplete": "Marquer le devoir comme terminé"
+      }
+    }
+  },
+  "date": "Date",
+  "delete": "Supprimer",
+  "done": "Terminé",
+  "days": {
+    "short": {
+      "monday": "Lun",
+      "tuesday": "Mar",
+      "wednesday": "Mer",
+      "thursday": "Jeu",
+      "friday": "Ven",
+      "saturday": "Sam",
+      "sunday": "Dim"
+    }
+  },
+  "saveChanges": "Enregistrer les modifications",
+  "close": "Fermer"
 }

@@ -1,6 +1,7 @@
 <script lang='ts'>
   import type { WithoutChildrenOrChild } from '$lib/utils'
   import type { Snippet } from 'svelte'
+  import { t } from '$lib/i18n.svelte'
   import { cn } from '$lib/utils'
   import XIcon from '@lucide/svelte/icons/x'
   import { Dialog as DialogPrimitive } from 'bits-ui'
@@ -37,7 +38,7 @@
         class="rounded-xs absolute end-4 top-4 opacity-70 ring-offset-background transition-opacity [&_svg]:pointer-events-none disabled:pointer-events-none [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0 hover:opacity-100 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-ring"
       >
         <XIcon />
-        <span class='sr-only'>Close</span>
+        <span class='sr-only'>{t('close', 'Close')}</span>
       </DialogPrimitive.Close>
     {/if}
   </DialogPrimitive.Content>

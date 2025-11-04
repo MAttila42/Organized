@@ -1,4 +1,5 @@
 <script lang='ts'>
+  import { t } from '$lib/i18n.svelte'
   import { onMount } from 'svelte'
   import AssignmentsList from '../components/AssignmentsList.svelte'
   import { study } from '../store.svelte'
@@ -29,7 +30,7 @@
 {#if dueAssignments.length === 0}
   <div class='flex flex-row items-center gap-2 text-sm text-muted'>
     <div class='i-fluent:clipboard-task-list-ltr-16-filled size-4'></div>
-    <div>No upcoming assignments.</div>
+    <div>{t('study.labels.dueAssignments.empty', 'No upcoming assignments.')}</div>
   </div>
 {:else}
   <AssignmentsList items={dueAssignments} variant='compact' />

@@ -1,10 +1,300 @@
 {
+  "color": "Szín",
+  "labels": "Címkék",
+  "labelsLoading": "Címkék betöltése...",
+  "noLabelsAdded": "Még nem adtál hozzá címkéket.",
+  "noLabels": "Nincsenek elérhető címkék",
+  "save": "Mentés",
+  "remove": "Eltávolítás",
+  "module": {
+    "edit": "Modulkártya szerkesztése",
+    "labels": {
+      "remove": {
+        "aria": "Címke eltávolítása"
+      },
+      "addAnother": "Új címke hozzáadása...",
+      "add": "Címke hozzáadása..."
+    }
+  },
+  "cancel": "Mégse",
+  "-": "",
+  "icon": "Ikon",
+  "shortcut": {
+    "edit": "Gyorsbillentyű szerkesztése",
+    "card": {
+      "aria": "Parancsikon"
+    }
+  },
+  "finances": {
+    "wallet": {
+      "overview": {
+        "title": "Áttekintés",
+        "description": "Válasszon pénztárcát a tranzakciók és egyenleg megtekintéséhez."
+      },
+      "pick": "Válasszon pénztárcát a tranzakciók nyomon követéséhez.",
+      "dialog": {
+        "title": "Tranzakció rögzítése",
+        "description": "A pozitív összegek növelik, a negatív összegek csökkentik az egyenleget.",
+        "income": "Bevétel",
+        "expense": "Kiadás",
+        "amount": "Összeg",
+        "date": "Dátum",
+        "note": "Megjegyzések",
+        "save": "Tranzakció mentése",
+        "notePlaceholder": "Opcionális leírás"
+      },
+      "currentBalance": "Jelenlegi egyenleg",
+      "addTransaction": "Tranzakció hozzáadása",
+      "income": "Bevétel",
+      "expense": "Kiadás",
+      "transactions": {
+        "title": "Tranzakciók",
+        "description": "Legfrissebbek először.",
+        "noTransactions": "Még nincsenek tranzakciók.",
+        "delete": "Tranzakció törlése",
+        "noDate": "Nincs dátum"
+      },
+      "labels": {
+        "balances": {
+          "empty": "Még nincsenek pénztárcák."
+        }
+      },
+      "selector": {
+        "title": "Pénztárcák",
+        "description": "Hozzon létre pénztárcákat a költségvetések és megtakarítások elkülönítéséhez.",
+        "empty": "Még nincsenek pénztárcák. Kezdje az első pénztárca hozzáadásával.",
+        "transactionSingular": "tranzakció",
+        "transactionPlural": "tranzakciók",
+        "edit": {
+          "aria": "Pénztárca adatainak szerkesztése",
+          "title": "Pénztárca szerkesztése",
+          "nameLabel": "Név",
+          "delete": "Pénztárca törlése"
+        },
+        "addTrigger": "Pénztárca hozzáadása",
+        "create": {
+          "title": "Új pénztárca",
+          "description": "Állítson be nevet, színt és opcionális leírást.",
+          "nameLabel": "Név",
+          "namePlaceholder": "Mindennapi kiadások",
+          "descriptionPlaceholder": "Rövid jegyzetek",
+          "cta": "Pénztárca létrehozása"
+        }
+      }
+    }
+  },
   "ui": {
-    "insert": "Rekord hozzáadása",
-    "purge": "Törlés",
-    "toggleLang": "Nyelv váltása"
+    "home": {
+      "title": "Kezdőlap"
+    }
   },
   "home": {
-    "oneliner": "A mindennapi társad alkalmazás"
-  }
+    "selectModule": "Modul kiválasztása",
+    "selectShortcut": "Parancsikon kiválasztása",
+    "heading": "Organized",
+    "settings": {
+      "aria": "Beállítások"
+    },
+    "shortcuts": {
+      "add": {
+        "aria": "Új parancsikon hozzáadása",
+        "title": "Parancsikon hozzáadása",
+        "iconLabel": "Ikon",
+        "colorLabel": "Szín",
+        "cta": "Parancsikon hozzáadása"
+      }
+    },
+    "modules": {
+      "add": {
+        "trigger": "Modul hozzáadása",
+        "title": "Modul hozzáadása",
+        "cta": "Modul hozzáadása"
+      }
+    }
+  },
+  "loading": "Betöltés...",
+  "settings": {
+    "language": {
+      "selectPrompt": "Nyelv kiválasztása",
+      "title": "Nyelv",
+      "description": "Válassza ki a szervezett alkalmazás nyelvét.",
+      "note": "A változtatások azonnal érvénybe lépnek és megmaradnak a munkamenetek között."
+    },
+    "header": {
+      "title": "Beállítások"
+    }
+  },
+  "back": "Vissza",
+  "edit": "Szerkesztés",
+  "modules": {
+    "study": {
+      "name": "Tanulmányok",
+      "description": "Alap tanulmányok modul.",
+      "links": {
+        "classesToday": {
+          "name": "Mai órák",
+          "description": "Mai órák listája."
+        },
+        "dueAssignments": {
+          "name": "Határidős feladatok",
+          "description": "Befejezetlen feladatok határidő szerint rendezve."
+        },
+        "upcomingExams": {
+          "name": "Közelgő vizsgák",
+          "description": "Vizsgák a következő héten."
+        }
+      }
+    },
+    "shopping": {
+      "name": "Bevásárlás",
+      "description": "Alap bevásárlás modul.",
+      "links": {
+        "list": {
+          "name": "Bevásárlólista",
+          "description": "Vásárolandó tételek listája."
+        }
+      }
+    },
+    "finances": {
+      "name": "Pénzügyek",
+      "description": "Pénztárcák, egyenlegek és tranzakciók nyomon követése.",
+      "links": {
+        "walletBalances": {
+          "name": "Pénztárca egyenlegek",
+          "description": "Pénztárcák pillanatnyi egyenlege."
+        }
+      }
+    }
+  },
+  "shopping": {
+    "title": "Bevásárlólista",
+    "description": "Tartsa nyilván a megvásárolandó tételeket.",
+    "empty": "A lista üres. Adja hozzá az első elemet.",
+    "add": {
+      "trigger": "Elem hozzáadása",
+      "title": "Elem hozzáadása",
+      "nameLabel": "Név",
+      "namePlaceholder": "Tej",
+      "quantityLabel": "Mennyiség",
+      "quantityPlaceholder": "2",
+      "unitLabel": "Mértékegység",
+      "unitPlaceholder": "db, l, kg",
+      "descriptionPlaceholder": "Márka vagy jegyzetek (opcionális)"
+    }
+  },
+  "description": "Leírás",
+  "add": "Hozzáadás",
+  "study": {
+    "labels": {
+      "upcomingExams": {
+        "empty": "Nincsenek vizsgák ezen a héten."
+      },
+      "dueAssignments": {
+        "empty": "Nincsenek határidős feladatok."
+      },
+      "classesToday": {
+        "empty": "Nincsenek mai órák."
+      }
+    },
+    "exams": {
+      "title": "Vizsgák",
+      "description": "Közelgő vizsgák nyomon követése.",
+      "empty": "Még nincsenek vizsgák. Adjon hozzá egyet.",
+      "add": {
+        "trigger": "Vizsga hozzáadása",
+        "title": "Vizsga hozzáadása",
+        "titleLabel": "Cím",
+        "titlePlaceholder": "Első vizsga",
+        "subjectLabel": "Tantárgy",
+        "subjectPlaceholder": "Fizika",
+        "descriptionLabel": "Jegyzetek",
+        "descriptionPlaceholder": "Témák, terem, bármi fontos"
+      },
+      "edit": {
+        "title": "Vizsga szerkesztése",
+        "titleLabel": "Cím",
+        "subjectLabel": "Tantárgy",
+        "descriptionLabel": "Jegyzetek"
+      }
+    },
+    "classes": {
+      "form": {
+        "dayPlaceholder": "Nap",
+        "noDay": "Nincs nap"
+      },
+      "title": "Órák",
+      "description": "Órarend kezelése.",
+      "empty": "Nincsenek órák ezen a napon. Adjon hozzá egyet.",
+      "add": {
+        "trigger": "Óra hozzáadása",
+        "title": "Óra hozzáadása",
+        "subjectLabel": "Tantárgy",
+        "subjectPlaceholder": "Matematika",
+        "shortLabel": "Rövid",
+        "shortPlaceholder": "Mate",
+        "teacherLabel": "Tanár",
+        "teacherPlaceholder": "Kovács tanár úr",
+        "locationLabel": "Helyszín",
+        "locationPlaceholder": "101-es terem",
+        "dayLabel": "Nap",
+        "periodLabel": "Időszak (1..)",
+        "periodPlaceholder": "1"
+      },
+      "edit": {
+        "title": "Óra szerkesztése",
+        "subjectLabel": "Tantárgy",
+        "shortLabel": "Rövid",
+        "teacherLabel": "Tanár",
+        "locationLabel": "Helyszín",
+        "dayLabel": "Nap",
+        "periodLabel": "Időszak (1..)"
+      }
+    },
+    "assignments": {
+      "title": "Feladatok",
+      "description": "Feladatok és határidők nyomon követése.",
+      "empty": "Még nincsenek feladatok. Adjon hozzá egyet.",
+      "add": {
+        "trigger": "Feladat hozzáadása",
+        "title": "Feladat hozzáadása",
+        "titleLabel": "Cím",
+        "titlePlaceholder": "5. fejezet olvasása",
+        "subjectLabel": "Tantárgy",
+        "subjectPlaceholder": "Történelem",
+        "dueDateLabel": "Határidő",
+        "descriptionLabel": "Jegyzetek",
+        "descriptionPlaceholder": "Bármi fontos"
+      },
+      "edit": {
+        "title": "Feladat szerkesztése",
+        "titleLabel": "Cím",
+        "subjectLabel": "Tantárgy",
+        "dueDateLabel": "Határidő",
+        "descriptionLabel": "Jegyzetek",
+        "completedLabel": "Befejezve",
+        "completedHint": "Kapcsolja be, ha a feladat kész.",
+        "completedAria": "Feladat befejezési állapota"
+      },
+      "item": {
+        "markIncomplete": "Feladat visszaminősítése befejezetlenre",
+        "markComplete": "Feladat megjelölése befejezettként"
+      }
+    }
+  },
+  "date": "Dátum",
+  "delete": "Törlés",
+  "done": "Kész",
+  "days": {
+    "short": {
+      "monday": "H",
+      "tuesday": "K",
+      "wednesday": "Sze",
+      "thursday": "Cs",
+      "friday": "P",
+      "saturday": "Szo",
+      "sunday": "V"
+    }
+  },
+  "saveChanges": "Változtatások mentése",
+  "close": "Bezárás"
 }

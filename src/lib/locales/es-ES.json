@@ -1,10 +1,295 @@
 {
-  "ui": {
-    "insert": "Agregar registro",
-    "purge": "Purgar",
-    "toggleLang": "Alternar idioma"
+  "color": "Color",
+  "labels": "Etiquetas",
+  "labelsLoading": "Cargando etiquetas...",
+  "noLabelsAdded": "Todavía no se han agregado etiquetas.",
+  "noLabels": "No hay etiquetas disponibles",
+  "save": "Guardar",
+  "remove": "Eliminar",
+  "module": {
+    "edit": "Editar tarjeta de módulo",
+    "labels": {
+      "remove": {
+        "aria": "Eliminar etiqueta"
+      },
+      "addAnother": "Agregar otra etiqueta...",
+      "add": "Agregar etiqueta..."
+    }
+  },
+  "cancel": "Cancelar",
+  "-": "",
+  "icon": "Icono",
+  "shortcut": {
+    "edit": "Editar acceso directo",
+    "card": {
+      "aria": "Acceso directo"
+    }
+  },
+  "finances": {
+    "wallet": {
+      "overview": {
+        "title": "Resumen",
+        "description": "Seleccione una billetera para ver sus transacciones y saldo."
+      },
+      "pick": "Elija una billetera para comenzar a rastrear transacciones.",
+      "dialog": {
+        "title": "Registrar transacción",
+        "description": "Los montos positivos suman al saldo, los negativos restan.",
+        "income": "Ingreso",
+        "expense": "Gasto",
+        "amount": "Monto",
+        "date": "Fecha",
+        "note": "Notas",
+        "save": "Guardar transacción",
+        "notePlaceholder": "Descripción opcional"
+      },
+      "currentBalance": "Saldo actual",
+      "addTransaction": "Agregar transacción",
+      "income": "Ingreso",
+      "expense": "Gasto",
+      "transactions": {
+        "title": "Transacciones",
+        "description": "Las más recientes primero.",
+        "noTransactions": "Aún no se han registrado transacciones.",
+        "delete": "Eliminar transacción",
+        "noDate": "Sin fecha"
+      },
+      "labels": {
+        "balances": {
+          "empty": "Aún no se han rastreado carteras."
+        }
+      },
+      "selector": {
+        "title": "Carteras",
+        "description": "Cree carteras para separar presupuestos y ahorros.",
+        "empty": "Aún no hay carteras. Agregue su primera cartera para comenzar.",
+        "transactionSingular": "transacción",
+        "transactionPlural": "transacciones",
+        "edit": {
+          "aria": "Editar detalles de la cartera",
+          "title": "Editar Cartera",
+          "nameLabel": "Nombre",
+          "delete": "Eliminar cartera"
+        },
+        "addTrigger": "Agregar Cartera",
+        "create": {
+          "title": "Nueva Cartera",
+          "description": "Establezca un nombre, color y descripción opcional.",
+          "nameLabel": "Nombre",
+          "namePlaceholder": "Gastos diarios",
+          "descriptionPlaceholder": "Notas cortas",
+          "cta": "Crear cartera"
+        }
+      }
+    }
   },
   "home": {
-    "oneliner": "Tu aplicación compañera diaria"
-  }
+    "selectModule": "Seleccione un módulo",
+    "selectShortcut": "Seleccione un acceso directo",
+    "heading": "Organized",
+    "settings": {
+      "aria": "Configuración"
+    },
+    "shortcuts": {
+      "add": {
+        "aria": "Agregar nuevo acceso directo",
+        "title": "Agregar Acceso Directo",
+        "iconLabel": "Icono",
+        "colorLabel": "Color",
+        "cta": "Agregar Acceso Directo"
+      }
+    },
+    "modules": {
+      "add": {
+        "trigger": "Agregar Módulo",
+        "title": "Agregar Módulo",
+        "cta": "Agregar Módulo"
+      }
+    }
+  },
+  "loading": "Cargando...",
+  "settings": {
+    "language": {
+      "selectPrompt": "Seleccione idioma",
+      "title": "Idioma",
+      "description": "Elija el idioma que Organizado usa en toda la aplicación.",
+      "note": "Los cambios se aplican de inmediato y persisten en las sesiones."
+    },
+    "header": {
+      "title": "Configuración"
+    }
+  },
+  "back": "Atrás",
+  "edit": "Editar",
+  "modules": {
+    "study": {
+      "name": "Estudio",
+      "description": "Módulo de estudio básico.",
+      "links": {
+        "classesToday": {
+          "name": "Clases hoy",
+          "description": "Lista de clases de hoy."
+        },
+        "dueAssignments": {
+          "name": "Tareas pendientes",
+          "description": "Tareas incompletas ordenadas por fecha de vencimiento."
+        },
+        "upcomingExams": {
+          "name": "Exámenes próximos",
+          "description": "Exámenes programados para la próxima semana."
+        }
+      }
+    },
+    "shopping": {
+      "name": "Compras",
+      "description": "Módulo de compras básico.",
+      "links": {
+        "list": {
+          "name": "Lista de compras",
+          "description": "Lista de artículos para comprar."
+        }
+      }
+    },
+    "finances": {
+      "name": "Finanzas",
+      "description": "Rastrear carteras, saldos y transacciones.",
+      "links": {
+        "walletBalances": {
+          "name": "Saldos de carteras",
+          "description": "Instantánea de cada cartera con su saldo actual."
+        }
+      }
+    }
+  },
+  "shopping": {
+    "title": "Lista de Compras",
+    "description": "Mantenga un registro de los artículos para comprar.",
+    "empty": "Su lista está vacía. Agregue su primer artículo.",
+    "add": {
+      "trigger": "Agregar Artículo",
+      "title": "Agregar Artículo",
+      "nameLabel": "Nombre",
+      "namePlaceholder": "Leche",
+      "quantityLabel": "Cantidad",
+      "quantityPlaceholder": "2",
+      "unitLabel": "Unidad",
+      "unitPlaceholder": "pcs, l, kg",
+      "descriptionPlaceholder": "Marca o notas (opcional)"
+    }
+  },
+  "description": "Descripción",
+  "add": "Agregar",
+  "study": {
+    "labels": {
+      "upcomingExams": {
+        "empty": "No hay exámenes programados para esta semana."
+      },
+      "dueAssignments": {
+        "empty": "No hay tareas pendientes."
+      },
+      "classesToday": {
+        "empty": "No hay clases hoy."
+      }
+    },
+    "exams": {
+      "title": "Exámenes",
+      "description": "Mantenga un registro de los exámenes próximos.",
+      "empty": "Aún no hay exámenes. Agregue uno.",
+      "add": {
+        "trigger": "Agregar Examen",
+        "title": "Agregar Examen",
+        "titleLabel": "Título",
+        "titlePlaceholder": "Parcial 1",
+        "subjectLabel": "Asignatura",
+        "subjectPlaceholder": "Física",
+        "descriptionLabel": "Notas",
+        "descriptionPlaceholder": "Temas, sala, cualquier cosa importante"
+      },
+      "edit": {
+        "title": "Editar Examen",
+        "titleLabel": "Título",
+        "subjectLabel": "Asignatura",
+        "descriptionLabel": "Notas"
+      }
+    },
+    "classes": {
+      "form": {
+        "dayPlaceholder": "Día",
+        "noDay": "Sin día"
+      },
+      "title": "Clases",
+      "description": "Administre su horario de clases.",
+      "empty": "No hay clases para este día. Agregue una.",
+      "add": {
+        "trigger": "Agregar Clase",
+        "title": "Agregar Clase",
+        "subjectLabel": "Asignatura",
+        "subjectPlaceholder": "Matemáticas",
+        "shortLabel": "Corto",
+        "shortPlaceholder": "Matemáticas",
+        "teacherLabel": "Profesor",
+        "teacherPlaceholder": "Sr. Smith",
+        "locationLabel": "Ubicación",
+        "locationPlaceholder": "Sala 101",
+        "dayLabel": "Día",
+        "periodLabel": "Período (1..)",
+        "periodPlaceholder": "1"
+      },
+      "edit": {
+        "title": "Editar Clase",
+        "subjectLabel": "Asignatura",
+        "shortLabel": "Corto",
+        "teacherLabel": "Profesor",
+        "locationLabel": "Ubicación",
+        "dayLabel": "Día",
+        "periodLabel": "Período (1..)"
+      }
+    },
+    "assignments": {
+      "title": "Tareas",
+      "description": "Rastrear tareas y plazos próximos.",
+      "empty": "Aún no hay tareas. Agregue una.",
+      "add": {
+        "trigger": "Agregar Tarea",
+        "title": "Agregar Tarea",
+        "titleLabel": "Título",
+        "titlePlaceholder": "Leer Capítulo 5",
+        "subjectLabel": "Asignatura",
+        "subjectPlaceholder": "Historia",
+        "dueDateLabel": "Fecha de vencimiento",
+        "descriptionLabel": "Notas",
+        "descriptionPlaceholder": "Cualquier cosa importante para recordar"
+      },
+      "edit": {
+        "title": "Editar Tarea",
+        "titleLabel": "Título",
+        "subjectLabel": "Asignatura",
+        "dueDateLabel": "Fecha de vencimiento",
+        "descriptionLabel": "Notas",
+        "completedLabel": "Completada",
+        "completedHint": "Marque cuando la tarea esté hecha.",
+        "completedAria": "Estado de finalización de la tarea"
+      },
+      "item": {
+        "markIncomplete": "Marcar tarea como incompleta",
+        "markComplete": "Marcar tarea como completa"
+      }
+    }
+  },
+  "date": "Fecha",
+  "delete": "Eliminar",
+  "done": "Hecho",
+  "days": {
+    "short": {
+      "monday": "Lun",
+      "tuesday": "Mar",
+      "wednesday": "Mié",
+      "thursday": "Jue",
+      "friday": "Vie",
+      "saturday": "Sáb",
+      "sunday": "Dom"
+    }
+  },
+  "saveChanges": "Guardar cambios",
+  "close": "Cerrar"
 }

@@ -1,5 +1,6 @@
 <script lang='ts'>
   import type { ModuleCard } from '$lib/stores/modules.svelte'
+  import { t } from '$lib/i18n.svelte'
   import { moduleStore } from '$lib/stores/modules.svelte'
   import { isMobile } from '$lib/utils'
   import { Button } from './ui/button'
@@ -133,31 +134,35 @@
           </div>
           <div class='flex flex-col gap-4'>
             <div class='flex flex-col gap-2'>
-              <Label for='color-mobile'>Color</Label>
+              <Label for='color-mobile'>{t('color', 'Color')}</Label>
               <Input id='color-mobile' type='color' bind:value={editColor} />
             </div>
             <div class='flex flex-col gap-2'>
-              <div class='text-sm font-medium'>Labels</div>
+              <div class='text-sm font-medium'>{t('labels', 'Labels')}</div>
               {#if isLabelsLoading}
-                <div class='text-xs text-muted'>Loading labels...</div>
+                <div class='text-xs text-muted'>{t('labelsLoading', 'Loading labels...')}</div>
               {:else}
                 <div class='flex flex-col gap-2'>
                   {#if enabledLabels.length === 0}
-                    <div class='text-xs text-muted'>No labels added yet.</div>
+                    <div class='text-xs text-muted'>{t('noLabelsAdded', 'No labels added yet.')}</div>
                   {/if}
                   {#each enabledLabels as l (l.userLinkId)}
                     <div class='flex items-center justify-between b b-border rounded-md px-2 py-1 text-sm'>
                       <span>{l.name}</span>
-                      <Button aria-label='Remove label' variant='outline' class='size-7 p-0' onclick={() => removeLabel(l.userLinkId)}>
+                      <Button aria-label={t('module.labels.remove.aria', 'Remove label')} variant='outline' class='size-7 p-0' onclick={() => removeLabel(l.userLinkId)}>
                         <div class='i-fluent:delete-16-regular size-4'></div>
                       </Button>
                     </div>
                   {/each}
                   <Select.Root type='single' bind:value={addLabelSelection}>
-                    <Select.Trigger class='w-full'>{addLabelSelection ? 'Add another label...' : 'Add label...'}</Select.Trigger>
+                    <Select.Trigger class='w-full'>
+                      {addLabelSelection
+                        ? t('module.labels.addAnother', 'Add another label...')
+                        : t('module.labels.add', 'Add label...')}
+                    </Select.Trigger>
                     <Select.Content>
                       {#if availableLabels.length === 0}
-                        <Select.Item value='' disabled>No labels available</Select.Item>
+                        <Select.Item value='' disabled>{t('noLabels', 'No labels available')}</Select.Item>
                       {:else}
                         {#each availableLabels as opt (opt.id)}
                           <Select.Item value={opt.id}>{opt.name}</Select.Item>
@@ -170,10 +175,10 @@
             </div>
             <div class='mt-2 flex flex-col gap-2'>
               <Drawer.Close class='w-full'>
-                <Button class='w-full' onclick={save}>Save</Button>
+                <Button class='w-full' onclick={save}>{t('save', 'Save')}</Button>
               </Drawer.Close>
               <Drawer.Close class='w-full'>
-                <Button variant='destructive' class='w-full' onclick={() => moduleStore.removeModuleCard(module.moduleId)}>Remove</Button>
+                <Button variant='destructive' class='w-full' onclick={() => moduleStore.removeModuleCard(module.moduleId)}>{t('remove', 'Remove')}</Button>
               </Drawer.Close>
             </div>
           </div>
@@ -200,35 +205,39 @@
   <Dialog.Root open>
     <Dialog.Content>
       <Dialog.Header>
-        <Dialog.Title>Edit Module Card</Dialog.Title>
+        <Dialog.Title>{t('module.edit', 'Edit Module Card')}</Dialog.Title>
       </Dialog.Header>
       <div class='flex flex-col gap-4'>
         <div class='flex flex-col gap-2'>
-          <Label for='color-desktop'>Color</Label>
+          <Label for='color-desktop'>{t('color', 'Color')}</Label>
           <Input id='color-desktop' type='color' bind:value={editColor} />
         </div>
         <div class='flex flex-col gap-2'>
-          <div class='text-sm font-medium'>Labels</div>
+          <div class='text-sm font-medium'>{t('labels', 'Labels')}</div>
           {#if isLabelsLoading}
-            <div class='text-xs text-muted'>Loading labels...</div>
+            <div class='text-xs text-muted'>{t('labelsLoading', 'Loading labels...')}</div>
           {:else}
             <div class='flex flex-col gap-2'>
               {#if enabledLabels.length === 0}
-                <div class='text-xs text-muted'>No labels added yet.</div>
+                <div class='text-xs text-muted'>{t('noLabelsAdded', 'No labels added yet.')}</div>
               {/if}
               {#each enabledLabels as l (l.userLinkId)}
                 <div class='flex items-center justify-between b b-border rounded-md px-2 py-1 text-sm'>
                   <span>{l.name}</span>
-                  <Button aria-label='Remove label' variant='outline' class='size-7 p-0' onclick={() => removeLabel(l.userLinkId)}>
+                  <Button aria-label={t('module.labels.remove.aria', 'Remove label')} variant='outline' class='size-7 p-0' onclick={() => removeLabel(l.userLinkId)}>
                     <div class='i-fluent:delete-16-regular size-4'></div>
                   </Button>
                 </div>
               {/each}
               <Select.Root type='single' bind:value={addLabelSelection}>
-                <Select.Trigger class='w-full'>{addLabelSelection ? 'Add another label...' : 'Add label...'}</Select.Trigger>
+                <Select.Trigger class='w-full'>
+                  {addLabelSelection
+                    ? t('module.labels.addAnother', 'Add another label...')
+                    : t('module.labels.add', 'Add label...')}
+                </Select.Trigger>
                 <Select.Content>
                   {#if availableLabels.length === 0}
-                    <Select.Item value='' disabled>No labels available</Select.Item>
+                    <Select.Item value='' disabled>{t('noLabels', 'No labels available')}</Select.Item>
                   {:else}
                     {#each availableLabels as opt (opt.id)}
                       <Select.Item value={opt.id}>{opt.name}</Select.Item>
@@ -240,8 +249,8 @@
           {/if}
         </div>
         <div class='mt-2 flex gap-2'>
-          <Button variant='outline' onclick={cancelEdit}>Cancel</Button>
-          <Button onclick={save}>Save</Button>
+          <Button variant='outline' onclick={cancelEdit}>{t('cancel', 'Cancel')}</Button>
+          <Button onclick={save}>{t('save', 'Save')}</Button>
         </div>
       </div>
     </Dialog.Content>

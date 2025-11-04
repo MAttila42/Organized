@@ -4,6 +4,7 @@
   import * as Dialog from '$lib/components/ui/dialog'
   import { Input } from '$lib/components/ui/input'
   import { Label } from '$lib/components/ui/label'
+  import { t } from '$lib/i18n.svelte'
   import { finances } from '../store.svelte'
 
   const walletSummaries = $derived(finances.walletSummaries)
@@ -98,14 +99,14 @@
 </script>
 
 <SectionContainer
-  title='Wallets'
-  description='Create wallets to separate budgets and savings.'
+  title={t('finances.wallet.selector.title', 'Wallets')}
+  description={t('finances.wallet.selector.description', 'Create wallets to separate budgets and savings.')}
   class='flex flex-col gap-3'
 >
   {#if walletSummaries.length === 0}
     <div class='mt-1 flex flex-row items-center gap-3 b-3 rounded-md b-dashed p-3 text-muted'>
       <div class='i-fluent:wallet-credit-card-20-regular size-5'></div>
-      <div>No wallets yet. Add your first wallet to get started.</div>
+      <div>{t('finances.wallet.selector.empty', 'No wallets yet. Add your first wallet to get started.')}</div>
     </div>
   {:else}
     <div class='flex flex-col gap-2'>
@@ -132,7 +133,11 @@
             </div>
           {/if}
           <div class='flex flex-row items-center justify-between text-xs text-muted'>
-            <div>{summary.transactionCount} {summary.transactionCount === 1 ? 'transaction' : 'transactions'}</div>
+            <div>
+              {`${summary.transactionCount} ${summary.transactionCount === 1
+                ? t('finances.wallet.selector.transactionSingular', 'transaction')
+                : t('finances.wallet.selector.transactionPlural', 'transactions')}`}
+            </div>
             <button
               type='button'
               class='opacity-0 transition group-hover:opacity-100'
@@ -140,7 +145,7 @@
                 event.stopPropagation()
                 openEdit(summary.wallet.id ?? null, summary.wallet.name ?? '', summary.wallet.color, summary.wallet.description)
               }}
-              aria-label='Edit wallet details'
+              aria-label={t('finances.wallet.selector.edit.aria', 'Edit wallet details')}
             >
               <div class='i-fluent:edit-16-regular size-4'></div>
             </button>
@@ -154,28 +159,28 @@
     <Dialog.Trigger class='w-full'>
       <div class='flex flex-row items-center justify-center gap-1 b-3 rounded-md b-dashed p-2 text-muted'>
         <div class='i-fluent:add-12-filled size-5'></div>
-        <div>Add Wallet</div>
+        <div>{t('finances.wallet.selector.addTrigger', 'Add Wallet')}</div>
       </div>
     </Dialog.Trigger>
     <Dialog.Content class='sm:max-w-md'>
       <Dialog.Header>
-        <Dialog.Title>New Wallet</Dialog.Title>
-        <Dialog.Description>Set a name, color, and optional description.</Dialog.Description>
+        <Dialog.Title>{t('finances.wallet.selector.create.title', 'New Wallet')}</Dialog.Title>
+        <Dialog.Description>{t('finances.wallet.selector.create.description', 'Set a name, color, and optional description.')}</Dialog.Description>
       </Dialog.Header>
       <div class='flex flex-col gap-4'>
         <div class='flex flex-col gap-2'>
-          <Label for='wallet-name'>Name</Label>
-          <Input id='wallet-name' bind:value={name} placeholder='Everyday spending' />
+          <Label for='wallet-name'>{t('finances.wallet.selector.create.nameLabel', 'Name')}</Label>
+          <Input id='wallet-name' bind:value={name} placeholder={t('finances.wallet.selector.create.namePlaceholder', 'Everyday spending')} />
         </div>
         <div class='flex flex-col gap-2'>
-          <Label for='wallet-color'>Color</Label>
+          <Label for='wallet-color'>{t('color', 'Color')}</Label>
           <Input id='wallet-color' type='color' bind:value={color} />
         </div>
         <div class='flex flex-col gap-2'>
-          <Label for='wallet-description'>Description</Label>
-          <Input id='wallet-description' bind:value={description} placeholder='Short notes' />
+          <Label for='wallet-description'>{t('description', 'Description')}</Label>
+          <Input id='wallet-description' bind:value={description} placeholder={t('finances.wallet.selector.create.descriptionPlaceholder', 'Short notes')} />
         </div>
-        <Button class='w-full' disabled={!canCreate} onclick={createWallet}>Create wallet</Button>
+        <Button class='w-full' disabled={!canCreate} onclick={createWallet}>{t('finances.wallet.selector.create.cta', 'Create wallet')}</Button>
       </div>
     </Dialog.Content>
   </Dialog.Root>
@@ -183,25 +188,25 @@
   <Dialog.Root bind:open={editOpen}>
     <Dialog.Content class='sm:max-w-md'>
       <Dialog.Header>
-        <Dialog.Title>Edit Wallet</Dialog.Title>
+        <Dialog.Title>{t('finances.wallet.selector.edit.title', 'Edit Wallet')}</Dialog.Title>
       </Dialog.Header>
       <div class='flex flex-col gap-4'>
         <div class='flex flex-col gap-2'>
-          <Label for='edit-wallet-name'>Name</Label>
+          <Label for='edit-wallet-name'>{t('finances.wallet.selector.edit.nameLabel', 'Name')}</Label>
           <Input id='edit-wallet-name' bind:value={editName} />
         </div>
         <div class='flex flex-col gap-2'>
-          <Label for='edit-wallet-color'>Color</Label>
+          <Label for='edit-wallet-color'>{t('color', 'Color')}</Label>
           <Input id='edit-wallet-color' type='color' bind:value={editColor} />
         </div>
         <div class='flex flex-col gap-2'>
-          <Label for='edit-wallet-description'>Description</Label>
+          <Label for='edit-wallet-description'>{t('description', 'Description')}</Label>
           <Input id='edit-wallet-description' bind:value={editDescription} />
         </div>
         <div class='flex flex-col gap-2'>
-          <Button class='w-full' disabled={!canSave} onclick={saveWallet}>Save changes</Button>
-          <Button variant='destructive' onclick={deleteWallet}>Delete wallet</Button>
-          <Button variant='ghost' onclick={closeEdit}>Cancel</Button>
+          <Button class='w-full' disabled={!canSave} onclick={saveWallet}>{t('saveChanges', 'Save changes')}</Button>
+          <Button variant='destructive' onclick={deleteWallet}>{t('finances.wallet.selector.edit.delete', 'Delete wallet')}</Button>
+          <Button variant='ghost' onclick={closeEdit}>{t('cancel', 'Cancel')}</Button>
         </div>
       </div>
     </Dialog.Content>

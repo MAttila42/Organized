@@ -1,4 +1,5 @@
 <script lang='ts'>
+  import { t } from '$lib/i18n.svelte'
   import initUnocssRuntime from '@unocss/runtime'
   import presetIcons from 'https://esm.sh/@unocss/preset-icons/browser'
   import '@unocss/reset/tailwind.css'
@@ -17,7 +18,7 @@
     {@render children()}
 
     {#snippet pending()}
-      <p>Loading...</p>
+      <p>{t('loading', 'Loading...')}</p>
     {/snippet}
   </svelte:boundary>
 </div>

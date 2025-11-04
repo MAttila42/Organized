@@ -1,5 +1,6 @@
 <script lang='ts'>
   import type { Shortcut } from '$lib/stores/modules.svelte'
+  import { t } from '$lib/i18n.svelte'
   import { moduleStore } from '$lib/stores/modules.svelte'
   import { isMobile } from '$lib/utils'
   import { Button } from './ui/button'
@@ -39,8 +40,8 @@
   }
 
   const actions: { name: string, variant: ButtonVariant, action: () => void }[] = [
-    { name: 'Edit', variant: 'outline', action: () => { isEditing = true } },
-    { name: 'Remove', variant: 'destructive', action: () => moduleStore.removeLink(shortcut.id) },
+    { name: t('edit', 'Edit'), variant: 'outline', action: () => { isEditing = true } },
+    { name: t('remove', 'Remove'), variant: 'destructive', action: () => moduleStore.removeLink(shortcut.id) },
   ]
 
   $effect(() => {
@@ -51,7 +52,7 @@
 
 {#snippet sc()}
   <button
-    aria-label='Shortcut'
+    aria-label={t('shortcut.card.aria', 'Shortcut')}
     class={`shortcut border border-accent size-15 rounded-2xl p-4 ${className}`}
     style={`--color: ${shortcut.color}`}
     {...restProps}
@@ -70,19 +71,19 @@
         <div class='w-full flex flex-col gap-6'>
           <div class='flex flex-col gap-4'>
             <div class='flex flex-col gap-2'>
-              <Label for='icon-mobile'>Icon</Label>
+              <Label for='icon-mobile'>{t('icon', 'Icon')}</Label>
               <Input id='icon-mobile' bind:value={editIcon} />
             </div>
             <div class='flex flex-col gap-2'>
-              <Label for='color-mobile'>Color</Label>
+              <Label for='color-mobile'>{t('color', 'Color')}</Label>
               <Input id='color-mobile' type='color' bind:value={editColor} />
             </div>
             <div class='mt-2 flex flex-col gap-2'>
               <Drawer.Close class='w-full'>
-                <Button class='w-full' onclick={save}>Save</Button>
+                <Button class='w-full' onclick={save}>{t('save', 'Save')}</Button>
               </Drawer.Close>
               <Drawer.Close class='w-full'>
-                <Button variant='destructive' class='w-full' onclick={() => moduleStore.removeLink(shortcut.id)}>Remove</Button>
+                <Button variant='destructive' class='w-full' onclick={() => moduleStore.removeLink(shortcut.id)}>{t('remove', 'Remove')}</Button>
               </Drawer.Close>
             </div>
           </div>
@@ -109,16 +110,16 @@
   <Dialog.Root open>
     <Dialog.Content>
       <Dialog.Header>
-        <Dialog.Title>Edit Shortcut</Dialog.Title>
+        <Dialog.Title>{t('shortcut.edit', 'Edit Shortcut')}</Dialog.Title>
       </Dialog.Header>
       <div class='flex flex-col gap-2'>
-        <Label for='icon-desktop'>Icon</Label>
+        <Label for='icon-desktop'>{t('icon', 'Icon')}</Label>
         <Input id='icon-desktop' bind:value={editIcon} />
-        <Label for='color-desktop'>Color</Label>
+        <Label for='color-desktop'>{t('color', 'Color')}</Label>
         <Input id='color-desktop' type='color' bind:value={editColor} />
         <div class='mt-2 flex gap-2'>
-          <Button variant='outline' onclick={cancelEdit}>Cancel</Button>
-          <Button onclick={save}>Save</Button>
+          <Button variant='outline' onclick={cancelEdit}>{t('cancel', 'Cancel')}</Button>
+          <Button onclick={save}>{t('save', 'Save')}</Button>
         </div>
       </div>
     </Dialog.Content>

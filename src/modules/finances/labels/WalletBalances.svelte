@@ -1,4 +1,5 @@
 <script lang='ts'>
+  import { t } from '$lib/i18n.svelte'
   import { finances } from '../store.svelte'
 
   const summaries = $derived(finances.walletSummaries)
@@ -18,7 +19,7 @@
 {#if summaries.length === 0}
   <div class='flex flex-row items-center gap-2 text-sm text-muted'>
     <div class='i-fluent:wallet-16-regular size-4'></div>
-    <div>No wallets tracked yet.</div>
+    <div>{t('finances.wallet.labels.balances.empty', 'No wallets tracked yet.')}</div>
   </div>
 {:else}
   <div class='flex flex-col gap-2'>
