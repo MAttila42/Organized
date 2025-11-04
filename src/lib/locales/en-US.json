@@ -1,10 +1,295 @@
 {
-  "ui": {
-    "insert": "Add record",
-    "purge": "Purge",
-    "toggleLang": "Toggle language"
+  "-": "",
+  "color": "Color",
+  "labels": "Labels",
+  "labelsLoading": "Loading labels...",
+  "noLabelsAdded": "No labels added yet.",
+  "noLabels": "No labels available",
+  "save": "Save",
+  "remove": "Remove",
+  "module": {
+    "edit": "Edit Module Card",
+    "labels": {
+      "remove": {
+        "aria": "Remove label"
+      },
+      "addAnother": "Add another label...",
+      "add": "Add label..."
+    }
+  },
+  "cancel": "Cancel",
+  "icon": "Icon",
+  "shortcut": {
+    "edit": "Edit Shortcut",
+    "card": {
+      "aria": "Shortcut"
+    }
+  },
+  "finances": {
+    "wallet": {
+      "overview": {
+        "title": "Overview",
+        "description": "Select a wallet to see its transactions and balance."
+      },
+      "pick": "Pick a wallet to begin tracking transactions.",
+      "dialog": {
+        "title": "Record transaction",
+        "description": "Positive amounts add to the balance, negative subtract.",
+        "income": "Income",
+        "expense": "Expense",
+        "amount": "Amount",
+        "date": "Date",
+        "note": "Notes",
+        "save": "Save transaction",
+        "notePlaceholder": "Optional description"
+      },
+      "currentBalance": "Current balance",
+      "addTransaction": "Add transaction",
+      "income": "Income",
+      "expense": "Expense",
+      "transactions": {
+        "title": "Transactions",
+        "description": "Most recent first.",
+        "noTransactions": "No transactions recorded yet.",
+        "delete": "Delete transaction",
+        "noDate": "No date"
+      },
+      "labels": {
+        "balances": {
+          "empty": "No wallets tracked yet."
+        }
+      },
+      "selector": {
+        "title": "Wallets",
+        "description": "Create wallets to separate budgets and savings.",
+        "empty": "No wallets yet. Add your first wallet to get started.",
+        "transactionSingular": "transaction",
+        "transactionPlural": "transactions",
+        "edit": {
+          "aria": "Edit wallet details",
+          "title": "Edit Wallet",
+          "nameLabel": "Name",
+          "delete": "Delete wallet"
+        },
+        "addTrigger": "Add Wallet",
+        "create": {
+          "title": "New Wallet",
+          "description": "Set a name, color, and optional description.",
+          "nameLabel": "Name",
+          "namePlaceholder": "Everyday spending",
+          "descriptionPlaceholder": "Short notes",
+          "cta": "Create wallet"
+        }
+      }
+    }
   },
   "home": {
-    "oneliner": "Your everyday companion app"
-  }
+    "selectModule": "Select a module",
+    "selectShortcut": "Select a shortcut",
+    "heading": "Organized",
+    "settings": {
+      "aria": "Settings"
+    },
+    "shortcuts": {
+      "add": {
+        "aria": "Add new shortcut",
+        "title": "Add Shortcut",
+        "iconLabel": "Icon",
+        "colorLabel": "Color",
+        "cta": "Add Shortcut"
+      }
+    },
+    "modules": {
+      "add": {
+        "trigger": "Add Module",
+        "title": "Add Module",
+        "cta": "Add Module"
+      }
+    }
+  },
+  "loading": "Loading...",
+  "settings": {
+    "language": {
+      "selectPrompt": "Select language",
+      "title": "Language",
+      "description": "Choose the language Organized uses throughout the app.",
+      "note": "Changes apply immediately and persist across sessions."
+    },
+    "header": {
+      "title": "Settings"
+    }
+  },
+  "back": "Back",
+  "edit": "Edit",
+  "modules": {
+    "study": {
+      "name": "Study",
+      "description": "Barebones study module.",
+      "links": {
+        "classesToday": {
+          "name": "Classes today",
+          "description": "List of today's classes."
+        },
+        "dueAssignments": {
+          "name": "Due assignments",
+          "description": "Incomplete assignments sorted by due date."
+        },
+        "upcomingExams": {
+          "name": "Upcoming exams",
+          "description": "Exams scheduled in the next week."
+        }
+      }
+    },
+    "shopping": {
+      "name": "Shopping",
+      "description": "Barebones shopping module.",
+      "links": {
+        "list": {
+          "name": "Shopping List",
+          "description": "List of items to buy."
+        }
+      }
+    },
+    "finances": {
+      "name": "Finances",
+      "description": "Track wallets, balances, and transactions.",
+      "links": {
+        "walletBalances": {
+          "name": "Wallet balances",
+          "description": "Snapshot of each wallet with its current balance."
+        }
+      }
+    }
+  },
+  "shopping": {
+    "title": "Shopping List",
+    "description": "Keep track of items to buy.",
+    "empty": "Your list is empty. Add your first item.",
+    "add": {
+      "trigger": "Add Item",
+      "title": "Add Item",
+      "nameLabel": "Name",
+      "namePlaceholder": "Milk",
+      "quantityLabel": "Quantity",
+      "quantityPlaceholder": "2",
+      "unitLabel": "Unit",
+      "unitPlaceholder": "pcs, l, kg",
+      "descriptionPlaceholder": "Brand or notes (optional)"
+    }
+  },
+  "description": "Description",
+  "add": "Add",
+  "study": {
+    "labels": {
+      "upcomingExams": {
+        "empty": "No exams scheduled this week."
+      },
+      "dueAssignments": {
+        "empty": "No upcoming assignments."
+      },
+      "classesToday": {
+        "empty": "No classes today."
+      }
+    },
+    "exams": {
+      "title": "Exams",
+      "description": "Keep track of upcoming exams.",
+      "empty": "No exams yet. Add one.",
+      "add": {
+        "trigger": "Add Exam",
+        "title": "Add Exam",
+        "titleLabel": "Title",
+        "titlePlaceholder": "Midterm 1",
+        "subjectLabel": "Subject",
+        "subjectPlaceholder": "Physics",
+        "descriptionLabel": "Notes",
+        "descriptionPlaceholder": "Topics, room, anything important"
+      },
+      "edit": {
+        "title": "Edit Exam",
+        "titleLabel": "Title",
+        "subjectLabel": "Subject",
+        "descriptionLabel": "Notes"
+      }
+    },
+    "classes": {
+      "form": {
+        "dayPlaceholder": "Day",
+        "noDay": "No day"
+      },
+      "title": "Classes",
+      "description": "Manage your class schedule.",
+      "empty": "No classes for this day. Add one.",
+      "add": {
+        "trigger": "Add Class",
+        "title": "Add Class",
+        "subjectLabel": "Subject",
+        "subjectPlaceholder": "Mathematics",
+        "shortLabel": "Short",
+        "shortPlaceholder": "Math",
+        "teacherLabel": "Teacher",
+        "teacherPlaceholder": "Mr. Smith",
+        "locationLabel": "Location",
+        "locationPlaceholder": "Room 101",
+        "dayLabel": "Day",
+        "periodLabel": "Period (1..)",
+        "periodPlaceholder": "1"
+      },
+      "edit": {
+        "title": "Edit Class",
+        "subjectLabel": "Subject",
+        "shortLabel": "Short",
+        "teacherLabel": "Teacher",
+        "locationLabel": "Location",
+        "dayLabel": "Day",
+        "periodLabel": "Period (1..)"
+      }
+    },
+    "assignments": {
+      "title": "Assignments",
+      "description": "Track tasks and upcoming deadlines.",
+      "empty": "No assignments yet. Add one.",
+      "add": {
+        "trigger": "Add Assignment",
+        "title": "Add Assignment",
+        "titleLabel": "Title",
+        "titlePlaceholder": "Read Chapter 5",
+        "subjectLabel": "Subject",
+        "subjectPlaceholder": "History",
+        "dueDateLabel": "Due Date",
+        "descriptionLabel": "Notes",
+        "descriptionPlaceholder": "Anything important to remember"
+      },
+      "edit": {
+        "title": "Edit Assignment",
+        "titleLabel": "Title",
+        "subjectLabel": "Subject",
+        "dueDateLabel": "Due Date",
+        "descriptionLabel": "Notes",
+        "completedLabel": "Completed",
+        "completedHint": "Toggle when the assignment is done.",
+        "completedAria": "Assignment completion status"
+      },
+      "item": {
+        "markIncomplete": "Mark assignment incomplete",
+        "markComplete": "Mark assignment complete"
+      }
+    }
+  },
+  "date": "Date",
+  "delete": "Delete",
+  "done": "Done",
+  "days": {
+    "short": {
+      "monday": "Mon",
+      "tuesday": "Tue",
+      "wednesday": "Wed",
+      "thursday": "Thu",
+      "friday": "Fri",
+      "saturday": "Sat",
+      "sunday": "Sun"
+    }
+  },
+  "saveChanges": "Save changes",
+  "close": "Close"
 }

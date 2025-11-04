@@ -4,6 +4,7 @@
 
 <script lang='ts'>
   import type { SelectExams } from '$lib/database/schema/study'
+  import { t } from '$lib/i18n.svelte'
 
   const {
     exam,
@@ -61,7 +62,7 @@
           </span>
         {/if}
         {#if isDone}
-          <span class='text-xs text-muted'>Done</span>
+          <span class='text-xs text-muted'>{t('done', 'Done')}</span>
         {/if}
       </div>
     </div>

@@ -6,13 +6,14 @@
   import { Input } from '$lib/components/ui/input'
   import { Label } from '$lib/components/ui/label'
   import * as Select from '$lib/components/ui/select'
+  import { t } from '$lib/i18n.svelte'
   import { moduleStore } from '$lib/stores/modules.svelte'
 
   let addModuleValue = $state('')
   let addModuleColor = $state('#FFFFFF')
 
   const addModuleValueTrigger = $derived(
-    moduleStore.modules.find(m => m.id === addModuleValue)?.name ?? 'Select a module',
+    moduleStore.modules.find(m => m.id === addModuleValue)?.name ?? t('home.selectModule', 'Select a module'),
   )
 
   function addModule() {
@@ -34,14 +35,14 @@
   let addShortcutColor = $state('#FFFFFF')
 
   const addShortcutModuleTrigger = $derived(
-    moduleStore.modules.find(m => m.id === addShortcutModule)?.name ?? 'Select a module',
+    moduleStore.modules.find(m => m.id === addShortcutModule)?.name ?? t('home.selectModule', 'Select a module'),
   )
   const addShortcutLinkTrigger = $derived(
     moduleStore.modules
       .find(m => m.id === addShortcutModule)
       ?.links
       .find(l => l.id === addShortcutLink)
-      ?.name ?? 'Select a shortcut',
+      ?.name ?? t('home.selectShortcut', 'Select a shortcut'),
   )
 
   const isAddShortcutReady = $derived(
@@ -70,8 +71,8 @@
 
 <div class='flex flex-col gap-0'>
   <div class='flex flex-row items-center justify-between px-5 pb-3'>
-    <h1 class='text-2xl font-bold'>Organized</h1>
-    <a href='/settings' aria-label='Settings' draggable='false'>
+    <h1 class='text-2xl font-bold'>{t('home.heading', 'Organized')}</h1>
+    <a href='/settings' aria-label={t('home.settings.aria', 'Settings')} draggable='false'>
       <div class='i-fluent:settings-16-filled size-7'></div>
     </a>
   </div>
@@ -86,13 +87,13 @@
 
       <Dialog.Root>
         <Dialog.Trigger>
-          <button class='size-15 b-3 rounded-2xl b-dashed p-3' aria-label='Add new shortcut'>
+          <button class='size-15 b-3 rounded-2xl b-dashed p-3' aria-label={t('home.shortcuts.add.aria', 'Add new shortcut')}>
             <div class='i-fluent:add-12-filled size-6 color-muted'></div>
           </button>
         </Dialog.Trigger>
         <Dialog.Content>
           <Dialog.Header>
-            <Dialog.Title>Add Shortcut</Dialog.Title>
+            <Dialog.Title>{t('home.shortcuts.add.title', 'Add Shortcut')}</Dialog.Title>
           </Dialog.Header>
 
           <div class='w-full flex flex-col gap-4'>
@@ -125,14 +126,14 @@
                     ?.description}
                 </Dialog.Description>
 
-                <Label for='icon'>Icon</Label>
+                <Label for='icon'>{t('home.shortcuts.add.iconLabel', 'Icon')}</Label>
                 <Input
                   bind:value={addShortcutIcon}
                   type='text'
                   id='icon'
                   placeholder='i-fluent:document-16-filled'
                 />
-                <Label for='color'>Color</Label>
+                <Label for='color'>{t('home.shortcuts.add.colorLabel', 'Color')}</Label>
                 <Input
                   bind:value={addShortcutColor}
                   type='color'
@@ -147,7 +148,7 @@
                 class='w-full'
                 disabled={!isAddShortcutReady}
               >
-                Add Shortcut
+                {t('home.shortcuts.add.cta', 'Add Shortcut')}
               </Button>
             </Dialog.Close>
           </div>
@@ -166,12 +167,12 @@
           class='flex flex-row items-center gap-3 b-3 rounded-md b-dashed p-3 text-muted'
         >
           <div class='i-fluent:add-12-filled size-6'></div>
-          <div>Add Module</div>
+          <div>{t('home.modules.add.trigger', 'Add Module')}</div>
         </div>
       </Dialog.Trigger>
       <Dialog.Content>
         <Dialog.Header>
-          <Dialog.Title>Add Module</Dialog.Title>
+          <Dialog.Title>{t('home.modules.add.title', 'Add Module')}</Dialog.Title>
         </Dialog.Header>
 
         <div class='w-full flex flex-col gap-4'>
@@ -191,7 +192,7 @@
               {moduleStore.modules.find(m => m.id === addModuleValue)
                 ?.description}
             </Dialog.Description>
-            <Label for='color'>Color</Label>
+            <Label for='color'>{t('color', 'Color')}</Label>
             <Input
               bind:value={addModuleColor}
               type='color'
@@ -205,7 +206,7 @@
               class='w-full'
               disabled={!addModuleValue}
             >
-              Add Module
+              {t('home.modules.add.cta', 'Add Module')}
             </Button>
           </Dialog.Close>
         </div>

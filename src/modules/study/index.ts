@@ -1,16 +1,17 @@
+import { t } from '$lib/i18n.svelte'
 import { moduleStore } from '$lib/stores/modules.svelte'
 import { study } from './store.svelte'
 
 export function load() {
   moduleStore.modules.push({
     id: 'study',
-    name: 'Study',
-    description: 'Barebones study module.',
+    name: t('modules.study.name', 'Study'),
+    description: t('modules.study.description', 'Barebones study module.'),
     links: [
       {
         id: 'classes-today',
-        name: 'Classes today',
-        description: 'List of today\'s classes.',
+        name: t('modules.study.links.classesToday.name', 'Classes today'),
+        description: t('modules.study.links.classesToday.description', 'List of today\'s classes.'),
         moduleId: 'study',
         type: 'label',
         call: () => import('./labels/ClassesToday.svelte'),
@@ -18,8 +19,8 @@ export function load() {
       },
       {
         id: 'due-assignments',
-        name: 'Due assignments',
-        description: 'Incomplete assignments sorted by due date.',
+        name: t('modules.study.links.dueAssignments.name', 'Due assignments'),
+        description: t('modules.study.links.dueAssignments.description', 'Incomplete assignments sorted by due date.'),
         moduleId: 'study',
         type: 'label',
         call: () => import('./labels/DueAssignments.svelte'),
@@ -27,8 +28,8 @@ export function load() {
       },
       {
         id: 'upcoming-exams',
-        name: 'Upcoming exams',
-        description: 'Exams scheduled in the next week.',
+        name: t('modules.study.links.upcomingExams.name', 'Upcoming exams'),
+        description: t('modules.study.links.upcomingExams.description', 'Exams scheduled in the next week.'),
         moduleId: 'study',
         type: 'label',
         call: () => import('./labels/UpcomingExams.svelte'),

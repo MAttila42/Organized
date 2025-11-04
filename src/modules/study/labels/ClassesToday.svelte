@@ -1,4 +1,5 @@
 <script lang='ts'>
+  import { t } from '$lib/i18n.svelte'
   import List from '../components/List.svelte'
   import { study } from '../store.svelte'
 
@@ -19,7 +20,7 @@
 {#if todayItems.length === 0}
   <div class='flex flex-row items-center gap-2 text-sm text-muted'>
     <div class='i-fluent:book-open-16-filled size-4'></div>
-    <div>No classes today.</div>
+    <div>{t('study.labels.classesToday.empty', 'No classes today.')}</div>
   </div>
 {:else}
   <List items={todayItems} variant='compact' />

@@ -1,10 +1,295 @@
 {
-  "ui": {
-    "insert": "Datensatz hinzufügen",
-    "purge": "Löschen",
-    "toggleLang": "Sprache umschalten"
+  "color": "Farbe",
+  "labels": "Beschriftungen",
+  "labelsLoading": "Beschriftungen werden geladen...",
+  "noLabelsAdded": "Noch keine Beschriftungen hinzugefügt.",
+  "noLabels": "Keine Beschriftungen verfügbar",
+  "save": "Speichern",
+  "remove": "Entfernen",
+  "module": {
+    "edit": "Modulkarte bearbeiten",
+    "labels": {
+      "remove": {
+        "aria": "Label entfernen"
+      },
+      "addAnother": "Ein weiteres Label hinzufügen...",
+      "add": "Label hinzufügen..."
+    }
+  },
+  "cancel": "Abbrechen",
+  "-": "",
+  "icon": "Symbol",
+  "shortcut": {
+    "edit": "Tastenkürzel bearbeiten",
+    "card": {
+      "aria": "Tastenkürzel"
+    }
+  },
+  "finances": {
+    "wallet": {
+      "overview": {
+        "title": "Übersicht",
+        "description": "Wählen Sie eine Brieftasche, um ihre Transaktionen und den Kontostand anzuzeigen."
+      },
+      "pick": "Wählen Sie eine Brieftasche, um Transaktionen zu verfolgen.",
+      "dialog": {
+        "title": "Transaktion aufzeichnen",
+        "description": "Positive Beträge erhöhen den Kontostand, negative Beträge verringern ihn.",
+        "income": "Einkommen",
+        "expense": "Ausgabe",
+        "amount": "Betrag",
+        "date": "Datum",
+        "note": "Notizen",
+        "save": "Transaktion speichern",
+        "notePlaceholder": "Optionale Beschreibung"
+      },
+      "currentBalance": "Aktueller Kontostand",
+      "addTransaction": "Transaktion hinzufügen",
+      "income": "Einkommen",
+      "expense": "Ausgabe",
+      "transactions": {
+        "title": "Transaktionen",
+        "description": "Neueste zuerst.",
+        "noTransactions": "Noch keine Transaktionen aufgezeichnet.",
+        "delete": "Transaktion löschen",
+        "noDate": "Kein Datum"
+      },
+      "labels": {
+        "balances": {
+          "empty": "Noch keine Brieftaschen verfolgt."
+        }
+      },
+      "selector": {
+        "title": "Brieftaschen",
+        "description": "Erstellen Sie Brieftaschen, um Budgets und Ersparnisse zu trennen.",
+        "empty": "Noch keine Brieftaschen. Fügen Sie Ihre erste Brieftasche hinzu, um loszulegen.",
+        "transactionSingular": "Transaktion",
+        "transactionPlural": "Transaktionen",
+        "edit": {
+          "aria": "Brieftaschendetails bearbeiten",
+          "title": "Brieftasche bearbeiten",
+          "nameLabel": "Name",
+          "delete": "Brieftasche löschen"
+        },
+        "addTrigger": "Brieftasche hinzufügen",
+        "create": {
+          "title": "Neue Brieftasche",
+          "description": "Setzen Sie einen Namen, eine Farbe und eine optionale Beschreibung.",
+          "nameLabel": "Name",
+          "namePlaceholder": "Tägliche Ausgaben",
+          "descriptionPlaceholder": "Kurze Notizen",
+          "cta": "Brieftasche erstellen"
+        }
+      }
+    }
   },
   "home": {
-    "oneliner": "Ihre tägliche Begleit-App"
-  }
+    "selectModule": "Modul auswählen",
+    "selectShortcut": "Tastenkürzel auswählen",
+    "heading": "Organized",
+    "settings": {
+      "aria": "Einstellungen"
+    },
+    "shortcuts": {
+      "add": {
+        "aria": "Neues Tastenkürzel hinzufügen",
+        "title": "Tastenkürzel hinzufügen",
+        "iconLabel": "Symbol",
+        "colorLabel": "Farbe",
+        "cta": "Tastenkürzel hinzufügen"
+      }
+    },
+    "modules": {
+      "add": {
+        "trigger": "Modul hinzufügen",
+        "title": "Modul hinzufügen",
+        "cta": "Modul hinzufügen"
+      }
+    }
+  },
+  "loading": "Wird geladen...",
+  "settings": {
+    "language": {
+      "selectPrompt": "Sprache auswählen",
+      "title": "Sprache",
+      "description": "Wählen Sie die Sprache, die Organisiert im gesamten App verwendet.",
+      "note": "Änderungen werden sofort angewendet und bleiben über Sitzungen hinweg erhalten."
+    },
+    "header": {
+      "title": "Einstellungen"
+    }
+  },
+  "back": "Zurück",
+  "edit": "Bearbeiten",
+  "modules": {
+    "study": {
+      "name": "Studium",
+      "description": "Barebones-Studienmodul.",
+      "links": {
+        "classesToday": {
+          "name": "Kurse heute",
+          "description": "Liste der heutigen Kurse."
+        },
+        "dueAssignments": {
+          "name": "Fällige Aufgaben",
+          "description": "Unvollständige Aufgaben, sortiert nach Fälligkeitsdatum."
+        },
+        "upcomingExams": {
+          "name": "Anstehende Prüfungen",
+          "description": "Prüfungen, die in der nächsten Woche geplant sind."
+        }
+      }
+    },
+    "shopping": {
+      "name": "Einkaufen",
+      "description": "Barebones-Einkaufsmodul.",
+      "links": {
+        "list": {
+          "name": "Einkaufsliste",
+          "description": "Liste der Artikel, die gekauft werden sollen."
+        }
+      }
+    },
+    "finances": {
+      "name": "Finanzen",
+      "description": "Verfolgen Sie Brieftaschen, Kontostände und Transaktionen.",
+      "links": {
+        "walletBalances": {
+          "name": "Brieftaschen-Kontostände",
+          "description": "Übersicht jeder Brieftasche mit ihrem aktuellen Kontostand."
+        }
+      }
+    }
+  },
+  "shopping": {
+    "title": "Einkaufsliste",
+    "description": "Verfolgen Sie Artikel, die gekauft werden sollen.",
+    "empty": "Ihre Liste ist leer. Fügen Sie Ihren ersten Artikel hinzu.",
+    "add": {
+      "trigger": "Artikel hinzufügen",
+      "title": "Artikel hinzufügen",
+      "nameLabel": "Name",
+      "namePlaceholder": "Milch",
+      "quantityLabel": "Menge",
+      "quantityPlaceholder": "2",
+      "unitLabel": "Einheit",
+      "unitPlaceholder": "Stück, l, kg",
+      "descriptionPlaceholder": "Marke oder Notizen (optional)"
+    }
+  },
+  "description": "Beschreibung",
+  "add": "Hinzufügen",
+  "study": {
+    "labels": {
+      "upcomingExams": {
+        "empty": "Keine Prüfungen in dieser Woche geplant."
+      },
+      "dueAssignments": {
+        "empty": "Keine fälligen Aufgaben."
+      },
+      "classesToday": {
+        "empty": "Keine Kurse heute."
+      }
+    },
+    "exams": {
+      "title": "Prüfungen",
+      "description": "Verfolgen Sie anstehende Prüfungen.",
+      "empty": "Noch keine Prüfungen. Fügen Sie eine hinzu.",
+      "add": {
+        "trigger": "Prüfung hinzufügen",
+        "title": "Prüfung hinzufügen",
+        "titleLabel": "Titel",
+        "titlePlaceholder": "Zwischenprüfung 1",
+        "subjectLabel": "Fach",
+        "subjectPlaceholder": "Physik",
+        "descriptionLabel": "Notizen",
+        "descriptionPlaceholder": "Themen, Raum, wichtige Informationen"
+      },
+      "edit": {
+        "title": "Prüfung bearbeiten",
+        "titleLabel": "Titel",
+        "subjectLabel": "Fach",
+        "descriptionLabel": "Notizen"
+      }
+    },
+    "classes": {
+      "form": {
+        "dayPlaceholder": "Tag",
+        "noDay": "Kein Tag"
+      },
+      "title": "Kurse",
+      "description": "Verwalten Sie Ihren Stundenplan.",
+      "empty": "Keine Kurse für diesen Tag. Fügen Sie einen hinzu.",
+      "add": {
+        "trigger": "Kurs hinzufügen",
+        "title": "Kurs hinzufügen",
+        "subjectLabel": "Fach",
+        "subjectPlaceholder": "Mathematik",
+        "shortLabel": "Kurz",
+        "shortPlaceholder": "Mathe",
+        "teacherLabel": "Lehrer",
+        "teacherPlaceholder": "Herr Müller",
+        "locationLabel": "Ort",
+        "locationPlaceholder": "Raum 101",
+        "dayLabel": "Tag",
+        "periodLabel": "Periode (1..)",
+        "periodPlaceholder": "1"
+      },
+      "edit": {
+        "title": "Kurs bearbeiten",
+        "subjectLabel": "Fach",
+        "shortLabel": "Kurz",
+        "teacherLabel": "Lehrer",
+        "locationLabel": "Ort",
+        "dayLabel": "Tag",
+        "periodLabel": "Periode (1..)"
+      }
+    },
+    "assignments": {
+      "title": "Aufgaben",
+      "description": "Verfolgen Sie Aufgaben und anstehende Fristen.",
+      "empty": "Noch keine Aufgaben. Fügen Sie eine hinzu.",
+      "add": {
+        "trigger": "Aufgabe hinzufügen",
+        "title": "Aufgabe hinzufügen",
+        "titleLabel": "Titel",
+        "titlePlaceholder": "Kapitel 5 lesen",
+        "subjectLabel": "Fach",
+        "subjectPlaceholder": "Geschichte",
+        "dueDateLabel": "Fälligkeitsdatum",
+        "descriptionLabel": "Notizen",
+        "descriptionPlaceholder": "Wichtige Informationen"
+      },
+      "edit": {
+        "title": "Aufgabe bearbeiten",
+        "titleLabel": "Titel",
+        "subjectLabel": "Fach",
+        "dueDateLabel": "Fälligkeitsdatum",
+        "descriptionLabel": "Notizen",
+        "completedLabel": "Abgeschlossen",
+        "completedHint": "Umschalten, wenn die Aufgabe erledigt ist.",
+        "completedAria": "Aufgabenabschlussstatus"
+      },
+      "item": {
+        "markIncomplete": "Aufgabe als unvollständig markieren",
+        "markComplete": "Aufgabe als abgeschlossen markieren"
+      }
+    }
+  },
+  "date": "Datum",
+  "delete": "Löschen",
+  "done": "Fertig",
+  "days": {
+    "short": {
+      "monday": "Mo",
+      "tuesday": "Di",
+      "wednesday": "Mi",
+      "thursday": "Do",
+      "friday": "Fr",
+      "saturday": "Sa",
+      "sunday": "So"
+    }
+  },
+  "saveChanges": "Änderungen speichern",
+  "close": "Schließen"
 }

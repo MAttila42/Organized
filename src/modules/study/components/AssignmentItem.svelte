@@ -4,6 +4,7 @@
 
 <script lang='ts'>
   import type { SelectAssignments } from '$lib/database/schema/study'
+  import { t } from '$lib/i18n.svelte'
 
   const {
     assignment,
@@ -43,7 +44,9 @@
       type='button'
       class={`mt-1 flex size-4 items-center justify-center rounded-full border ${isCompleted ? 'border-primary bg-primary/10 text-primary' : 'border-muted text-muted'}`}
       onclick={handleToggle}
-      aria-label={isCompleted ? 'Mark assignment incomplete' : 'Mark assignment complete'}
+      aria-label={isCompleted
+        ? t('study.assignments.item.markIncomplete', 'Mark assignment incomplete')
+        : t('study.assignments.item.markComplete', 'Mark assignment complete')}
       aria-pressed={isCompleted}
     >
       {#if isCompleted}
