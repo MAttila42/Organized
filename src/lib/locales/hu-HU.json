@@ -142,6 +142,14 @@
         "upcomingExams": {
           "name": "Közelgő vizsgák",
           "description": "Vizsgák a következő héten."
+        },
+        "addAssignment": {
+          "name": "Feladat hozzáadása",
+          "description": "Ugrás a tanulmányok modulhoz és a feladat hozzáadása párbeszédpanel megnyitása."
+        },
+        "addExam": {
+          "name": "Vizsga hozzáadása",
+          "description": "Ugrás a tanulmányok modulhoz és a vizsga hozzáadása párbeszédpanel megnyitása."
         }
       }
     },
@@ -152,6 +160,10 @@
         "list": {
           "name": "Bevásárlólista",
           "description": "Vásárolandó tételek listája."
+        },
+        "addItem": {
+          "name": "Elem hozzáadása",
+          "description": "Ugrás a bevásárlás modulhoz és az elem hozzáadása párbeszédpanel megnyitása."
         }
       }
     },
@@ -162,6 +174,13 @@
         "walletBalances": {
           "name": "Pénztárca egyenlegek",
           "description": "Pénztárcák pillanatnyi egyenlege."
+        },
+        "recordTransaction": {
+          "name": "Tranzakció rögzítése",
+          "description": "Pénzügyek megnyitása egy kiválasztott pénztárcában történő tranzakció rögzítéséhez.",
+          "parameters": {
+            "wallet": "Pénztárca neve"
+          }
         }
       }
     }
@@ -296,5 +315,6 @@
     }
   },
   "saveChanges": "Változtatások mentése",
-  "close": "Bezárás"
+  "close": "Bezárás",
+  "wallet": ""
 }
