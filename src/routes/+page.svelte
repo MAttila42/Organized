@@ -44,6 +44,16 @@
       .find(l => l.id === addShortcutLink)
       ?.name ?? t('home.selectShortcut', 'Select a shortcut'),
   )
+  const addShortcutDescription = $derived(() => {
+    if (!addShortcutModule || !addShortcutLink)
+      return ''
+
+    return moduleStore.modules
+      .find(m => m.id === addShortcutModule)
+      ?.links
+      .find(l => l.id === addShortcutLink)
+      ?.description ?? ''
+  })
 
   const isAddShortcutReady = $derived(
     addShortcutModule && addShortcutLink && addShortcutIcon,
@@ -122,8 +132,7 @@
 
               {#if addShortcutLink}
                 <Dialog.Description class='text-muted'>
-                  {moduleStore.modules.find(m => m.id === addShortcutLink)
-                    ?.description}
+                  {addShortcutDescription()}
                 </Dialog.Description>
 
                 <Label for='icon'>{t('home.shortcuts.add.iconLabel', 'Icon')}</Label>
