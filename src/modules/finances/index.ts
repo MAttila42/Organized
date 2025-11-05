@@ -1,6 +1,6 @@
 import { t } from '$lib/i18n.svelte'
 import { registerModule } from '../utils'
-import { createAddExpenseShortcut } from './shortcuts'
+import { createAddTransactionShortcut } from './shortcuts'
 import { finances } from './store.svelte'
 
 export function load() {
@@ -10,16 +10,16 @@ export function load() {
     description: t('modules.finances.description', 'Track wallets, balances, and transactions.'),
     links: [
       {
-        id: 'record-expense',
-        name: t('modules.finances.links.recordExpense.name', 'Record expense'),
-        description: t('modules.finances.links.recordExpense.description', 'Open finances to record an expense in a selected wallet.'),
+        id: 'record-transaction',
+        name: t('modules.finances.links.recordTransaction.name', 'Record transaction'),
+        description: t('modules.finances.links.recordTransaction.description', 'Open finances to record a transaction in a selected wallet.'),
         moduleId: 'finances',
         type: 'shortcut',
-        call: createAddExpenseShortcut(),
+        call: createAddTransactionShortcut(),
         parameters: [
           {
             id: 'wallet',
-            name: t('modules.finances.links.recordExpense.parameters.wallet', 'Wallet name'),
+            name: t('modules.finances.links.recordTransaction.parameters.wallet', 'Wallet name'),
             type: 'string',
           },
         ],

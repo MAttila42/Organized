@@ -21,7 +21,7 @@
   let hasInitialisedShortcut = $state(false)
   let appliedWalletParam = $state<string | null>(null)
 
-  const addExpenseRoute = createShortcutRoute('finances', 'record-expense')
+  const addTransactionRoute = createShortcutRoute('finances', 'record-transaction')
 
   const canAddTransaction = $derived(
     Boolean(selectedSummary && Number.parseFloat(amount) > 0),
@@ -78,13 +78,13 @@
   }
 
   $effect(createShortcutDialogSync(
-    addExpenseRoute,
+    addTransactionRoute,
     () => dialogOpen,
     (value) => { dialogOpen = value },
   ))
 
   $effect(() => {
-    if (!addExpenseRoute.isActive()) {
+    if (!addTransactionRoute.isActive()) {
       hasInitialisedShortcut = false
       appliedWalletParam = null
       return
@@ -98,7 +98,7 @@
   })
 
   $effect(() => {
-    if (!addExpenseRoute.isActive())
+    if (!addTransactionRoute.isActive())
       return
 
     const walletParam = page.url.searchParams.get('wallet')?.trim()

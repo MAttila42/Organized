@@ -1,7 +1,7 @@
 import { createModuleRouteShortcut } from '../utils'
 
-export function createAddExpenseShortcut() {
-  const navigate = createModuleRouteShortcut('finances', 'record-expense')
+export function createAddTransactionShortcut() {
+  const navigate = createModuleRouteShortcut('finances', 'record-transaction')
 
   return async (params?: Record<string, string>) => {
     const payload: Record<string, string> = {}
