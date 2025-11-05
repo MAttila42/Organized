@@ -6,6 +6,7 @@
   import { Input } from '$lib/components/ui/input'
   import { Label } from '$lib/components/ui/label'
   import { t } from '$lib/i18n.svelte'
+  import { createShortcutDialogSync, createShortcutRoute } from '../utils'
   import List from './components/List.svelte'
   import { shopping } from './store.svelte'
 
@@ -13,8 +14,17 @@
   let quantityStr = $state('')
   let unit = $state('')
   let description = $state('')
+  let isAddDialogOpen = $state(false)
 
   const isAddReady = $derived(!!name.trim())
+  const addRouteKey = 'add-item'
+  const addItemRoute = createShortcutRoute('shopping', addRouteKey)
+
+  $effect(createShortcutDialogSync(
+    addItemRoute,
+    () => isAddDialogOpen,
+    (value) => { isAddDialogOpen = value },
+  ))
 
   async function addItem() {
     if (!isAddReady)
@@ -35,6 +45,7 @@
     unit = ''
     description = ''
   }
+
 </script>
 
 <div class='mx-4 flex flex-col gap-4'>
@@ -52,7 +63,7 @@
       <List items={shopping.items} variant='default' />
     {/if}
 
-    <Dialog.Root>
+    <Dialog.Root bind:open={isAddDialogOpen}>
       <Dialog.Trigger class='w-full'>
         <div class='flex flex-row items-center justify-center gap-1 b-3 rounded-md b-dashed p-2 text-muted'>
           <div class='i-fluent:add-12-filled size-5'></div>

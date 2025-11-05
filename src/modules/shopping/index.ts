@@ -1,20 +1,20 @@
 import { t } from '$lib/i18n.svelte'
-import { moduleStore } from '$lib/stores/modules.svelte'
+import { createModuleRouteShortcut, registerModule } from '../utils'
 import { shopping } from './store.svelte'
 
 export function load() {
-  moduleStore.modules.push({
+  registerModule({
     id: 'shopping',
     name: t('modules.shopping.name', 'Shopping'),
     description: t('modules.shopping.description', 'Barebones shopping module.'),
     links: [
       {
-        id: 'test',
-        name: 'Test Shortcut',
-        description: 'A test shortcut link for demonstration purposes.',
+        id: 'add-item',
+        name: t('modules.shopping.links.addItem.name', 'Add Item'),
+        description: t('modules.shopping.links.addItem.description', 'Jump to the shopping module and open the add item dialog.'),
         moduleId: 'shopping',
         type: 'shortcut',
-        call: () => { console.warn('Test shortcut activated!') },
+        call: createModuleRouteShortcut('shopping', 'add-item'),
         parameters: [],
       },
       {
