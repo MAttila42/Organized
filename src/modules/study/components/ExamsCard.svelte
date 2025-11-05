@@ -7,6 +7,7 @@
   import { Label } from '$lib/components/ui/label'
   import { Textarea } from '$lib/components/ui/textarea'
   import { t } from '$lib/i18n.svelte'
+  import { createShortcutDialogSync, createShortcutRoute } from '../../utils'
   import { study } from '../store.svelte'
   import ExamsList from './ExamsList.svelte'
 
@@ -41,6 +42,7 @@
   let subject = $state('')
   let date = $state('')
   let description = $state('')
+  let isAddDialogOpen = $state(false)
 
   let editing = $state<null | number>(null)
   let isEditOpen = $state(false)
@@ -51,6 +53,15 @@
 
   const isAddReady = $derived(!!title.trim() && !!date)
   const isEditReady = $derived(!!editTitle.trim() && !!editDate && editing != null)
+  const addRouteKey = 'add-exam'
+  const addExamRoute = createShortcutRoute('study', addRouteKey)
+  const syncAddExamDialog = createShortcutDialogSync(
+    addExamRoute,
+    () => isAddDialogOpen,
+    (value) => { isAddDialogOpen = value },
+  )
+
+  $effect(syncAddExamDialog)
 
   function resetForm() {
     title = ''
@@ -106,6 +117,7 @@
     await study.removeExam(editing)
     closeEdit()
   }
+
 </script>
 
 <SectionContainer
@@ -122,7 +134,7 @@
     <ExamsList items={sortedExams} edit={openEdit} />
   {/if}
 
-  <Dialog.Root>
+  <Dialog.Root bind:open={isAddDialogOpen}>
     <Dialog.Trigger class='w-full'>
       <div class='flex flex-row items-center justify-center gap-1 b-3 rounded-md b-dashed p-2 text-muted'>
         <div class='i-fluent:add-12-filled size-5'></div>

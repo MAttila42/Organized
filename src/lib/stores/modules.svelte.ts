@@ -1,6 +1,6 @@
 import { useDatabase } from '$lib/database'
 import { userLinks, userModules } from '$lib/database/schema/home'
-import { and, eq, gte, sql } from 'drizzle-orm'
+import { and, eq, gte, inArray, sql } from 'drizzle-orm'
 
 export interface Module {
   id: string
@@ -98,19 +98,39 @@ export const moduleStore = $state({
       .where(eq(userLinks.type, 'shortcut'))
       .orderBy(userLinks.displayOrder)
 
-    this.shortcuts = enabledShortcuts.map(s => ({
-      id: s.id,
-      moduleId: s.moduleId,
-      linkId: s.linkId,
-      icon: s.icon!,
-      color: s.color,
-      displayOrder: s.displayOrder,
-      call: this.modules
-        .find(m => m.id === s.moduleId)!
-        .links
-        .find(link => link.id === s.linkId)!.call,
-      parameters: s.parameters ?? {},
-    }))
+    const modulesById = new Map(this.modules.map(m => [m.id, m]))
+    const resolved: Shortcut[] = []
+    const invalidLinkIds: number[] = []
+
+    for (const shortcut of enabledShortcuts) {
+      const moduleDef = modulesById.get(shortcut.moduleId)
+      if (!moduleDef) {
+        invalidLinkIds.push(shortcut.id)
+        continue
+      }
+
+      const link = moduleDef.links.find(l => l.type === 'shortcut' && l.id === shortcut.linkId)
+      if (!link) {
+        invalidLinkIds.push(shortcut.id)
+        continue
+      }
+
+      resolved.push({
+        id: shortcut.id,
+        moduleId: shortcut.moduleId,
+        linkId: shortcut.linkId,
+        icon: shortcut.icon!,
+        color: shortcut.color,
+        displayOrder: shortcut.displayOrder,
+        call: link.call,
+        parameters: shortcut.parameters ?? {},
+      })
+    }
+
+    if (invalidLinkIds.length > 0)
+      await database.delete(userLinks).where(inArray(userLinks.id, invalidLinkIds))
+
+    this.shortcuts = resolved
   },
 
   /**

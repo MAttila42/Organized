@@ -137,6 +137,14 @@
         "upcomingExams": {
           "name": "Upcoming exams",
           "description": "Exams scheduled in the next week."
+        },
+        "addAssignment": {
+          "name": "Add assignment",
+          "description": "Jump to the study module and open the add assignment dialog."
+        },
+        "addExam": {
+          "name": "Add exam",
+          "description": "Jump to the study module and open the add exam dialog."
         }
       }
     },
@@ -147,6 +155,10 @@
         "list": {
           "name": "Shopping List",
           "description": "List of items to buy."
+        },
+        "addItem": {
+          "name": "Add Item",
+          "description": "Jump to the shopping module and open the add item dialog."
         }
       }
     },
@@ -157,6 +169,13 @@
         "walletBalances": {
           "name": "Wallet balances",
           "description": "Snapshot of each wallet with its current balance."
+        },
+        "recordTransaction": {
+          "name": "Record transaction",
+          "description": "Open finances to record a transaction in a selected wallet.",
+          "parameters": {
+            "wallet": "Wallet name"
+          }
         }
       }
     }
@@ -291,5 +310,6 @@
     }
   },
   "saveChanges": "Save changes",
-  "close": "Close"
+  "close": "Close",
+  "wallet": ""
 }

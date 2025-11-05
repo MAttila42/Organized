@@ -1,4 +1,5 @@
 <script lang='ts'>
+  import { page } from '$app/state'
   import SectionContainer from '$lib/components/SectionContainer.svelte'
   import { Button } from '$lib/components/ui/button'
   import * as Dialog from '$lib/components/ui/dialog'
@@ -6,6 +7,7 @@
   import { Label } from '$lib/components/ui/label'
   import { Textarea } from '$lib/components/ui/textarea'
   import { t } from '$lib/i18n.svelte'
+  import { createShortcutDialogSync, createShortcutRoute } from '../../utils'
   import { finances } from '../store.svelte'
 
   const selectedSummary = $derived(finances.selectedWalletSummary)
@@ -16,6 +18,10 @@
   let amount = $state('')
   let occurredAt = $state(new Date().toISOString().slice(0, 10))
   let note = $state('')
+  let hasInitialisedShortcut = $state(false)
+  let appliedWalletParam = $state<string | null>(null)
+
+  const addTransactionRoute = createShortcutRoute('finances', 'record-transaction')
 
   const canAddTransaction = $derived(
     Boolean(selectedSummary && Number.parseFloat(amount) > 0),
@@ -70,6 +76,45 @@
       return new Date(timestamp).toLocaleDateString()
     return value
   }
+
+  $effect(createShortcutDialogSync(
+    addTransactionRoute,
+    () => dialogOpen,
+    (value) => { dialogOpen = value },
+  ))
+
+  $effect(() => {
+    if (!addTransactionRoute.isActive()) {
+      hasInitialisedShortcut = false
+      appliedWalletParam = null
+      return
+    }
+
+    if (!hasInitialisedShortcut) {
+      resetForm()
+      kind = 'expense'
+      hasInitialisedShortcut = true
+    }
+  })
+
+  $effect(() => {
+    if (!addTransactionRoute.isActive())
+      return
+
+    const walletParam = page.url.searchParams.get('wallet')?.trim()
+    if (!walletParam)
+      return
+
+    const normalized = walletParam.toLowerCase()
+    if (appliedWalletParam === normalized)
+      return
+
+    const match = finances.wallets.find(wallet => (wallet.name ?? '').trim().toLowerCase() === normalized)
+    if (match?.id != null) {
+      finances.selectWallet(match.id)
+      appliedWalletParam = normalized
+    }
+  })
 </script>
 
 {#if !selectedSummary}

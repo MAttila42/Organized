@@ -137,6 +137,14 @@
         "upcomingExams": {
           "name": "Anstehende Prüfungen",
           "description": "Prüfungen, die in der nächsten Woche geplant sind."
+        },
+        "addAssignment": {
+          "name": "Aufgabe hinzufügen",
+          "description": "Zum Studienmodul springen und das Dialogfeld zum Hinzufügen einer Aufgabe öffnen."
+        },
+        "addExam": {
+          "name": "Prüfung hinzufügen",
+          "description": "Zum Studienmodul springen und das Dialogfeld zum Hinzufügen einer Prüfung öffnen."
         }
       }
     },
@@ -147,6 +155,10 @@
         "list": {
           "name": "Einkaufsliste",
           "description": "Liste der Artikel, die gekauft werden sollen."
+        },
+        "addItem": {
+          "name": "Artikel hinzufügen",
+          "description": "Zum Einkaufsmodul springen und das Dialogfeld zum Hinzufügen eines Artikels öffnen."
         }
       }
     },
@@ -157,6 +169,13 @@
         "walletBalances": {
           "name": "Brieftaschen-Kontostände",
           "description": "Übersicht jeder Brieftasche mit ihrem aktuellen Kontostand."
+        },
+        "recordTransaction": {
+          "name": "Transaktion aufzeichnen",
+          "description": "Finanzen öffnen, um eine Transaktion in einer ausgewählten Brieftasche aufzuzeichnen.",
+          "parameters": {
+            "wallet": "Name der Brieftasche"
+          }
         }
       }
     }
@@ -291,5 +310,6 @@
     }
   },
   "saveChanges": "Änderungen speichern",
-  "close": "Schließen"
+  "close": "Schließen",
+  "wallet": ""
 }

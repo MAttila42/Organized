@@ -18,6 +18,11 @@
     class: className,
     ...restProps
   }: Props = $props()
+
+  type $$Events = {
+    input: Event & { currentTarget: HTMLInputElement }
+    change: Event & { currentTarget: HTMLInputElement }
+  }
 </script>
 
 {#if type === 'file'}
