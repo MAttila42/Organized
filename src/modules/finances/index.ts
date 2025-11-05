@@ -1,9 +1,9 @@
 import { t } from '$lib/i18n.svelte'
-import { moduleStore } from '$lib/stores/modules.svelte'
+import { registerModule } from '../utils'
 import { finances } from './store.svelte'
 
 export function load() {
-  moduleStore.modules.push({
+  registerModule({
     id: 'finances',
     name: t('modules.finances.name', 'Finances'),
     description: t('modules.finances.description', 'Track wallets, balances, and transactions.'),
