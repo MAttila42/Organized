@@ -1,13 +1,31 @@
 import { t } from '$lib/i18n.svelte'
-import { moduleStore } from '$lib/stores/modules.svelte'
+import { createModuleRouteShortcut, registerModule } from '../utils'
 import { study } from './store.svelte'
 
 export function load() {
-  moduleStore.modules.push({
+  registerModule({
     id: 'study',
     name: t('modules.study.name', 'Study'),
     description: t('modules.study.description', 'Barebones study module.'),
     links: [
+      {
+        id: 'add-assignment',
+        name: t('modules.study.links.addAssignment.name', 'Add assignment'),
+        description: t('modules.study.links.addAssignment.description', 'Jump to the study module and open the add assignment dialog.'),
+        moduleId: 'study',
+        type: 'shortcut',
+        call: createModuleRouteShortcut('study', 'add-assignment'),
+        parameters: [],
+      },
+      {
+        id: 'add-exam',
+        name: t('modules.study.links.addExam.name', 'Add exam'),
+        description: t('modules.study.links.addExam.description', 'Jump to the study module and open the add exam dialog.'),
+        moduleId: 'study',
+        type: 'shortcut',
+        call: createModuleRouteShortcut('study', 'add-exam'),
+        parameters: [],
+      },
       {
         id: 'classes-today',
         name: t('modules.study.links.classesToday.name', 'Classes today'),
