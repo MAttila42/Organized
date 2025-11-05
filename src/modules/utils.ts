@@ -47,10 +47,24 @@ export function createModuleRouteShortcut(moduleId: string, ...segments: string[
     .map(encodeURIComponent)
     .join('/')
 
-  return async () => {
+  return async (params?: Record<string, string | number | boolean>) => {
     const { goto } = await import('$app/navigation')
     const url = path ? `/module/${moduleId}/${path}` : `/module/${moduleId}`
-    await goto(url)
+
+    let query = ''
+    if (params && Object.keys(params).length > 0) {
+      const search = new URLSearchParams()
+      for (const [key, value] of Object.entries(params)) {
+        if (value === undefined || value === null)
+          continue
+        search.set(key, String(value))
+      }
+      const serialized = search.toString()
+      if (serialized)
+        query = `?${serialized}`
+    }
+
+    await goto(`${url}${query}`)
   }
 }
 

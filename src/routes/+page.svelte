@@ -1,4 +1,5 @@
 <script lang='ts'>
+  import type { LinkParameter } from '$lib/stores/modules.svelte'
   import ModuleCard from '$lib/components/ModuleCard.svelte'
   import Shortcut from '$lib/components/Shortcut.svelte'
   import { Button } from '$lib/components/ui/button'
@@ -33,6 +34,8 @@
   let addShortcutLink = $state('')
   let addShortcutIcon = $state('')
   let addShortcutColor = $state('#FFFFFF')
+  let addShortcutParameters = $state<Record<string, string>>({})
+  let addShortcutParametersLinkId = $state<string | null>(null)
 
   const addShortcutModuleTrigger = $derived(
     moduleStore.modules.find(m => m.id === addShortcutModule)?.name ?? t('home.selectModule', 'Select a module'),
@@ -44,20 +47,55 @@
       .find(l => l.id === addShortcutLink)
       ?.name ?? t('home.selectShortcut', 'Select a shortcut'),
   )
-  const addShortcutDescription = $derived(() => {
-    if (!addShortcutModule || !addShortcutLink)
-      return ''
-
-    return moduleStore.modules
+  const addShortcutLinkDefinition = $derived(
+    moduleStore.modules
       .find(m => m.id === addShortcutModule)
       ?.links
-      .find(l => l.id === addShortcutLink)
-      ?.description ?? ''
-  })
+      .find(l => l.id === addShortcutLink && l.type === 'shortcut') ?? null,
+  )
+  const addShortcutDescription = $derived(addShortcutLinkDefinition?.description ?? '')
+  const addShortcutParameterDefinitions = $derived(
+    (Array.isArray(addShortcutLinkDefinition?.parameters)
+      ? addShortcutLinkDefinition.parameters
+      : []) as LinkParameter[],
+  )
 
   const isAddShortcutReady = $derived(
-    addShortcutModule && addShortcutLink && addShortcutIcon,
+    Boolean(addShortcutModule && addShortcutLink && addShortcutIcon && addShortcutLinkDefinition),
   )
+
+  $effect(() => {
+    const link = addShortcutLinkDefinition
+    const parameters = addShortcutParameterDefinitions
+
+    if (!link) {
+      addShortcutParameters = {}
+      addShortcutParametersLinkId = null
+      return
+    }
+
+    if (addShortcutParametersLinkId === link.id)
+      return
+
+    const defaults: Record<string, string> = {}
+    for (const parameter of parameters)
+      defaults[parameter.id] = parameter.defaultValue != null ? String(parameter.defaultValue) : ''
+
+    addShortcutParameters = defaults
+    addShortcutParametersLinkId = link.id
+  })
+
+  function updateShortcutParameter(id: string, value: string) {
+    addShortcutParameters = {
+      ...addShortcutParameters,
+      [id]: value,
+    }
+  }
+
+  function resetShortcutParameters() {
+    addShortcutParameters = {}
+    addShortcutParametersLinkId = null
+  }
 
   function addShortcut() {
     if (!isAddShortcutReady)
@@ -66,7 +104,9 @@
     moduleStore.addShortcut(
       addShortcutModule,
       addShortcutLink,
-      {},
+      Object.fromEntries(
+        Object.entries(addShortcutParameters).map(([key, value]) => [key, typeof value === 'string' ? value.trim() : '']),
+      ),
       addShortcutIcon,
       addShortcutColor,
       moduleStore.shortcuts.length,
@@ -76,6 +116,7 @@
     addShortcutLink = ''
     addShortcutIcon = ''
     addShortcutColor = '#FFFFFF'
+    resetShortcutParameters()
   }
 </script>
 
@@ -132,8 +173,25 @@
 
               {#if addShortcutLink}
                 <Dialog.Description class='text-muted'>
-                  {addShortcutDescription()}
+                  {addShortcutDescription}
                 </Dialog.Description>
+
+                {#if addShortcutParameterDefinitions.length > 0}
+                  <div class='flex flex-col gap-3'>
+                    {#each addShortcutParameterDefinitions as parameter (parameter.id)}
+                      <div class='flex flex-col gap-2'>
+                        <Label for={`shortcut-param-${parameter.id}`}>{parameter.name}</Label>
+                        <Input
+                          id={`shortcut-param-${parameter.id}`}
+                          type={parameter.type === 'number' ? 'number' : 'text'}
+                          value={addShortcutParameters[parameter.id] ?? ''}
+                          on:input={(event: Event) => updateShortcutParameter(parameter.id, (event.currentTarget as HTMLInputElement | null)?.value ?? '')}
+                          placeholder={parameter.defaultValue != null ? String(parameter.defaultValue) : ''}
+                        />
+                      </div>
+                    {/each}
+                  </div>
+                {/if}
 
                 <Label for='icon'>{t('home.shortcuts.add.iconLabel', 'Icon')}</Label>
                 <Input
