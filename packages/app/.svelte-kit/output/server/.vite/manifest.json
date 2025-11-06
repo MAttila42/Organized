@@ -1,0 +1,548 @@
+{
+  "../../node_modules/.bun/@fontsource+ubuntu@5.2.8/node_modules/@fontsource/ubuntu/files/ubuntu-cyrillic-400-normal.woff": {
+    "file": "_app/immutable/assets/ubuntu-cyrillic-400-normal.CD6XmiVF.woff",
+    "src": "../../node_modules/.bun/@fontsource+ubuntu@5.2.8/node_modules/@fontsource/ubuntu/files/ubuntu-cyrillic-400-normal.woff"
+  },
+  "../../node_modules/.bun/@fontsource+ubuntu@5.2.8/node_modules/@fontsource/ubuntu/files/ubuntu-cyrillic-400-normal.woff2": {
+    "file": "_app/immutable/assets/ubuntu-cyrillic-400-normal.D9OZd8lm.woff2",
+    "src": "../../node_modules/.bun/@fontsource+ubuntu@5.2.8/node_modules/@fontsource/ubuntu/files/ubuntu-cyrillic-400-normal.woff2"
+  },
+  "../../node_modules/.bun/@fontsource+ubuntu@5.2.8/node_modules/@fontsource/ubuntu/files/ubuntu-cyrillic-ext-400-normal.woff": {
+    "file": "_app/immutable/assets/ubuntu-cyrillic-ext-400-normal.BQUrPAlD.woff",
+    "src": "../../node_modules/.bun/@fontsource+ubuntu@5.2.8/node_modules/@fontsource/ubuntu/files/ubuntu-cyrillic-ext-400-normal.woff"
+  },
+  "../../node_modules/.bun/@fontsource+ubuntu@5.2.8/node_modules/@fontsource/ubuntu/files/ubuntu-cyrillic-ext-400-normal.woff2": {
+    "file": "_app/immutable/assets/ubuntu-cyrillic-ext-400-normal.B-Nhg57H.woff2",
+    "src": "../../node_modules/.bun/@fontsource+ubuntu@5.2.8/node_modules/@fontsource/ubuntu/files/ubuntu-cyrillic-ext-400-normal.woff2"
+  },
+  "../../node_modules/.bun/@fontsource+ubuntu@5.2.8/node_modules/@fontsource/ubuntu/files/ubuntu-greek-400-normal.woff": {
+    "file": "_app/immutable/assets/ubuntu-greek-400-normal.UX4bU-Ff.woff",
+    "src": "../../node_modules/.bun/@fontsource+ubuntu@5.2.8/node_modules/@fontsource/ubuntu/files/ubuntu-greek-400-normal.woff"
+  },
+  "../../node_modules/.bun/@fontsource+ubuntu@5.2.8/node_modules/@fontsource/ubuntu/files/ubuntu-greek-400-normal.woff2": {
+    "file": "_app/immutable/assets/ubuntu-greek-400-normal.GaJa0t-K.woff2",
+    "src": "../../node_modules/.bun/@fontsource+ubuntu@5.2.8/node_modules/@fontsource/ubuntu/files/ubuntu-greek-400-normal.woff2"
+  },
+  "../../node_modules/.bun/@fontsource+ubuntu@5.2.8/node_modules/@fontsource/ubuntu/files/ubuntu-greek-ext-400-normal.woff": {
+    "file": "_app/immutable/assets/ubuntu-greek-ext-400-normal.VZgpvyyF.woff",
+    "src": "../../node_modules/.bun/@fontsource+ubuntu@5.2.8/node_modules/@fontsource/ubuntu/files/ubuntu-greek-ext-400-normal.woff"
+  },
+  "../../node_modules/.bun/@fontsource+ubuntu@5.2.8/node_modules/@fontsource/ubuntu/files/ubuntu-greek-ext-400-normal.woff2": {
+    "file": "_app/immutable/assets/ubuntu-greek-ext-400-normal.CeBDcuzJ.woff2",
+    "src": "../../node_modules/.bun/@fontsource+ubuntu@5.2.8/node_modules/@fontsource/ubuntu/files/ubuntu-greek-ext-400-normal.woff2"
+  },
+  "../../node_modules/.bun/@fontsource+ubuntu@5.2.8/node_modules/@fontsource/ubuntu/files/ubuntu-latin-400-normal.woff": {
+    "file": "_app/immutable/assets/ubuntu-latin-400-normal.ChuJk2Dr.woff",
+    "src": "../../node_modules/.bun/@fontsource+ubuntu@5.2.8/node_modules/@fontsource/ubuntu/files/ubuntu-latin-400-normal.woff"
+  },
+  "../../node_modules/.bun/@fontsource+ubuntu@5.2.8/node_modules/@fontsource/ubuntu/files/ubuntu-latin-400-normal.woff2": {
+    "file": "_app/immutable/assets/ubuntu-latin-400-normal.CQJ26Fy6.woff2",
+    "src": "../../node_modules/.bun/@fontsource+ubuntu@5.2.8/node_modules/@fontsource/ubuntu/files/ubuntu-latin-400-normal.woff2"
+  },
+  "../../node_modules/.bun/@fontsource+ubuntu@5.2.8/node_modules/@fontsource/ubuntu/files/ubuntu-latin-ext-400-normal.woff": {
+    "file": "_app/immutable/assets/ubuntu-latin-ext-400-normal.kv0aZEtN.woff",
+    "src": "../../node_modules/.bun/@fontsource+ubuntu@5.2.8/node_modules/@fontsource/ubuntu/files/ubuntu-latin-ext-400-normal.woff"
+  },
+  "../../node_modules/.bun/@fontsource+ubuntu@5.2.8/node_modules/@fontsource/ubuntu/files/ubuntu-latin-ext-400-normal.woff2": {
+    "file": "_app/immutable/assets/ubuntu-latin-ext-400-normal.Bb6UNjxu.woff2",
+    "src": "../../node_modules/.bun/@fontsource+ubuntu@5.2.8/node_modules/@fontsource/ubuntu/files/ubuntu-latin-ext-400-normal.woff2"
+  },
+  "../../node_modules/.bun/@sveltejs+kit@2.48.4+d62e52401e2da246/node_modules/@sveltejs/kit/src/runtime/app/navigation.js": {
+    "file": "chunks/navigation.js",
+    "name": "navigation",
+    "src": "../../node_modules/.bun/@sveltejs+kit@2.48.4+d62e52401e2da246/node_modules/@sveltejs/kit/src/runtime/app/navigation.js",
+    "isDynamicEntry": true,
+    "imports": [
+      "_client.js"
+    ]
+  },
+  "../../node_modules/.bun/@sveltejs+kit@2.48.4+d62e52401e2da246/node_modules/@sveltejs/kit/src/runtime/app/server/remote/index.js": {
+    "file": "remote-entry.js",
+    "name": "remote-entry",
+    "src": "../../node_modules/.bun/@sveltejs+kit@2.48.4+d62e52401e2da246/node_modules/@sveltejs/kit/src/runtime/app/server/remote/index.js",
+    "isEntry": true,
+    "imports": [
+      "_shared.js",
+      "_false.js",
+      "_environment.js"
+    ]
+  },
+  "../../node_modules/.bun/@sveltejs+kit@2.48.4+d62e52401e2da246/node_modules/@sveltejs/kit/src/runtime/components/svelte-5/error.svelte": {
+    "file": "entries/fallbacks/error.svelte.js",
+    "name": "entries/fallbacks/error.svelte",
+    "src": "../../node_modules/.bun/@sveltejs+kit@2.48.4+d62e52401e2da246/node_modules/@sveltejs/kit/src/runtime/components/svelte-5/error.svelte",
+    "isEntry": true,
+    "imports": [
+      "_async.js",
+      "_index.js"
+    ]
+  },
+  "../../node_modules/.bun/@sveltejs+kit@2.48.4+d62e52401e2da246/node_modules/@sveltejs/kit/src/runtime/server/index.js": {
+    "file": "index.js",
+    "name": "index",
+    "src": "../../node_modules/.bun/@sveltejs+kit@2.48.4+d62e52401e2da246/node_modules/@sveltejs/kit/src/runtime/server/index.js",
+    "isEntry": true,
+    "imports": [
+      "_false.js",
+      "_environment.js",
+      "_shared.js",
+      "_exports.js",
+      "_utils.js",
+      "_internal.js"
+    ]
+  },
+  ".svelte-kit/generated/server/internal.js": {
+    "file": "internal.js",
+    "name": "internal",
+    "src": ".svelte-kit/generated/server/internal.js",
+    "isEntry": true,
+    "imports": [
+      "_internal.js",
+      "_environment.js"
+    ]
+  },
+  "_AssignmentsList.js": {
+    "file": "chunks/AssignmentsList.js",
+    "name": "AssignmentsList",
+    "imports": [
+      "_async.js",
+      "_index2.js",
+      "_i18n.svelte.js",
+      "_attributes.js"
+    ]
+  },
+  "_ExamsList.js": {
+    "file": "chunks/ExamsList.js",
+    "name": "ExamsList",
+    "imports": [
+      "_async.js",
+      "_index2.js",
+      "_i18n.svelte.js"
+    ]
+  },
+  "_List.js": {
+    "file": "chunks/List.js",
+    "name": "List",
+    "imports": [
+      "_async.js",
+      "_index2.js",
+      "__layout.js"
+    ]
+  },
+  "_List2.js": {
+    "file": "chunks/List2.js",
+    "name": "List",
+    "imports": [
+      "_async.js",
+      "_index2.js"
+    ]
+  },
+  "_SectionContainer.js": {
+    "file": "chunks/SectionContainer.js",
+    "name": "SectionContainer",
+    "imports": [
+      "_async.js",
+      "_card.js",
+      "_index2.js",
+      "_attributes.js"
+    ]
+  },
+  "__layout.js": {
+    "file": "chunks/_layout.js",
+    "name": "_layout",
+    "imports": [
+      "_modules.svelte.js",
+      "_i18n.svelte.js",
+      "_exports.js",
+      "_utils.js",
+      "_client.js"
+    ],
+    "dynamicImports": [
+      "../../node_modules/.bun/@sveltejs+kit@2.48.4+d62e52401e2da246/node_modules/@sveltejs/kit/src/runtime/app/navigation.js",
+      "src/modules/finances/labels/WalletBalances.svelte",
+      "src/modules/finances/finances.svelte",
+      "src/modules/shopping/labels/ShoppingList.svelte",
+      "src/modules/shopping/shopping.svelte",
+      "src/modules/study/labels/ClassesToday.svelte",
+      "src/modules/study/labels/DueAssignments.svelte",
+      "src/modules/study/labels/UpcomingExams.svelte",
+      "src/modules/study/study.svelte"
+    ]
+  },
+  "_async.js": {
+    "file": "chunks/async.js",
+    "name": "async"
+  },
+  "_attributes.js": {
+    "file": "chunks/attributes.js",
+    "name": "attributes",
+    "imports": [
+      "_async.js"
+    ]
+  },
+  "_card.js": {
+    "file": "chunks/card.js",
+    "name": "card",
+    "imports": [
+      "_async.js",
+      "_index2.js",
+      "_attributes.js"
+    ]
+  },
+  "_client.js": {
+    "file": "chunks/client.js",
+    "name": "client",
+    "imports": [
+      "_equality.js",
+      "_exports.js",
+      "_utils.js"
+    ]
+  },
+  "_context.js": {
+    "file": "chunks/context.js",
+    "name": "context"
+  },
+  "_dialog-close.js": {
+    "file": "chunks/dialog-close.js",
+    "name": "dialog-close",
+    "imports": [
+      "_async.js",
+      "_index2.js"
+    ]
+  },
+  "_dialog-description.js": {
+    "file": "chunks/dialog-description.js",
+    "name": "dialog-description",
+    "imports": [
+      "_async.js",
+      "_index2.js",
+      "_card.js"
+    ]
+  },
+  "_environment.js": {
+    "file": "chunks/environment.js",
+    "name": "environment"
+  },
+  "_equality.js": {
+    "file": "chunks/equality.js",
+    "name": "equality"
+  },
+  "_events.js": {
+    "file": "chunks/events.js",
+    "name": "events",
+    "imports": [
+      "_false.js",
+      "_equality.js",
+      "_index2.js",
+      "_async.js"
+    ]
+  },
+  "_exports.js": {
+    "file": "chunks/exports.js",
+    "name": "exports",
+    "imports": [
+      "_equality.js"
+    ]
+  },
+  "_false.js": {
+    "file": "chunks/false.js",
+    "name": "false"
+  },
+  "_i18n.svelte.js": {
+    "file": "chunks/i18n.svelte.js",
+    "name": "i18n.svelte"
+  },
+  "_index.js": {
+    "file": "chunks/index.js",
+    "name": "index",
+    "imports": [
+      "_client.js",
+      "_context.js"
+    ]
+  },
+  "_index2.js": {
+    "file": "chunks/index2.js",
+    "name": "index",
+    "imports": [
+      "_attributes.js",
+      "_async.js",
+      "_context.js"
+    ]
+  },
+  "_index3.js": {
+    "file": "chunks/index3.js",
+    "name": "index",
+    "imports": [
+      "_async.js",
+      "_index2.js",
+      "_card.js"
+    ]
+  },
+  "_internal.js": {
+    "file": "chunks/internal.js",
+    "name": "internal",
+    "imports": [
+      "_index2.js",
+      "_events.js",
+      "_equality.js",
+      "_async.js",
+      "_context.js",
+      "_environment.js"
+    ]
+  },
+  "_label.js": {
+    "file": "chunks/label.js",
+    "name": "label",
+    "imports": [
+      "_async.js",
+      "_index2.js",
+      "_card.js",
+      "_attributes.js",
+      "_i18n.svelte.js"
+    ]
+  },
+  "_modules.svelte.js": {
+    "file": "chunks/modules.svelte.js",
+    "name": "modules.svelte"
+  },
+  "_shared.js": {
+    "file": "chunks/shared.js",
+    "name": "shared",
+    "imports": [
+      "_utils.js"
+    ]
+  },
+  "_textarea.js": {
+    "file": "chunks/textarea.js",
+    "name": "textarea",
+    "imports": [
+      "_async.js",
+      "_index2.js",
+      "_card.js",
+      "_attributes.js"
+    ]
+  },
+  "_utils.js": {
+    "file": "chunks/utils.js",
+    "name": "utils"
+  },
+  "src/modules/finances/finances.svelte": {
+    "file": "chunks/finances.js",
+    "name": "finances",
+    "src": "src/modules/finances/finances.svelte",
+    "isDynamicEntry": true,
+    "imports": [
+      "_async.js",
+      "_index2.js",
+      "_client.js",
+      "_SectionContainer.js",
+      "_label.js",
+      "_textarea.js",
+      "_i18n.svelte.js",
+      "_exports.js",
+      "_utils.js",
+      "_modules.svelte.js",
+      "__layout.js",
+      "_dialog-description.js",
+      "_attributes.js"
+    ]
+  },
+  "src/modules/finances/labels/WalletBalances.svelte": {
+    "file": "chunks/WalletBalances.js",
+    "name": "WalletBalances",
+    "src": "src/modules/finances/labels/WalletBalances.svelte",
+    "isDynamicEntry": true,
+    "imports": [
+      "_async.js",
+      "_index2.js",
+      "_i18n.svelte.js",
+      "__layout.js"
+    ]
+  },
+  "src/modules/shopping/labels/ShoppingList.svelte": {
+    "file": "chunks/ShoppingList.js",
+    "name": "ShoppingList",
+    "src": "src/modules/shopping/labels/ShoppingList.svelte",
+    "isDynamicEntry": true,
+    "imports": [
+      "_async.js",
+      "_List.js",
+      "__layout.js"
+    ]
+  },
+  "src/modules/shopping/shopping.svelte": {
+    "file": "chunks/shopping.js",
+    "name": "shopping",
+    "src": "src/modules/shopping/shopping.svelte",
+    "isDynamicEntry": true,
+    "imports": [
+      "_async.js",
+      "_SectionContainer.js",
+      "_label.js",
+      "_i18n.svelte.js",
+      "_exports.js",
+      "_utils.js",
+      "_client.js",
+      "_modules.svelte.js",
+      "_List.js",
+      "__layout.js",
+      "_dialog-close.js"
+    ]
+  },
+  "src/modules/study/labels/ClassesToday.svelte": {
+    "file": "chunks/ClassesToday.js",
+    "name": "ClassesToday",
+    "src": "src/modules/study/labels/ClassesToday.svelte",
+    "isDynamicEntry": true,
+    "imports": [
+      "_async.js",
+      "_i18n.svelte.js",
+      "_List2.js",
+      "__layout.js"
+    ]
+  },
+  "src/modules/study/labels/DueAssignments.svelte": {
+    "file": "chunks/DueAssignments.js",
+    "name": "DueAssignments",
+    "src": "src/modules/study/labels/DueAssignments.svelte",
+    "isDynamicEntry": true,
+    "imports": [
+      "_async.js",
+      "_i18n.svelte.js",
+      "_AssignmentsList.js",
+      "__layout.js"
+    ]
+  },
+  "src/modules/study/labels/UpcomingExams.svelte": {
+    "file": "chunks/UpcomingExams.js",
+    "name": "UpcomingExams",
+    "src": "src/modules/study/labels/UpcomingExams.svelte",
+    "isDynamicEntry": true,
+    "imports": [
+      "_async.js",
+      "_i18n.svelte.js",
+      "_ExamsList.js",
+      "__layout.js"
+    ]
+  },
+  "src/modules/study/study.svelte": {
+    "file": "chunks/study.js",
+    "name": "study",
+    "src": "src/modules/study/study.svelte",
+    "isDynamicEntry": true,
+    "imports": [
+      "_async.js",
+      "_index2.js",
+      "_SectionContainer.js",
+      "_label.js",
+      "_textarea.js",
+      "_i18n.svelte.js",
+      "_exports.js",
+      "_utils.js",
+      "_attributes.js",
+      "_client.js",
+      "_modules.svelte.js",
+      "__layout.js",
+      "_AssignmentsList.js",
+      "_dialog-close.js",
+      "_index3.js",
+      "_List2.js",
+      "_ExamsList.js"
+    ]
+  },
+  "src/routes/+layout.svelte": {
+    "file": "entries/pages/_layout.svelte.js",
+    "name": "entries/pages/_layout.svelte",
+    "src": "src/routes/+layout.svelte",
+    "isEntry": true,
+    "imports": [
+      "_async.js",
+      "_i18n.svelte.js"
+    ],
+    "css": [
+      "_app/immutable/assets/_layout.DcPHTJjn.css"
+    ],
+    "assets": [
+      "_app/immutable/assets/ubuntu-cyrillic-ext-400-normal.B-Nhg57H.woff2",
+      "_app/immutable/assets/ubuntu-cyrillic-ext-400-normal.BQUrPAlD.woff",
+      "_app/immutable/assets/ubuntu-cyrillic-400-normal.D9OZd8lm.woff2",
+      "_app/immutable/assets/ubuntu-cyrillic-400-normal.CD6XmiVF.woff",
+      "_app/immutable/assets/ubuntu-greek-ext-400-normal.CeBDcuzJ.woff2",
+      "_app/immutable/assets/ubuntu-greek-ext-400-normal.VZgpvyyF.woff",
+      "_app/immutable/assets/ubuntu-greek-400-normal.GaJa0t-K.woff2",
+      "_app/immutable/assets/ubuntu-greek-400-normal.UX4bU-Ff.woff",
+      "_app/immutable/assets/ubuntu-latin-ext-400-normal.Bb6UNjxu.woff2",
+      "_app/immutable/assets/ubuntu-latin-ext-400-normal.kv0aZEtN.woff",
+      "_app/immutable/assets/ubuntu-latin-400-normal.CQJ26Fy6.woff2",
+      "_app/immutable/assets/ubuntu-latin-400-normal.ChuJk2Dr.woff"
+    ]
+  },
+  "src/routes/+layout.ts": {
+    "file": "entries/pages/_layout.ts.js",
+    "name": "entries/pages/_layout.ts",
+    "src": "src/routes/+layout.ts",
+    "isEntry": true,
+    "imports": [
+      "__layout.js",
+      "_i18n.svelte.js",
+      "_modules.svelte.js"
+    ]
+  },
+  "src/routes/+page.svelte": {
+    "file": "entries/pages/_page.svelte.js",
+    "name": "entries/pages/_page.svelte",
+    "src": "src/routes/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_async.js",
+      "_index2.js",
+      "_i18n.svelte.js",
+      "_modules.svelte.js",
+      "_card.js",
+      "_label.js",
+      "_context.js",
+      "_attributes.js",
+      "_events.js",
+      "_equality.js",
+      "_index3.js",
+      "_dialog-description.js",
+      "_dialog-close.js"
+    ],
+    "css": [
+      "_app/immutable/assets/_page.BN1MJNJh.css"
+    ]
+  },
+  "src/routes/module/[moduleId]/[...rest]/+page.svelte": {
+    "file": "entries/pages/module/_moduleId_/_...rest_/_page.svelte.js",
+    "name": "entries/pages/module/_moduleId_/_...rest_/_page.svelte",
+    "src": "src/routes/module/[moduleId]/[...rest]/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_async.js",
+      "_attributes.js",
+      "_index.js",
+      "_i18n.svelte.js",
+      "_modules.svelte.js"
+    ]
+  },
+  "src/routes/module/[moduleId]/[...rest]/+page.ts": {
+    "file": "entries/pages/module/_moduleId_/_...rest_/_page.ts.js",
+    "name": "entries/pages/module/_moduleId_/_...rest_/_page.ts",
+    "src": "src/routes/module/[moduleId]/[...rest]/+page.ts",
+    "isEntry": true
+  },
+  "src/routes/settings/+page.svelte": {
+    "file": "entries/pages/settings/_page.svelte.js",
+    "name": "entries/pages/settings/_page.svelte",
+    "src": "src/routes/settings/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_async.js",
+      "_index2.js",
+      "_SectionContainer.js",
+      "_index3.js",
+      "_i18n.svelte.js",
+      "_attributes.js"
+    ]
+  }
+}

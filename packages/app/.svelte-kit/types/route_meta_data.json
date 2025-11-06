@@ -1,0 +1,13 @@
+{
+	"/": [
+		"src/routes/+layout.ts",
+		"src/routes/+layout.ts"
+	],
+	"/module/[moduleId]/[...rest]": [
+		"src/routes/module/[moduleId]/[...rest]/+page.ts",
+		"src/routes/+layout.ts"
+	],
+	"/settings": [
+		"src/routes/+layout.ts"
+	]
+}

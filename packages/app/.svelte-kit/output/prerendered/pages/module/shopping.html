@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<link rel="icon" href="../favicon.png" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+	
+		<link rel="modulepreload" href="../_app/immutable/entry/start.Canfitzi.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/CLEbI9k6.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/BruXBgQu.js">
+		<link rel="modulepreload" href="../_app/immutable/entry/app.CXsy_75e.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/PPVm8Dsz.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/BONUUjX4.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/BKJo60Al.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/C3mfnZMO.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/DIV_Juqf.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/zTxQI-8N.js">
+</head>
+
+<body data-sveltekit-preload-data="hover" class="dark select-none">
+	<span id="app-dev-mode" style="display:none;">%APP_DEV_MODE_PLACEHOLDER%</span>
+	<div style="display: contents">
+			<script>
+				{
+					__sveltekit_1jhlhjm = {
+						base: new URL("..", location).pathname.slice(0, -1)
+					};
+
+					const element = document.currentScript.parentElement;
+
+					Promise.all([
+						import("../_app/immutable/entry/start.Canfitzi.js"),
+						import("../_app/immutable/entry/app.CXsy_75e.js")
+					]).then(([kit, app]) => {
+						kit.start(app, element);
+					});
+				}
+			</script>
+		</div>
+	<script type="module">
+		const devModeElement = document.getElementById('app-dev-mode');
+		const isDev = devModeElement && devModeElement.textContent === 'true';
+		if (isDev) {
+			document.body.setAttribute('data-sveltekit-preload-code', 'eager');
+		}
+	</script>
+</body>
+
+</html>

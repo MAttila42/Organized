@@ -1,0 +1,29 @@
+{
+  "name": "organized",
+  "type": "module",
+  "version": "0.0.1",
+  "private": true,
+  "packageManager": "bun@1.2.22",
+  "scripts": {
+    "desktop": "tauri dev",
+    "android": "tauri android dev",
+    "build:desktop": "tauri build",
+    "build:android": "tauri android build",
+    "db": "drizzle-kit",
+    "add": "bun x shadcn-svelte@latest add",
+    "lint": "eslint --fix .",
+    "sync": "svelte-kit sync",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
+  },
+  "dependencies": {
+    "@tauri-apps/plugin-haptics": "~2.3.0",
+    "@tauri-apps/plugin-os": "~2.3.1",
+    "@tauri-apps/plugin-sql": "~2.3.0"
+  },
+  "devDependencies": {
+    "@sveltejs/adapter-static": "^3.0.9",
+    "@tauri-apps/api": "^2.8.0",
+    "@tauri-apps/cli": "^2.8.4"
+  }
+}

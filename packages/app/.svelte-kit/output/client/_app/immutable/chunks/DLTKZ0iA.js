@@ -1,0 +1,1 @@
+import"./BONUUjX4.js";import"./RZjKwJig.js";import{p as o,a as p}from"./BruXBgQu.js";import{i as r}from"./DgH1OoWI.js";import{L as s}from"./CorsPudY.js";import{s as m}from"./DDKh-MSL.js";function g(t,i){o(i,!1),r(),s(t,{get items(){return m.items},variant:"compact"}),p()}export{g as default};
