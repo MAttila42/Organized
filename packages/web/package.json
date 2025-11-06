@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",
+    "preview": "vite build && wrangler dev",
     "db": "drizzle-kit",
     "r:db": "NODE_ENV=production drizzle-kit",
     "sync": "svelte-kit sync",
@@ -14,7 +15,8 @@
     "lint": "eslint ."
   },
   "devDependencies": {
-    "@sveltejs/adapter-auto": "^7.0.0",
-    "globals": "^16.5.0"
+    "@sveltejs/adapter-cloudflare": "^7.2.4",
+    "globals": "^16.5.0",
+    "wrangler": "^4.45.4"
   }
 }
