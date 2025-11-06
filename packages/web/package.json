@@ -6,11 +6,12 @@
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",
+    "db": "drizzle-kit",
+    "r:db": "NODE_ENV=production drizzle-kit",
     "sync": "svelte-kit sync",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-    "lint": "eslint .",
-    "db": "drizzle-kit"
+    "lint": "eslint ."
   },
   "devDependencies": {
     "@sveltejs/adapter-auto": "^7.0.0",
