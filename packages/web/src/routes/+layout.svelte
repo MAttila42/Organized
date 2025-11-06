@@ -1,5 +1,6 @@
 <script lang='ts'>
   import favicon from '$lib/assets/favicon.svg'
+  import AuthProvider from '@rttnd/gau/client/svelte/AuthProvider.svelte'
 
   const { children } = $props()
 </script>
@@ -8,4 +9,6 @@
   <link rel='icon' href={favicon} />
 </svelte:head>
 
-{@render children()}
+<AuthProvider>
+  {@render children()}
+</AuthProvider>
