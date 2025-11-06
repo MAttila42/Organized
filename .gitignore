@@ -5,12 +5,12 @@ node_modules
 .vercel
 .netlify
 .wrangler
-/.svelte-kit
+.svelte-kit
+.nyc_output
 /build
 /coverage
 /test-results
 /playwright-report
-/.nyc_output
 
 # OS
 .DS_Store
@@ -22,7 +22,7 @@ Thumbs.db
 !.env.example
 !.env.test
 .dev.vars
-/core/gen/android/keystore.properties
+**/core/gen/android/keystore.properties
 
 # Vite
 vite.config.js.timestamp-*
@@ -32,4 +32,4 @@ vite.config.ts.timestamp-*
 *.db
 
 package-lock.json
-/.lin
+.lin

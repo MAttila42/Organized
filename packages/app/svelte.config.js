@@ -9,6 +9,7 @@ const config = {
     prerender: {
       entries: [
         '*',
+        '/module/finances',
         '/module/shopping',
         '/module/study',
       ],
