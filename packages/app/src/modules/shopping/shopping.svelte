@@ -19,6 +19,9 @@
   const isAddReady = $derived(!!name.trim())
   const addRouteKey = 'add-item'
   const addItemRoute = createShortcutRoute('shopping', addRouteKey)
+  const listItems = $derived(shopping.items.filter(item => !item.inCart))
+  const cartItems = $derived(shopping.items.filter(item => !!item.inCart))
+  const hasCartItems = $derived(cartItems.length > 0)
 
   $effect(createShortcutDialogSync(
     addItemRoute,
@@ -54,13 +57,13 @@
     description={t('shopping.description', 'Keep track of items to buy.')}
     class='flex flex-col gap-3'
   >
-    {#if shopping.items.length === 0}
+    {#if listItems.length === 0}
       <div class='mt-1 flex flex-row items-center gap-3 b-3 rounded-md b-dashed p-3 text-muted'>
         <div class='i-fluent:cart-16-filled size-5'></div>
         <div>{t('shopping.empty', 'Your list is empty. Add your first item.')}</div>
       </div>
     {:else}
-      <List items={shopping.items} variant='default' />
+      <List items={listItems} variant='default' />
     {/if}
 
     <Dialog.Root bind:open={isAddDialogOpen}>
@@ -105,5 +108,16 @@
         </div>
       </Dialog.Content>
     </Dialog.Root>
+
+    {#if hasCartItems}
+      <div class='mt-2 flex flex-col gap-2'>
+        <div class='flex flex-row items-center gap-2 text-sm text-muted font-medium'>
+          <div class='i-fluent:cart-16-regular size-4'></div>
+          <span>{t('shopping.inCart.title', 'In Cart')}</span>
+          <span class='text-xs text-muted'>({cartItems.length})</span>
+        </div>
+        <List items={cartItems} variant='compact' />
+      </div>
+    {/if}
   </SectionContainer>
 </div>

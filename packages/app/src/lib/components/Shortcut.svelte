@@ -22,6 +22,8 @@
 
   type ButtonVariant = 'outline' | 'destructive'
   let isEditing = $state(false)
+  let isMenuOpen = $state(false)
+  let isMounted = $state(false)
   let editIcon = $state(shortcut.icon)
   let editColor = $state(shortcut.color)
 
@@ -45,9 +47,13 @@
   ]
 
   $effect(() => {
-    if (isMobile)
-      isEditing = true
+    isMounted = true
   })
+
+  function handleMobileEdit(e: MouseEvent) {
+    e.preventDefault()
+    isEditing = true
+  }
 </script>
 
 {#snippet sc()}
@@ -61,69 +67,72 @@
   </button>
 {/snippet}
 
-{#if isMobile}
-  <Drawer.Root>
-    <Drawer.Trigger>
-      {@render sc()}
-    </Drawer.Trigger>
-    <Drawer.Content>
-      <Drawer.Footer>
-        <div class='w-full flex flex-col gap-6'>
-          <div class='flex flex-col gap-4'>
-            <div class='flex flex-col gap-2'>
-              <Label for='icon-mobile'>{t('icon', 'Icon')}</Label>
-              <Input id='icon-mobile' bind:value={editIcon} />
-            </div>
-            <div class='flex flex-col gap-2'>
-              <Label for='color-mobile'>{t('color', 'Color')}</Label>
-              <Input id='color-mobile' type='color' bind:value={editColor} />
-            </div>
-            <div class='mt-2 flex flex-col gap-2'>
-              <Drawer.Close class='w-full'>
-                <Button class='w-full' onclick={save}>{t('save', 'Save')}</Button>
-              </Drawer.Close>
-              <Drawer.Close class='w-full'>
-                <Button variant='destructive' class='w-full' onclick={() => moduleStore.removeLink(shortcut.id)}>{t('remove', 'Remove')}</Button>
-              </Drawer.Close>
+{#if isMounted}
+  {#if isMobile}
+    <Drawer.Root bind:open={isEditing}>
+      <Drawer.Content>
+        <Drawer.Footer>
+          <div class='w-full flex flex-col gap-6'>
+            <div class='flex flex-col gap-4'>
+              <div class='flex flex-col gap-2'>
+                <Label for='icon-mobile'>{t('icon', 'Icon')}</Label>
+                <Input id='icon-mobile' bind:value={editIcon} />
+              </div>
+              <div class='flex flex-col gap-2'>
+                <Label for='color-mobile'>{t('color', 'Color')}</Label>
+                <Input id='color-mobile' type='color' bind:value={editColor} />
+              </div>
+              <div class='mt-2 flex flex-col gap-2'>
+                <Drawer.Close class='w-full'>
+                  <Button class='w-full' onclick={save}>{t('save', 'Save')}</Button>
+                </Drawer.Close>
+                <Drawer.Close class='w-full'>
+                  <Button variant='destructive' class='w-full' onclick={() => moduleStore.removeLink(shortcut.id)}>{t('remove', 'Remove')}</Button>
+                </Drawer.Close>
+              </div>
             </div>
           </div>
-        </div>
-      </Drawer.Footer>
-    </Drawer.Content>
-  </Drawer.Root>
-{:else}
-  <ContextMenu.Root>
-    <ContextMenu.Trigger>
-      {@render sc()}
-    </ContextMenu.Trigger>
-    <ContextMenu.Content>
-      {#each actions as { name, variant, action }}
-        <ContextMenu.Item variant={variant === 'destructive' ? 'destructive' : undefined} onclick={action}>
-          {name}
-        </ContextMenu.Item>
-      {/each}
-    </ContextMenu.Content>
-  </ContextMenu.Root>
-{/if}
+        </Drawer.Footer>
+      </Drawer.Content>
+    </Drawer.Root>
 
-{#if !isMobile && isEditing}
-  <Dialog.Root open>
-    <Dialog.Content>
-      <Dialog.Header>
-        <Dialog.Title>{t('shortcut.edit', 'Edit Shortcut')}</Dialog.Title>
-      </Dialog.Header>
-      <div class='flex flex-col gap-2'>
-        <Label for='icon-desktop'>{t('icon', 'Icon')}</Label>
-        <Input id='icon-desktop' bind:value={editIcon} />
-        <Label for='color-desktop'>{t('color', 'Color')}</Label>
-        <Input id='color-desktop' type='color' bind:value={editColor} />
-        <div class='mt-2 flex gap-2'>
-          <Button variant='outline' onclick={cancelEdit}>{t('cancel', 'Cancel')}</Button>
-          <Button onclick={save}>{t('save', 'Save')}</Button>
+    <div oncontextmenu={handleMobileEdit} role='button' tabindex='0'>
+      {@render sc()}
+    </div>
+  {:else}
+    <ContextMenu.Root bind:open={isMenuOpen}>
+      <ContextMenu.Trigger>
+        {@render sc()}
+      </ContextMenu.Trigger>
+      <ContextMenu.Content>
+        {#each actions as { name, variant, action }}
+          <ContextMenu.Item variant={variant === 'destructive' ? 'destructive' : undefined} onclick={action}>
+            {name}
+          </ContextMenu.Item>
+        {/each}
+      </ContextMenu.Content>
+    </ContextMenu.Root>
+
+    <Dialog.Root bind:open={isEditing}>
+      <Dialog.Content>
+        <Dialog.Header>
+          <Dialog.Title>{t('shortcut.edit', 'Edit Shortcut')}</Dialog.Title>
+        </Dialog.Header>
+        <div class='flex flex-col gap-2'>
+          <Label for='icon-desktop'>{t('icon', 'Icon')}</Label>
+          <Input id='icon-desktop' bind:value={editIcon} />
+          <Label for='color-desktop'>{t('color', 'Color')}</Label>
+          <Input id='color-desktop' type='color' bind:value={editColor} />
+          <div class='mt-2 flex gap-2'>
+            <Button variant='outline' onclick={cancelEdit}>{t('cancel', 'Cancel')}</Button>
+            <Button onclick={save}>{t('save', 'Save')}</Button>
+          </div>
         </div>
-      </div>
-    </Dialog.Content>
-  </Dialog.Root>
+      </Dialog.Content>
+    </Dialog.Root>
+  {/if}
+{:else}
+  {@render sc()}
 {/if}
 
 <style>

@@ -184,6 +184,9 @@
     "title": "Lista de Compras",
     "description": "Mantenga un registro de los artículos para comprar.",
     "empty": "Su lista está vacía. Agregue su primer artículo.",
+    "inCart": {
+      "title": "En el carrito"
+    },
     "add": {
       "trigger": "Agregar Artículo",
       "title": "Agregar Artículo",

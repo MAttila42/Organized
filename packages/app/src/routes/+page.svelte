@@ -36,6 +36,9 @@
   let addShortcutColor = $state('#FFFFFF')
   let addShortcutParameters = $state<Record<string, string>>({})
   let addShortcutParametersLinkId = $state<string | null>(null)
+  let isAddShortcutOpen = $state(false)
+  let isAddModuleOpen = $state(false)
+  let isMounted = $state(false)
 
   const addShortcutModuleTrigger = $derived(
     moduleStore.modules.find(m => m.id === addShortcutModule)?.name ?? t('home.selectModule', 'Select a module'),
@@ -63,6 +66,10 @@
   const isAddShortcutReady = $derived(
     Boolean(addShortcutModule && addShortcutLink && addShortcutIcon && addShortcutLinkDefinition),
   )
+
+  $effect(() => {
+    isMounted = true
+  })
 
   $effect(() => {
     const link = addShortcutLinkDefinition
@@ -136,148 +143,167 @@
         />
       {/each}
 
-      <Dialog.Root>
-        <Dialog.Trigger>
-          <button class='size-15 b-3 rounded-2xl b-dashed p-3' aria-label={t('home.shortcuts.add.aria', 'Add new shortcut')}>
+      {#if isMounted}
+        <Dialog.Root bind:open={isAddShortcutOpen}>
+          <button
+            class='size-15 b-3 rounded-2xl b-dashed p-3'
+            aria-label={t('home.shortcuts.add.aria', 'Add new shortcut')}
+            onclick={() => { isAddShortcutOpen = true }}
+          >
             <div class='i-fluent:add-12-filled size-6 color-muted'></div>
           </button>
-        </Dialog.Trigger>
-        <Dialog.Content>
-          <Dialog.Header>
-            <Dialog.Title>{t('home.shortcuts.add.title', 'Add Shortcut')}</Dialog.Title>
-          </Dialog.Header>
+          <Dialog.Content>
+            <Dialog.Header>
+              <Dialog.Title>{t('home.shortcuts.add.title', 'Add Shortcut')}</Dialog.Title>
+            </Dialog.Header>
 
-          <div class='w-full flex flex-col gap-4'>
-            <Select.Root type='single' bind:value={addShortcutModule}>
-              <Select.Trigger class='w-full'>
-                {addShortcutModuleTrigger}
-              </Select.Trigger>
-              <Select.Content>
-                {#each moduleStore.moduleCards as module (module.moduleId)}
-                  <Select.Item value={module.moduleId}>{module.name}</Select.Item>
-                {/each}
-              </Select.Content>
-            </Select.Root>
-
-            {#if addShortcutModule}
-              <Select.Root type='single' bind:value={addShortcutLink}>
+            <div class='w-full flex flex-col gap-4'>
+              <Select.Root type='single' bind:value={addShortcutModule}>
                 <Select.Trigger class='w-full'>
-                  {addShortcutLinkTrigger}
+                  {addShortcutModuleTrigger}
                 </Select.Trigger>
                 <Select.Content>
-                  {#each moduleStore.getActions(addShortcutModule) as link (link.id)}
-                    <Select.Item value={link.id}>{link.name}</Select.Item>
+                  {#each moduleStore.moduleCards as module (module.moduleId)}
+                    <Select.Item value={module.moduleId}>{module.name}</Select.Item>
                   {/each}
                 </Select.Content>
               </Select.Root>
 
-              {#if addShortcutLink}
-                <Dialog.Description class='text-muted'>
-                  {addShortcutDescription}
-                </Dialog.Description>
-
-                {#if addShortcutParameterDefinitions.length > 0}
-                  <div class='flex flex-col gap-3'>
-                    {#each addShortcutParameterDefinitions as parameter (parameter.id)}
-                      <div class='flex flex-col gap-2'>
-                        <Label for={`shortcut-param-${parameter.id}`}>{parameter.name}</Label>
-                        <Input
-                          id={`shortcut-param-${parameter.id}`}
-                          type={parameter.type === 'number' ? 'number' : 'text'}
-                          value={addShortcutParameters[parameter.id] ?? ''}
-                          on:input={(event: Event) => updateShortcutParameter(parameter.id, (event.currentTarget as HTMLInputElement | null)?.value ?? '')}
-                          placeholder={parameter.defaultValue != null ? String(parameter.defaultValue) : ''}
-                        />
-                      </div>
+              {#if addShortcutModule}
+                <Select.Root type='single' bind:value={addShortcutLink}>
+                  <Select.Trigger class='w-full'>
+                    {addShortcutLinkTrigger}
+                  </Select.Trigger>
+                  <Select.Content>
+                    {#each moduleStore.getActions(addShortcutModule) as link (link.id)}
+                      <Select.Item value={link.id}>{link.name}</Select.Item>
                     {/each}
-                  </div>
-                {/if}
+                  </Select.Content>
+                </Select.Root>
 
-                <Label for='icon'>{t('home.shortcuts.add.iconLabel', 'Icon')}</Label>
-                <Input
-                  bind:value={addShortcutIcon}
-                  type='text'
-                  id='icon'
-                  placeholder='i-fluent:document-16-filled'
-                />
-                <Label for='color'>{t('home.shortcuts.add.colorLabel', 'Color')}</Label>
-                <Input
-                  bind:value={addShortcutColor}
-                  type='color'
-                  id='color'
-                />
+                {#if addShortcutLink}
+                  <Dialog.Description class='text-muted'>
+                    {addShortcutDescription}
+                  </Dialog.Description>
+
+                  {#if addShortcutParameterDefinitions.length > 0}
+                    <div class='flex flex-col gap-3'>
+                      {#each addShortcutParameterDefinitions as parameter (parameter.id)}
+                        <div class='flex flex-col gap-2'>
+                          <Label for={`shortcut-param-${parameter.id}`}>{parameter.name}</Label>
+                          <Input
+                            id={`shortcut-param-${parameter.id}`}
+                            type={parameter.type === 'number' ? 'number' : 'text'}
+                            value={addShortcutParameters[parameter.id] ?? ''}
+                            on:input={(event: Event) => updateShortcutParameter(parameter.id, (event.currentTarget as HTMLInputElement | null)?.value ?? '')}
+                            placeholder={parameter.defaultValue != null ? String(parameter.defaultValue) : ''}
+                          />
+                        </div>
+                      {/each}
+                    </div>
+                  {/if}
+
+                  <Label for='icon'>{t('home.shortcuts.add.iconLabel', 'Icon')}</Label>
+                  <Input
+                    bind:value={addShortcutIcon}
+                    type='text'
+                    id='icon'
+                    placeholder='i-fluent:document-16-filled'
+                  />
+                  <Label for='color'>{t('home.shortcuts.add.colorLabel', 'Color')}</Label>
+                  <Input
+                    bind:value={addShortcutColor}
+                    type='color'
+                    id='color'
+                  />
+                {/if}
               {/if}
+
+              <Dialog.Close disabled={!isAddShortcutReady}>
+                <Button
+                  onclick={addShortcut}
+                  class='w-full'
+                  disabled={!isAddShortcutReady}
+                >
+                  {t('home.shortcuts.add.cta', 'Add Shortcut')}
+                </Button>
+              </Dialog.Close>
+            </div>
+          </Dialog.Content>
+        </Dialog.Root>
+      {:else}
+        <button
+          class='size-15 b-3 rounded-2xl b-dashed p-3'
+          aria-label={t('home.shortcuts.add.aria', 'Add new shortcut')}
+        >
+          <div class='i-fluent:add-12-filled size-6 color-muted'></div>
+        </button>
+      {/if}
+    </div>
+  </div>
+  <div class='mx-4 mt-4 flex flex-col gap-4'>
+    {#each moduleStore.moduleCards as module}
+      <ModuleCard {module} />
+    {/each}
+
+    {#if isMounted}
+      <Dialog.Root bind:open={isAddModuleOpen}>
+        <button
+          class='flex flex-row items-center gap-3 b-3 rounded-md b-dashed p-3 text-muted'
+          onclick={() => { isAddModuleOpen = true }}
+        >
+          <div class='i-fluent:add-12-filled size-6'></div>
+          <div>{t('home.modules.add.trigger', 'Add Module')}</div>
+        </button>
+        <Dialog.Content>
+          <Dialog.Header>
+            <Dialog.Title>{t('home.modules.add.title', 'Add Module')}</Dialog.Title>
+          </Dialog.Header>
+
+          <div class='w-full flex flex-col gap-4'>
+            <Select.Root type='single' bind:value={addModuleValue}>
+              <Select.Trigger class='w-full'>
+                {addModuleValueTrigger}
+              </Select.Trigger>
+              <Select.Content>
+                {#each moduleStore.modules.filter(m => !moduleStore.moduleCards.find(mc => mc.moduleId === m.id)) as module (module.id)}
+                  <Select.Item value={module.id}>{module.name}</Select.Item>
+                {/each}
+              </Select.Content>
+            </Select.Root>
+
+            {#if addModuleValue}
+              <Dialog.Description class='text-muted'>
+                {moduleStore.modules.find(m => m.id === addModuleValue)
+                  ?.description}
+              </Dialog.Description>
+              <Label for='color'>{t('color', 'Color')}</Label>
+              <Input
+                bind:value={addModuleColor}
+                type='color'
+                id='color'
+              />
             {/if}
 
-            <Dialog.Close disabled={!isAddShortcutReady}>
+            <Dialog.Close disabled={!addModuleValue}>
               <Button
-                onclick={addShortcut}
+                onclick={addModule}
                 class='w-full'
-                disabled={!isAddShortcutReady}
+                disabled={!addModuleValue}
               >
-                {t('home.shortcuts.add.cta', 'Add Shortcut')}
+                {t('home.modules.add.cta', 'Add Module')}
               </Button>
             </Dialog.Close>
           </div>
         </Dialog.Content>
       </Dialog.Root>
-    </div>
-  </div>
-  <div class='mx-4 mt-4 flex flex-col gap-4'>
-    {#each await moduleStore.moduleCards as module}
-      <ModuleCard {module} />
-    {/each}
-
-    <Dialog.Root>
-      <Dialog.Trigger>
-        <div
-          class='flex flex-row items-center gap-3 b-3 rounded-md b-dashed p-3 text-muted'
-        >
-          <div class='i-fluent:add-12-filled size-6'></div>
-          <div>{t('home.modules.add.trigger', 'Add Module')}</div>
-        </div>
-      </Dialog.Trigger>
-      <Dialog.Content>
-        <Dialog.Header>
-          <Dialog.Title>{t('home.modules.add.title', 'Add Module')}</Dialog.Title>
-        </Dialog.Header>
-
-        <div class='w-full flex flex-col gap-4'>
-          <Select.Root type='single' bind:value={addModuleValue}>
-            <Select.Trigger class='w-full'>
-              {addModuleValueTrigger}
-            </Select.Trigger>
-            <Select.Content>
-              {#each moduleStore.modules.filter(m => !moduleStore.moduleCards.find(mc => mc.moduleId === m.id)) as module (module.id)}
-                <Select.Item value={module.id}>{module.name}</Select.Item>
-              {/each}
-            </Select.Content>
-          </Select.Root>
-
-          {#if addModuleValue}
-            <Dialog.Description class='text-muted'>
-              {moduleStore.modules.find(m => m.id === addModuleValue)
-                ?.description}
-            </Dialog.Description>
-            <Label for='color'>{t('color', 'Color')}</Label>
-            <Input
-              bind:value={addModuleColor}
-              type='color'
-              id='color'
-            />
-          {/if}
-
-          <Dialog.Close disabled={!addModuleValue}>
-            <Button
-              onclick={addModule}
-              class='w-full'
-              disabled={!addModuleValue}
-            >
-              {t('home.modules.add.cta', 'Add Module')}
-            </Button>
-          </Dialog.Close>
-        </div>
-      </Dialog.Content>
-    </Dialog.Root>
+    {:else}
+      <button
+        class='flex flex-row items-center gap-3 b-3 rounded-md b-dashed p-3 text-muted'
+      >
+        <div class='i-fluent:add-12-filled size-6'></div>
+        <div>{t('home.modules.add.trigger', 'Add Module')}</div>
+      </button>
+    {/if}
   </div>
 </div>

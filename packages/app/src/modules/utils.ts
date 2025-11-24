@@ -83,7 +83,7 @@ export function createShortcutRoute(moduleId: string, routeKey: string) {
   const isActive = () => {
     if (!browser)
       return false
-    const rest = page.params.rest ?? ''
+    const rest = page.params?.rest ?? ''
     return rest.split('/')[0] === routeKey
   }
 

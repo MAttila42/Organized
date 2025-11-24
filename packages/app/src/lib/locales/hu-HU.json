@@ -199,6 +199,9 @@
       "unitLabel": "Mértékegység",
       "unitPlaceholder": "db, l, kg",
       "descriptionPlaceholder": "Márka vagy jegyzetek (opcionális)"
+    },
+    "inCart": {
+      "title": "A kosárban"
     }
   },
   "description": "Leírás",
