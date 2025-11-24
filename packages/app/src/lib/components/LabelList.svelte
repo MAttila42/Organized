@@ -6,6 +6,7 @@
   let {
     ref = $bindable(null),
     class: className,
+    children,
     ...restProps
   }: WithElementRef<HTMLAttributes<HTMLDivElement>> = $props()
 </script>
@@ -15,5 +16,5 @@
   class={cn('flex flex-col divide-y rounded-lg bg-background', className)}
   {...restProps}
 >
-  <slot />
+  {@render children?.()}
 </div>
