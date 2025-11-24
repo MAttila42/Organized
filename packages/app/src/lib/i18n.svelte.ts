@@ -40,10 +40,11 @@ const i18n = {
  * @param fallback An optional fallback string to return if the key is not found. (Organized convention: use the default locale's translation as fallback and use lin for translations)
  * @returns The translated string for the given key in the selected locale, or the fallback if the key is not found.
  */
-export function t(key: string, fallback?: string) {
+export function t(key: string, fallback?: string, options?: Record<string, any>) {
   return i18next.t(key, {
     defaultValue: fallback,
     lng: state.locale,
+    ...options,
   })
 }
 

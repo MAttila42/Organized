@@ -1,4 +1,5 @@
 <script lang='ts'>
+  import LabelList from '$lib/components/LabelList.svelte'
   import { t } from '$lib/i18n.svelte'
   import { finances } from '../store.svelte'
 
@@ -22,9 +23,9 @@
     <div>{t('finances.wallet.labels.balances.empty', 'No wallets tracked yet.')}</div>
   </div>
 {:else}
-  <div class='flex flex-col gap-2'>
+  <LabelList>
     {#each summaries as summary (summary.wallet.id)}
-      <div class='flex flex-row items-center justify-between gap-3 border border-border/60 rounded-md bg-background px-3 py-2 text-sm'>
+      <div class='flex flex-row items-center justify-between gap-3 px-3 py-2 text-sm'>
         <div class='min-w-0 flex flex-row items-center gap-2'>
           <span class='size-2.5 shrink-0 rounded-full' style={`background: ${summary.wallet.color ?? '#64748B'}`}></span>
           <span class='truncate font-medium'>{summary.wallet.name}</span>
@@ -34,5 +35,5 @@
         </span>
       </div>
     {/each}
-  </div>
+  </LabelList>
 {/if}

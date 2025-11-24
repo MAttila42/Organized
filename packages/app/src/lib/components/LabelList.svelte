@@ -1,0 +1,19 @@
+<script lang='ts'>
+  import type { WithElementRef } from '$lib/utils'
+  import type { HTMLAttributes } from 'svelte/elements'
+  import { cn } from '$lib/utils'
+
+  let {
+    ref = $bindable(null),
+    class: className,
+    ...restProps
+  }: WithElementRef<HTMLAttributes<HTMLDivElement>> = $props()
+</script>
+
+<div
+  bind:this={ref}
+  class={cn('flex flex-col divide-y rounded-lg bg-background', className)}
+  {...restProps}
+>
+  <slot />
+</div>
