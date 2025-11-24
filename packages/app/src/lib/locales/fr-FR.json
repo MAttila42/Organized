@@ -57,10 +57,10 @@
       "labels": {
         "balances": {
           "empty": "Aucun portefeuille suivi pour le moment."
-        }
-      },
-      "selector": {
-        "title": "Portefeuilles",
+        },
+        "inCart": {
+          "title": "Dans le panier"
+        },
         "description": "Créez des portefeuilles pour séparer les budgets et les économies.",
         "empty": "Aucun portefeuille pour le moment. Ajoutez votre premier portefeuille pour commencer.",
         "transactionSingular": "transaction",
@@ -194,6 +194,9 @@
       "unitLabel": "Unité",
       "unitPlaceholder": "pcs, l, kg",
       "descriptionPlaceholder": "Marque ou notes (facultatif)"
+    },
+    "inCart": {
+      "title": "Dans le panier"
     }
   },
   "description": "Description",

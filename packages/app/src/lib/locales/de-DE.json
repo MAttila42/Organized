@@ -194,6 +194,9 @@
       "unitLabel": "Einheit",
       "unitPlaceholder": "Stück, l, kg",
       "descriptionPlaceholder": "Marke oder Notizen (optional)"
+    },
+    "inCart": {
+      "title": "Im Einkaufswagen"
     }
   },
   "description": "Beschreibung",

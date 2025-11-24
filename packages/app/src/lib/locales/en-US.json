@@ -184,6 +184,9 @@
     "title": "Shopping List",
     "description": "Keep track of items to buy.",
     "empty": "Your list is empty. Add your first item.",
+    "inCart": {
+      "title": "In Cart"
+    },
     "add": {
       "trigger": "Add Item",
       "title": "Add Item",

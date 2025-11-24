@@ -7,10 +7,10 @@ node_modules
 .wrangler
 .svelte-kit
 .nyc_output
-/build
-/coverage
-/test-results
-/playwright-report
+**/build
+**/coverage
+**/test-results
+**/playwright-report
 
 # OS
 .DS_Store

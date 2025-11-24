@@ -6,6 +6,7 @@ export const shoppingList = sqliteTable('shopping_list', {
   quantity: integer('quantity'),
   unit: text('unit'),
   description: text('description'),
+  inCart: integer('in_cart').notNull().default(0),
 })
 export type SelectShoppingList = typeof shoppingList.$inferSelect
 export type InsertShoppingList = typeof shoppingList.$inferInsert

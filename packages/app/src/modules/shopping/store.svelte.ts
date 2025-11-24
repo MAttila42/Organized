@@ -10,7 +10,10 @@ export const shopping = $state({
     const { database } = await useDatabase()
     await database
       .insert(shoppingList)
-      .values(item)
+      .values({
+        ...item,
+        inCart: 0,
+      })
     await this.loadItems()
   },
 
@@ -18,6 +21,21 @@ export const shopping = $state({
     const { database } = await useDatabase()
     await database.delete(shoppingList).where(eq(shoppingList.id, id))
     this.items = this.items.filter(item => item.id !== id)
+  },
+
+  async toggleCart(id: number) {
+    const currentItem = this.items.find(item => item.id === id)
+    if (!currentItem)
+      return
+
+    const nextInCart = currentItem.inCart ? 0 : 1
+    const { database } = await useDatabase()
+    await database
+      .update(shoppingList)
+      .set({ inCart: nextInCart })
+      .where(eq(shoppingList.id, id))
+
+    this.items = this.items.map(item => (item.id === id ? { ...item, inCart: nextInCart } : item))
   },
 
   async loadItems() {

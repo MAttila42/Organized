@@ -2,8 +2,11 @@
   import SectionContainer from '$lib/components/SectionContainer.svelte'
   import * as Select from '$lib/components/ui/select'
   import i18n, { t } from '$lib/i18n.svelte'
+  import { untrack } from 'svelte'
 
   let localeSelection = $state(i18n.locale)
+  let isLocaleOpen = $state(false)
+  let isMounted = $state(false)
   const availableLocales = $derived([...i18n.locales])
   const localeOptions = $derived(
     availableLocales.map(value => ({
@@ -16,6 +19,10 @@
   )
 
   $effect(() => {
+    isMounted = true
+  })
+
+  $effect(() => {
     if (!localeSelection)
       return
     if (localeSelection !== i18n.locale)
@@ -26,8 +33,11 @@
     const currentLocale = i18n.locale
     if (!currentLocale)
       return
-    if (currentLocale !== localeSelection)
-      localeSelection = currentLocale
+    if (currentLocale !== localeSelection) {
+      untrack(() => {
+        localeSelection = currentLocale
+      })
+    }
   })
 
   function formatLocale(locale: string) {
@@ -66,16 +76,18 @@
       description={t('settings.language.description', 'Choose the language Organized uses throughout the app.')}
     >
       <div class='flex flex-col gap-2'>
-        <Select.Root type='single' bind:value={localeSelection}>
-          <Select.Trigger class='w-full justify-between'>
-            {selectedLocaleLabel}
-          </Select.Trigger>
-          <Select.Content>
-            {#each localeOptions as option (option.value)}
-              <Select.Item value={option.value}>{option.label}</Select.Item>
-            {/each}
-          </Select.Content>
-        </Select.Root>
+        {#if isMounted}
+          <Select.Root type='single' bind:value={localeSelection} bind:open={isLocaleOpen}>
+            <Select.Trigger class='w-full justify-between'>
+              {selectedLocaleLabel}
+            </Select.Trigger>
+            <Select.Content>
+              {#each localeOptions as option (option.value)}
+                <Select.Item value={option.value}>{option.label}</Select.Item>
+              {/each}
+            </Select.Content>
+          </Select.Root>
+        {/if}
 
         <p class='text-sm text-muted'>{t('settings.language.note', 'Changes apply immediately and persist across sessions.')}</p>
       </div>
