@@ -3,7 +3,7 @@ import { DrizzleAdapter } from '@rttnd/gau/adapters/drizzle'
 import { createAuth } from '@rttnd/gau/core'
 import { GitHub, Google } from '@rttnd/gau/oauth'
 import { db } from './db'
-import { Accounts, Users } from './db/schema'
+import { Accounts, Users } from './db/schema/auth'
 
 export const auth = createAuth({
   adapter: DrizzleAdapter(db, Users, Accounts),

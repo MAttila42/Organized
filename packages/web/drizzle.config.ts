@@ -12,7 +12,7 @@ export default defineConfig({
       : process.env.DATABASE_URL_REMOTE!,
     authToken: process.env.DATABASE_AUTH_TOKEN,
   },
-  schema: './src/lib/server/db/schema.ts',
+  schema: './src/lib/server/db/schema',
   strict: true,
   verbose: false,
 })
