@@ -50,9 +50,9 @@
     onSignInWithGoogle={handleGoogleSignIn}
   />
   <ModuleHighlights modules={moduleHighlights} />
-  <div class='mx-auto my-10 h-px w-full max-w-5xl bg-white/10'></div>
+  <div class='mx-auto my-10 h-px max-w-5xl w-full bg-white/10'></div>
   <FeatureGrid features={features} />
-  <div class='mx-auto my-10 h-px w-full max-w-5xl bg-white/10'></div>
+  <div class='mx-auto my-10 h-px max-w-5xl w-full bg-white/10'></div>
   <WorkflowSection steps={workflowSteps} />
   <CommunitySection
     repoUrl={repoUrl}

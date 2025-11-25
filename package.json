@@ -18,8 +18,8 @@
     "elysia": "^1.4.16",
     "i18next": "^25.6.3",
     "lucide-svelte": "^0.554.0",
-    "tailwind-merge": "^3.4.0",
-    "tailwind-variants": "^3.2.2"
+    "tailwind-variants": "^3.2.2",
+    "unocss-merge": "^0.6.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^6.2.0",

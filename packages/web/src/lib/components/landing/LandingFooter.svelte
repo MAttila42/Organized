@@ -12,8 +12,8 @@
   }>()
 </script>
 
-<footer class='border-t border-white/10 px-5 py-8 sm:px-6 md:px-12'>
-  <div class='mx-auto flex w-full max-w-6xl flex-col gap-4 text-center text-xs uppercase tracking-[0.3em] text-muted-foreground sm:flex-row sm:items-center sm:justify-between'>
+<footer class='border-t border-white/10 px-5 py-8 md:px-12 sm:px-6'>
+  <div class='text-muted-foreground mx-auto max-w-6xl w-full flex flex-col gap-4 text-center text-xs tracking-[0.3em] uppercase sm:flex-row sm:items-center sm:justify-between'>
     <span>© {currentYear} Organized. Crafted with neon energy.</span>
     <div class='flex justify-center gap-4'>
       <a class='transition-colors hover:text-foreground' href={repoUrl} target='_blank' rel='noreferrer'>
@@ -30,7 +30,7 @@
       <Button
         variant='link'
         size='sm'
-        class='px-0 text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground hover:text-foreground'
+        class='text-muted-foreground px-0 text-xs font-semibold tracking-[0.3em] uppercase hover:text-foreground'
         onclick={onSignInWithGitHub}
       >
         Sign in with GitHub
