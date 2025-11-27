@@ -3,6 +3,7 @@ import { sqliteTable, text } from 'drizzle-orm/sqlite-core'
 export const shoppingLists = sqliteTable('shopping_lists', {
   id: text().primaryKey().$defaultFn(() => crypto.randomUUID()),
   accessToken: text().$defaultFn(() => crypto.randomUUID().replaceAll(/-/g, '')),
+  ownerId: text().notNull(),
   name: text().notNull(),
   description: text(),
   color: text(),
