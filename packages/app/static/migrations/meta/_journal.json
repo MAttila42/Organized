@@ -50,6 +50,20 @@
       "when": 1762442048518,
       "tag": "0006_marvelous_meteorite",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "6",
+      "when": 1769629964250,
+      "tag": "0007_sloppy_doorman",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "6",
+      "when": 1769630924114,
+      "tag": "0008_sloppy_hulk",
+      "breakpoints": true
     }
   ]
 }

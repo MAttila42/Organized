@@ -1,45 +1,100 @@
-import type { InsertShoppingList, SelectShoppingList } from '$lib/database/schema/shopping'
-import { useDatabase } from '$lib/database'
-import { shoppingList } from '$lib/database/schema/shopping'
-import { eq } from 'drizzle-orm'
+import { isOnline } from './api'
+import { localStore } from './stores/local.svelte'
+import { sharedStore } from './stores/shared.svelte'
+
+export type ListMode = 'local' | 'shared'
+
+export type ShoppingItem
+  = | (typeof localStore.items)[number]
+    | (typeof sharedStore.items)[number]
 
 export const shopping = $state({
-  items: [] as (SelectShoppingList)[],
+  mode: 'local' as ListMode,
+  initialized: false,
 
-  async addItem(item: InsertShoppingList) {
-    const { database } = await useDatabase()
-    await database
-      .insert(shoppingList)
-      .values({
-        ...item,
-        inCart: 0,
-      })
-    await this.loadItems()
+  get isOnline() {
+    return isOnline()
   },
 
-  async removeItem(id: number) {
-    const { database } = await useDatabase()
-    await database.delete(shoppingList).where(eq(shoppingList.id, id))
-    this.items = this.items.filter(item => item.id !== id)
+  get isSharedMode() {
+    return this.mode === 'shared' && sharedStore.currentListId !== null
   },
 
-  async toggleCart(id: number) {
-    const currentItem = this.items.find(item => item.id === id)
-    if (!currentItem)
+  get local() {
+    return localStore
+  },
+
+  get shared() {
+    return sharedStore
+  },
+
+  get items(): ShoppingItem[] {
+    return this.isSharedMode ? sharedStore.items : localStore.items
+  },
+
+  get activeItems(): ShoppingItem[] {
+    return this.isSharedMode ? sharedStore.activeItems : localStore.activeItems
+  },
+
+  get cartItems(): ShoppingItem[] {
+    return this.isSharedMode ? sharedStore.cartItems : localStore.cartItems
+  },
+
+  get canEdit() {
+    // All members can edit (no role restrictions)
+    return true
+  },
+
+  async initialize() {
+    if (this.initialized)
       return
 
-    const nextInCart = currentItem.inCart ? 0 : 1
-    const { database } = await useDatabase()
-    await database
-      .update(shoppingList)
-      .set({ inCart: nextInCart })
-      .where(eq(shoppingList.id, id))
+    await localStore.initialize()
 
-    this.items = this.items.map(item => (item.id === id ? { ...item, inCart: nextInCart } : item))
+    if (this.isOnline)
+      await sharedStore.loadMemberships()
+
+    this.initialized = true
   },
 
-  async loadItems() {
-    const { database } = await useDatabase()
-    this.items = await database.select().from(shoppingList).all()
+  async useLocal() {
+    this.mode = 'local'
+    sharedStore.clear()
+  },
+
+  async useShared(listId: string) {
+    if (!this.isOnline)
+      throw new Error('Shared lists require an internet connection')
+
+    this.mode = 'shared'
+    await sharedStore.selectList(listId)
+  },
+
+  async addItem(input: { name: string, quantity?: string | null, unit?: string | null, description?: string | null }) {
+    if (this.isSharedMode)
+      await sharedStore.addItem(input)
+
+    else
+      await localStore.add(input)
+  },
+
+  async removeItem(id: number | string) {
+    if (this.isSharedMode)
+      await sharedStore.removeItem(String(id))
+
+    else
+      await localStore.remove(Number(id))
+  },
+
+  async toggleCart(id: number | string) {
+    if (this.isSharedMode)
+      await sharedStore.toggleCart(String(id))
+
+    else
+      await localStore.toggleCart(Number(id))
   },
 })
+
+// Re-export types for components
+export type { LocalItem } from './stores/local.svelte'
+export type { SharedItem } from './stores/shared.svelte'

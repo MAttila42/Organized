@@ -28,6 +28,7 @@ export const itemUpdateSchema = t.Object({
   quantity: t.Optional(t.String()),
   unit: t.Optional(t.String()),
   description: t.Optional(t.String()),
+  inCart: t.Optional(t.Number()),
 })
 
 export const itemIdParams = t.Object({

@@ -1,4 +1,6 @@
 export * from './errors'
 export * from './list-guards'
+export * from './shopping-invite.service'
 export * from './shopping-item.service'
 export * from './shopping-list.service'
+export * from './shopping-member.service'

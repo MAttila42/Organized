@@ -6,7 +6,7 @@ import { eq } from 'drizzle-orm'
 export type ShoppingList = InferSelectModel<typeof shoppingLists>
 export type NewShoppingList = InferInsertModel<typeof shoppingLists>
 
-export type CreateShoppingListInput = Pick<NewShoppingList, 'ownerId' | 'name' | 'description' | 'color'>
+export type CreateShoppingListInput = Pick<NewShoppingList, 'ownerInstanceId' | 'name' | 'description' | 'color'>
 export type UpdateShoppingListInput = Partial<Pick<NewShoppingList, 'name' | 'description' | 'color' | 'accessToken'>>
 
 function withTimestamps<T extends Record<string, unknown>>(data: T) {
@@ -29,6 +29,10 @@ export async function findShoppingListById(id: string) {
 export async function findShoppingListByAccessToken(accessToken: string) {
   const [list] = await db.select().from(shoppingLists).where(eq(shoppingLists.accessToken, accessToken))
   return list ?? null
+}
+
+export async function findShoppingListsByOwnerInstance(ownerInstanceId: string) {
+  return db.select().from(shoppingLists).where(eq(shoppingLists.ownerInstanceId, ownerInstanceId))
 }
 
 export async function updateShoppingListById(id: string, data: UpdateShoppingListInput) {

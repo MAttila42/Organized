@@ -3,6 +3,7 @@ import { findShoppingItemsByListId } from '../repositories/shopping-item.reposit
 import {
   createShoppingList,
   deleteShoppingListById,
+  findShoppingListsByOwnerInstance,
   updateShoppingListById,
 } from '../repositories/shopping-list.repository'
 import { ShoppingServiceError } from './errors'
@@ -28,9 +29,9 @@ export async function getListWithItems(accessToken: string): Promise<ShoppingLis
   return { list, items }
 }
 
-export async function createList(ownerId: string, data: CreateShoppingListDto): Promise<ShoppingList> {
+export async function createList(ownerInstanceId: string, data: CreateShoppingListDto): Promise<ShoppingList> {
   const list = await createShoppingList({
-    ownerId,
+    ownerInstanceId,
     name: data.name,
     description: data.description ?? null,
     color: data.color ?? null,
@@ -42,8 +43,8 @@ export async function createList(ownerId: string, data: CreateShoppingListDto): 
   return list
 }
 
-export async function updateList(listId: string, ownerId: string, data: UpdateShoppingListDto): Promise<ShoppingList> {
-  await requireOwnedList(listId, ownerId)
+export async function updateList(listId: string, instanceId: string, data: UpdateShoppingListDto): Promise<ShoppingList> {
+  await requireOwnedList(listId, instanceId)
 
   const updates = buildListUpdatePayload(data)
   const next = await updateShoppingListById(listId, updates)
@@ -53,8 +54,8 @@ export async function updateList(listId: string, ownerId: string, data: UpdateSh
   return next
 }
 
-export async function rotateAccessToken(listId: string, ownerId: string): Promise<ShoppingList> {
-  await requireOwnedList(listId, ownerId)
+export async function rotateAccessToken(listId: string, instanceId: string): Promise<ShoppingList> {
+  await requireOwnedList(listId, instanceId)
 
   const accessToken = crypto.randomUUID().replaceAll('-', '')
   const next = await updateShoppingListById(listId, { accessToken })
@@ -65,12 +66,16 @@ export async function rotateAccessToken(listId: string, ownerId: string): Promis
   return next
 }
 
-export async function deleteList(listId: string, ownerId: string): Promise<void> {
-  await requireOwnedList(listId, ownerId)
+export async function deleteList(listId: string, instanceId: string): Promise<void> {
+  await requireOwnedList(listId, instanceId)
 
   const deleted = await deleteShoppingListById(listId)
   if (!deleted)
     throw new ShoppingServiceError(500, 'Failed to delete shopping list')
+}
+
+export async function getListsByOwner(instanceId: string): Promise<ShoppingList[]> {
+  return findShoppingListsByOwnerInstance(instanceId)
 }
 
 function buildListUpdatePayload(data: UpdateShoppingListDto): UpdateShoppingListInput {

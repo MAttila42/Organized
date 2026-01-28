@@ -7,7 +7,7 @@ export type ShoppingItem = InferSelectModel<typeof shoppingItems>
 export type NewShoppingItem = InferInsertModel<typeof shoppingItems>
 
 export type CreateShoppingItemInput = Pick<NewShoppingItem, 'listId' | 'name' | 'quantity' | 'unit' | 'description'>
-export type UpdateShoppingItemInput = Partial<Pick<NewShoppingItem, 'name' | 'quantity' | 'unit' | 'description'>>
+export type UpdateShoppingItemInput = Partial<Pick<NewShoppingItem, 'name' | 'quantity' | 'unit' | 'description' | 'inCart'>>
 
 function withTimestamps<T extends Record<string, unknown>>(data: T) {
   return {

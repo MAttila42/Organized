@@ -22,3 +22,19 @@ export async function requireUserId(request: Request) {
 
   return session.user.id
 }
+
+/**
+ * Extract and require instance token from request.
+ * Instance tokens identify an app installation (anonymous user).
+ */
+export function requireInstanceToken(request: Request): string {
+  const instanceToken = request.headers.get('x-instance-token')
+  if (!instanceToken)
+    throw new ServiceError(401, 'Missing instance token')
+
+  // Basic validation: should be a UUID-like string
+  if (instanceToken.length < 32)
+    throw new ServiceError(401, 'Invalid instance token')
+
+  return instanceToken
+}
