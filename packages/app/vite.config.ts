@@ -13,6 +13,7 @@ export default defineConfig({
     }),
     sveltekit(),
   ],
+  envPrefix: ['VITE_', 'TAURI_', 'API_'],
   clearScreen: false,
   server: {
     fs: {

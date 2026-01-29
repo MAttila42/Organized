@@ -19,6 +19,7 @@
     "@rttnd/gau": "^1.0.0"
   },
   "devDependencies": {
+    "@elysiajs/cors": "^1.4.0",
     "@internationalized/date": "^3.10.0",
     "@lucide/svelte": "^0.554.0",
     "@sveltejs/adapter-cloudflare": "^7.2.4",

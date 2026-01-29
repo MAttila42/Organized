@@ -30,5 +30,5 @@ export function load() {
     component: () => import('./shopping.svelte'),
   })
 
-  shopping.loadItems()
+  shopping.initialize()
 }

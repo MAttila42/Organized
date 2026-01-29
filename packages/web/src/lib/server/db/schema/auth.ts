@@ -28,8 +28,8 @@ export const Accounts = sqliteTable(
     tokenType: text(),
     scope: text(),
     idToken: text(),
-    sessionState: text('session_state'),
-    createdAt: integer('created_at', { mode: 'timestamp' }).$defaultFn(() => new Date()),
+    sessionState: text(),
+    createdAt: integer({ mode: 'timestamp' }).$defaultFn(() => new Date()),
   },
   account => [
     primaryKey({

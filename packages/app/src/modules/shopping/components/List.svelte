@@ -1,5 +1,5 @@
 <script lang='ts'>
-  import type { SelectShoppingList } from '$lib/database/schema/shopping'
+  import type { ShoppingItem } from '../store.svelte'
   import type { ItemVariant } from './Item.svelte'
   import Item from './Item.svelte'
 
@@ -7,13 +7,13 @@
     items,
     variant = 'default',
   }: {
-    items: SelectShoppingList[]
+    items: ShoppingItem[]
     variant?: ItemVariant
   } = $props()
 </script>
 
 <div class='flex flex-col rounded-lg bg-background divide-y'>
-  {#each items as item (item.id)}
+  {#each items as item (`${item.source}:${item.id}`)}
     <Item item={item} variant={variant} />
   {/each}
 </div>
