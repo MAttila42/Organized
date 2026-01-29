@@ -1,77 +1,116 @@
 <script lang='ts'>
   import type { WorkflowStep } from './landing-content'
 
-  const { steps } = $props<{ steps: WorkflowStep[] }>()
+  const { steps }: { steps: WorkflowStep[] } = $props()
 </script>
 
-<section id='workflow' class='px-5 pb-16 md:px-12 sm:px-6 sm:pb-20'>
-  <div class='mx-auto max-w-6xl flex flex-col gap-12 lg:flex-row'>
-    <div class='flex-1 space-y-6'>
-      <div class='space-y-3'>
-        <span class='text-[0.7rem] text-primary font-semibold tracking-[0.35em] uppercase'>
-          How it works
-        </span>
-        <h2 class='text-3xl font-semibold sm:text-4xl'>
-          Build an ecosystem that knows what to do next.
-        </h2>
-        <p class='text-muted-foreground text-base sm:text-lg'>
-          Organized guides you from idea to execution with a clear, visual workflow that keeps every module talking to each other.
-        </p>
-      </div>
-      <div class='grid grid-cols-1 gap-4'>
-        {#each steps as step, index (step.title)}
-          <div class='flex items-start gap-4 border border-white/10 rounded-2xl bg-background/70 p-5 backdrop-blur transition-transform duration-200 hover:border-white/30 hover:-translate-y-0.5'>
-            <div class='size-11 flex items-center justify-center border border-white/20 rounded-full bg-background/80 text-sm text-primary font-semibold'>
+<section id='workflow' class='relative overflow-hidden bg-slate-950 py-24 text-white'>
+  <div class='container mx-auto max-w-6xl px-4'>
+
+    <div class='mb-20 text-center'>
+      <span class='mb-4 block text-xs text-purple-400 font-bold tracking-[0.3em] uppercase'>
+        Workflow
+      </span>
+      <h2 class='mb-6 text-3xl font-bold tracking-tight md:text-5xl'>
+        From Idea to
+        <span class='from-purple-400 to-pink-500 bg-gradient-to-r bg-clip-text text-transparent'>Execution</span>
+      </h2>
+      <p class='mx-auto max-w-2xl text-lg text-slate-400'>
+        Organized guides you through a clear visual path. No messy spreadsheets, just a flow that knows what to do next.
+      </p>
+    </div>
+
+    <div class='flex flex-col gap-24'>
+      {#each steps as step, index}
+        <div class={`flex flex-col items-center gap-12 md:flex-row ${index % 2 === 1 ? 'md:flex-row-reverse' : ''}`}>
+
+          <div class='flex-1 text-center space-y-6 md:text-left'>
+            <div class='h-12 w-12 inline-flex items-center justify-center border border-purple-500/30 rounded-full bg-purple-500/10 text-xl text-purple-400 font-bold'>
               {index + 1}
             </div>
-            <div class='space-y-2'>
-              <div class='flex items-center gap-2'>
-                <span class={`${step.icon} size-4 text-primary`}></span>
-                <h3 class='text-lg font-semibold'>{step.title}</h3>
+            <h3 class='text-3xl text-white font-bold'>
+              {step.title}
+            </h3>
+            <p class='text-lg text-slate-400 leading-relaxed'>
+              {step.description}
+            </p>
+          </div>
+
+          <div class='relative flex-1'>
+            <div class='absolute inset-0 translate-x-4 translate-y-4 rounded-3xl from-purple-600/20 to-blue-600/20 bg-gradient-to-br blur-2xl'></div>
+
+            <div class='relative overflow-hidden border border-white/10 rounded-3xl bg-slate-900/80 p-8 backdrop-blur-xl transition-transform hover:scale-[1.02]'>
+              <div class='mb-8 flex items-center gap-2 border-b border-white/5 pb-4'>
+                <div class='h-3 w-3 rounded-full bg-red-500/50'></div>
+                <div class='h-3 w-3 rounded-full bg-yellow-500/50'></div>
+                <div class='h-3 w-3 rounded-full bg-green-500/50'></div>
               </div>
-              <p class='text-muted-foreground text-sm leading-relaxed'>{step.description}</p>
+
+              <div class='flex flex-col items-center justify-center py-10'>
+                <div class='mb-6 h-20 w-20 flex items-center justify-center rounded-2xl from-white/10 to-white/5 bg-gradient-to-br shadow-inner'>
+                  <span class={`${step.icon} h-10 w-10 text-white`}></span>
+                </div>
+                <div class='h-4 w-32 rounded-full bg-white/10'></div>
+                <div class='mt-3 h-3 w-24 rounded-full bg-white/5'></div>
+              </div>
+
+              <div class='mt-6 opacity-30 space-y-2'>
+                <div class='h-2 w-full rounded-full bg-white/10'></div>
+                <div class='h-2 w-2/3 rounded-full bg-white/10'></div>
+              </div>
             </div>
           </div>
-        {/each}
+
+        </div>
+      {/each}
+    </div>
+
+    <div class='mt-32 border border-white/10 rounded-3xl bg-white/5 p-8 backdrop-blur md:p-12'>
+      <div class='flex flex-col gap-10 lg:flex-row lg:items-center'>
+        <div class='flex-1 space-y-6'>
+          <h3 class='text-2xl text-white font-bold md:text-3xl'>
+            Automation without the code
+          </h3>
+          <p class='text-slate-400'>
+            Stack conditions to build anything from gentle nudges to complex scenarios.
+            Preview every automation in real time before publishing.
+          </p>
+          <div class='flex flex-col gap-3'>
+            <div class='flex items-center gap-3 text-sm text-slate-300'>
+              <span class='h-6 w-6 flex items-center justify-center rounded-full bg-green-500/20 text-green-400'>✓</span>
+              <span>Trigger from tasks or calendar</span>
+            </div>
+            <div class='flex items-center gap-3 text-sm text-slate-300'>
+              <span class='h-6 w-6 flex items-center justify-center rounded-full bg-green-500/20 text-green-400'>✓</span>
+              <span>Visual logic builder</span>
+            </div>
+          </div>
+        </div>
+
+        <div class='flex-1 border border-white/10 rounded-xl bg-slate-900/50 p-6'>
+          <div class='mb-4 flex items-center justify-between text-xs text-slate-500 font-bold tracking-widest uppercase'>
+            <span>Activity Log</span>
+            <span class='text-green-400'>● Live</span>
+          </div>
+          <div class='space-y-3'>
+            <div class='flex items-center justify-between border border-white/5 rounded-lg bg-white/5 px-4 py-3'>
+              <div class='flex items-center gap-3'>
+                <span class='i-lucide:check-circle h-4 w-4 text-green-400'></span>
+                <span class='text-sm text-slate-200'>Daily finance digest sent</span>
+              </div>
+              <span class='text-xs text-slate-500'>Just now</span>
+            </div>
+            <div class='flex items-center justify-between border border-white/5 rounded-lg bg-white/5 px-4 py-3 opacity-50'>
+              <div class='flex items-center gap-3'>
+                <span class='i-lucide:clock h-4 w-4 text-yellow-400'></span>
+                <span class='text-sm text-slate-200'>Grocery restock pending</span>
+              </div>
+              <span class='text-xs text-slate-500'>2m ago</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <aside class='max-w-xl w-full border border-white/10 rounded-3xl bg-background/60 p-6 backdrop-blur lg:sticky lg:top-28 space-y-6'>
-      <h3 class='text-xl font-semibold'>A flow built for living</h3>
-      <p class='text-muted-foreground text-sm leading-relaxed'>
-        Organize modules on a neon-lit canvas, connect them with visual rules, and preview the outcome before committing. It is everything you need to orchestrate chores, side projects, and ambitious goals without losing momentum.
-      </p>
-      <div class='border border-white/10 rounded-2xl bg-background/80 p-4 shadow-[0_0_40px_rgba(120,119,198,0.25)] space-y-4'>
-        <div class='text-muted-foreground flex items-center justify-between text-xs font-semibold tracking-[0.3em] uppercase'>
-          <span>Automation preview</span>
-          <span>Live</span>
-        </div>
-        <div class='space-y-3'>
-          <div class='flex items-center justify-between border border-white/10 rounded-lg bg-background/90 px-4 py-3 text-sm'>
-            <div class='flex items-center gap-2'>
-              <span class='i-lucide:calendar-clock size-4 text-primary'></span>
-              <span>Daily finance digest</span>
-            </div>
-            <span class='text-xs text-primary tracking-[0.3em] uppercase'>Ready</span>
-          </div>
-          <div class='flex items-center justify-between border border-white/10 rounded-lg bg-background/90 px-4 py-3 text-sm'>
-            <div class='flex items-center gap-2'>
-              <span class='i-lucide:list-checks size-4 text-primary'></span>
-              <span>Auto restock groceries</span>
-            </div>
-            <span class='text-muted-foreground text-xs tracking-[0.3em] uppercase'>Awaiting trigger</span>
-          </div>
-          <div class='flex items-center justify-between border border-white/10 rounded-lg bg-background/90 px-4 py-3 text-sm'>
-            <div class='flex items-center gap-2'>
-              <span class='i-lucide:book-open-check size-4 text-primary'></span>
-              <span>Study focus block</span>
-            </div>
-            <span class='text-xs text-primary tracking-[0.3em] uppercase'>Queued</span>
-          </div>
-        </div>
-      </div>
-      <p class='text-muted-foreground text-xs font-semibold tracking-[0.3em] uppercase'>
-        No scripts. No spreadsheets. Just your modules working together.
-      </p>
-    </aside>
+
   </div>
 </section>

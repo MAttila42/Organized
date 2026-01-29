@@ -1,41 +1,45 @@
 <script lang='ts'>
   import type { ModuleHighlight } from './landing-content'
-  import {
-    Card,
-    CardDescription,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-  } from '$lib/components/ui/card'
 
-  const { modules } = $props<{ modules: ModuleHighlight[] }>()
+  const { modules }: { modules: ModuleHighlight[] } = $props()
 </script>
 
-<section id='modules' class='px-5 pb-16 md:px-12 sm:px-6 sm:pb-20'>
-  <div class='grid grid-cols-1 mx-auto max-w-6xl gap-5 lg:grid-cols-3 sm:grid-cols-2'>
-    {#each modules as module (module.name)}
-      <Card class='relative overflow-hidden border-white/10 bg-background/70 backdrop-blur transition-transform duration-200 hover:border-white/30 hover:-translate-y-1'>
-        <CardHeader class='gap-4 px-5 pt-6'>
-          <div class='relative size-12 flex items-center justify-center overflow-hidden border border-white/20 rounded-full bg-background/60'>
-            <span class='absolute inset-0 opacity-80' style={`background: ${module.accent};`}></span>
-            <span class={`relative ${module.icon} size-5 text-primary`}></span>
-          </div>
-          <div class='space-y-2'>
-            <CardTitle class='text-xl font-semibold'>{module.name}</CardTitle>
-            <CardDescription class='text-muted-foreground text-sm'>
+<section id='modules' class='relative z-10 px-4 pb-20 -mt-10 sm:pb-24'>
+  <div class='container mx-auto max-w-6xl'>
+
+    <div class='grid grid-cols-1 gap-6 lg:grid-cols-3'>
+      {#each modules as module}
+        <div class='group relative flex flex-col justify-between overflow-hidden border border-white/10 rounded-3xl bg-slate-900/80 p-8 shadow-2xl backdrop-blur-xl transition-all hover:border-white/20 hover:bg-slate-800/80 hover:-translate-y-1'>
+
+          <div
+            class='absolute h-64 w-64 rounded-full opacity-20 blur-[80px] transition-opacity -right-20 -top-20 group-hover:opacity-30'
+            style={`background: ${module.accent};`}
+          ></div>
+
+          <div>
+            <div class='mb-6 flex items-center gap-4'>
+              <div class='h-12 w-12 flex items-center justify-center border border-white/10 rounded-2xl bg-white/5 shadow-inner'>
+                <span class={`${module.icon} h-6 w-6 text-white`}></span>
+              </div>
+              <h3 class='text-xl text-white font-bold'>{module.name}</h3>
+            </div>
+
+            <p class='mb-8 text-sm text-slate-400 leading-relaxed'>
               {module.description}
-            </CardDescription>
+            </p>
           </div>
-        </CardHeader>
-        <CardFooter class='flex flex-wrap gap-2 px-5 pb-6 pt-2'>
-          {#each module.badges as badge (badge)}
-            <span class='text-muted-foreground border border-white/15 rounded-full bg-background/80 px-3 py-1 text-[0.65rem] font-semibold tracking-[0.25em] uppercase'>
-              {badge}
-            </span>
-          {/each}
-        </CardFooter>
-        <div class='pointer-events-none absolute inset-0 opacity-80 -z-10' style={`background: ${module.accent}; filter: blur(70px);`}></div>
-      </Card>
-    {/each}
+
+          <div class='flex flex-wrap gap-2'>
+            {#each module.badges as badge}
+              <span class='border border-white/5 rounded-lg bg-white/5 px-3 py-1.5 text-[10px] text-slate-300 font-bold tracking-wider uppercase transition-colors group-hover:border-white/10 group-hover:bg-white/10'>
+                {badge}
+              </span>
+            {/each}
+          </div>
+
+        </div>
+      {/each}
+    </div>
+
   </div>
 </section>

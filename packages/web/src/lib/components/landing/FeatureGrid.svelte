@@ -1,55 +1,56 @@
 <script lang='ts'>
   import type { FeatureHighlight } from './landing-content'
-  import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
-  } from '$lib/components/ui/card'
 
-  const { features } = $props<{ features: FeatureHighlight[] }>()
+  const { features }: { features: FeatureHighlight[] } = $props()
 </script>
 
-<section id='features' class='px-5 py-16 md:px-12 sm:px-6 sm:py-20'>
-  <div class='mx-auto max-w-6xl flex flex-col gap-10'>
-    <div class='mx-auto max-w-3xl text-center space-y-4'>
-      <span class='text-[0.7rem] text-primary font-semibold tracking-[0.35em] uppercase'>
-        Features
+<section id='features' class='relative bg-slate-950 py-24 text-white'>
+  <div class='container mx-auto max-w-6xl px-4'>
+    <div class='mb-16 flex flex-col items-center text-center'>
+      <span class='mb-4 text-xs text-purple-400 font-bold tracking-[0.3em] uppercase'>
+        Capabilities
       </span>
-      <h2 class='text-3xl font-semibold leading-tight sm:text-4xl'>
-        Everything you need to run your life from a single board.
+      <h2 class='mb-6 text-3xl font-bold tracking-tight md:text-5xl'>
+        Everything you need in
+        <span class='from-purple-400 to-pink-500 bg-gradient-to-r bg-clip-text text-transparent'>One Place</span>
       </h2>
-      <p class='text-muted-foreground text-base sm:text-lg'>
-        Organized keeps every workflow within reach with a modular toolkit that evolves right alongside your goals.
+      <p class='max-w-2xl text-lg text-slate-400'>
+        Organized keeps every workflow within reach. Modular, visual, and designed to evolve alongside your goals.
       </p>
     </div>
-    <div class='grid grid-cols-1 gap-6 lg:grid-cols-3 sm:grid-cols-2'>
-      {#each features as feature (feature.title)}
-        <Card class='relative h-full overflow-hidden border-white/10 bg-background/70 backdrop-blur transition-transform duration-200 hover:border-white/30 hover:-translate-y-1'>
-          <CardHeader class='gap-4 px-5 pt-6'>
-            <div class='relative size-12 flex items-center justify-center overflow-hidden border border-white/20 rounded-full bg-background/60'>
-              <span class='absolute inset-0 opacity-80' style={`background: ${feature.accent};`}></span>
-              <span class={`relative ${feature.icon} size-5 text-primary`}></span>
-            </div>
-            <div class='space-y-2'>
-              <CardTitle class='text-xl font-semibold'>{feature.title}</CardTitle>
-              <CardDescription class='text-muted-foreground text-sm'>
-                {feature.description}
-              </CardDescription>
-            </div>
-          </CardHeader>
-          <CardContent class='flex flex-col gap-3 px-5 pb-6'>
-            {#each feature.points as point (point)}
-              <div class='text-muted-foreground flex items-start gap-3 text-sm'>
-                <span class='mt-1 size-2 rounded-full bg-primary/70'></span>
-                <p class='leading-relaxed'>{point}</p>
-              </div>
+
+    <div class='grid grid-cols-1 gap-6 md:grid-cols-3'>
+      {#each features as feature}
+        <div class='group relative flex flex-col overflow-hidden border border-white/10 rounded-3xl bg-white/5 p-8 backdrop-blur-sm transition-all hover:border-white/20 hover:bg-white/10 hover:shadow-2xl hover:-translate-y-1'>
+
+          <div
+            class='absolute h-32 w-32 rounded-full bg-purple-500/20 blur-3xl transition-opacity duration-500 -right-10 -top-10 group-hover:bg-purple-500/30'
+            style={`background: ${feature.accent}; filter: blur(60px); opacity: 0.15;`}
+          ></div>
+
+          <div class='mb-6 h-14 w-14 flex items-center justify-center border border-white/10 rounded-2xl bg-white/5 shadow-inner'>
+            <span class={`${feature.icon} h-6 w-6 text-white`}></span>
+          </div>
+
+          <h3 class='mb-3 text-xl text-white font-bold'>
+            {feature.title}
+          </h3>
+          <p class='mb-6 text-sm text-slate-400 leading-relaxed'>
+            {feature.description}
+          </p>
+
+          <ul class='mt-auto space-y-3'>
+            {#each feature.points as point}
+              <li class='flex items-start gap-3 text-sm text-slate-300'>
+                <span class='mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-purple-400'></span>
+                <span class='opacity-80'>{point}</span>
+              </li>
             {/each}
-          </CardContent>
-          <div class='pointer-events-none absolute inset-0 opacity-60 -z-10' style={`background: ${feature.accent}; filter: blur(90px);`}></div>
-        </Card>
+          </ul>
+
+        </div>
       {/each}
     </div>
+
   </div>
 </section>

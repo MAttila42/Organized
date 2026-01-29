@@ -4,67 +4,71 @@
 
   const {
     repoUrl,
-    highlights,
     onSignInWithGitHub,
-  } = $props<{
+  }: {
     repoUrl: string
     highlights: CommunityHighlight[]
     onSignInWithGitHub: () => void
-  }>()
+  } = $props()
 </script>
 
-<section id='community' class='px-5 pb-20 md:px-12 sm:px-6 sm:pb-24'>
-  <div class='mx-auto max-w-6xl flex flex-col gap-12'>
-    <div class='mx-auto max-w-3xl text-center space-y-4'>
-      <span class='text-[0.7rem] text-primary font-semibold tracking-[0.35em] uppercase'>
-        Community
-      </span>
-      <h2 class='text-3xl font-semibold sm:text-4xl'>
-        Built in public with everyone invited.
-      </h2>
-      <p class='text-muted-foreground text-base sm:text-lg'>
-        Organized is proudly open source. From roadmap discussions to brand-new modules, everything happens in the open so you can learn, build, and share together.
-      </p>
-    </div>
-    <div class='grid grid-cols-1 gap-6 md:grid-cols-3'>
-      {#each highlights as community (community.title)}
-        <div class='border border-white/10 rounded-3xl bg-background/70 p-6 text-left backdrop-blur transition-transform duration-200 hover:border-white/30 hover:-translate-y-1'>
-          <div class='mb-4 size-12 flex items-center justify-center border border-white/20 rounded-full bg-background/70'>
-            <span class={`${community.icon} size-5 text-primary`}></span>
-          </div>
-          <h3 class='text-lg font-semibold'>{community.title}</h3>
-          <p class='text-muted-foreground mt-3 text-sm leading-relaxed'>
-            {community.description}
-          </p>
+<section id='community' class='relative overflow-hidden bg-slate-950 py-32 text-white'>
+
+  <div class='[mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]'></div>
+
+  <div class='container relative mx-auto max-w-5xl px-4'>
+
+    <div class='relative overflow-hidden border border-white/10 rounded-[2.5rem] bg-slate-900/50 px-6 py-20 text-center shadow-2xl backdrop-blur-xl md:px-20'>
+
+      <div class='absolute left-1/2 top-1/2 h-64 w-64 rounded-full bg-purple-600/30 blur-[100px] -translate-x-1/2 -translate-y-1/2'></div>
+
+      <div class='relative'>
+        <span class='mb-6 inline-block border border-purple-500/30 rounded-full bg-purple-500/10 px-4 py-1.5 text-xs text-purple-300 font-bold tracking-widest uppercase'>
+          Open Source
+        </span>
+
+        <h2 class='mb-8 text-4xl font-bold tracking-tight md:text-6xl'>
+          Built in public. <br />
+          <span class='text-slate-400'>Powered by you.</span>
+        </h2>
+
+        <p class='mx-auto mb-10 max-w-2xl text-lg text-slate-400'>
+          Organized is proudly open source. From roadmap discussions to brand-new modules,
+          everything happens in the open so you can learn, build, and share together.
+        </p>
+
+        <div class='flex flex-col items-center justify-center gap-4 sm:flex-row'>
+          <Button
+            href={repoUrl}
+            target='_blank'
+            rel='noreferrer'
+            class='h-14 rounded-full bg-white px-10 text-lg text-slate-900 font-bold shadow-[0_0_30px_rgba(255,255,255,0.3)] transition-all hover:scale-105 hover:bg-slate-200'
+          >
+            <span class='mr-2 text-xl'>★</span> Star on GitHub
+          </Button>
+
+          <Button
+            onclick={onSignInWithGitHub}
+            variant='outline'
+            class='h-14 border-white/10 rounded-full bg-white/5 px-10 text-lg text-white font-bold backdrop-blur transition-all hover:bg-white/10'
+          >
+            Join the Community
+          </Button>
         </div>
-      {/each}
+
+        <div class='mt-12 flex flex-wrap justify-center gap-8 border-t border-white/5 pt-8 opacity-60'>
+          <div class='flex flex-col items-center'>
+            <span class='text-2xl text-white font-bold'>MIT</span>
+            <span class='text-xs text-slate-500 tracking-wider uppercase'>License</span>
+          </div>
+          <div class='flex flex-col items-center'>
+            <span class='text-2xl text-white font-bold'>100%</span>
+            <span class='text-xs text-slate-500 tracking-wider uppercase'>Free</span>
+          </div>
+        </div>
+
+      </div>
     </div>
-    <div class='mx-auto max-w-2xl w-full flex flex-col gap-3 sm:flex-row sm:justify-center'>
-      <Button
-        variant='outline'
-        class='w-full border-white/40 bg-background/70 px-8 py-3 text-sm font-semibold tracking-[0.3em] uppercase sm:w-auto'
-        href={`${repoUrl}/issues`}
-        target='_blank'
-        rel='noreferrer'
-      >
-        Browse issues
-      </Button>
-      <Button
-        class='bg-primary-gradient w-full px-8 py-3 text-sm text-primary-foreground font-semibold tracking-[0.3em] uppercase shadow-[0_10px_40px_rgba(120,119,198,0.45)] sm:w-auto'
-        href={`${repoUrl}#readme`}
-        target='_blank'
-        rel='noreferrer'
-      >
-        Start contributing
-      </Button>
-      <Button
-        variant='link'
-        size='sm'
-        class='text-muted-foreground mx-auto px-0 text-xs font-semibold tracking-[0.3em] uppercase sm:mx-0 sm:w-auto hover:text-foreground'
-        onclick={onSignInWithGitHub}
-      >
-        Sign in with GitHub
-      </Button>
-    </div>
+
   </div>
 </section>
